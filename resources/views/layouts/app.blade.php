@@ -26,7 +26,8 @@
 </head>
 
 <body>
-    <div x-data="{ isSideMenuOpen : false }" class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div x-data="{ isSideMenuOpen : false }" class="flex h-screen bg-gray-50 dark:bg-gray-900"
+        :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
         @include('layouts._sidebar')
         <!-- Mobile sidebar -->
@@ -34,10 +35,11 @@
         @include('layouts._mobile-sidebar')
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
-                <div class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
+                <div
+                    class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
                     <!-- Mobile hamburger -->
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
-                    @click="isSideMenuOpen = !isSideMenuOpen"  aria-label="Menu">
+                        @click="isSideMenuOpen = !isSideMenuOpen" aria-label="Menu">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -83,8 +85,9 @@
                         <li x-data="{ toggleNotificationsMenu : false }" class="relative">
                             <button
                                 class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
-                                @click="toggleNotificationsMenu = ! toggleNotificationsMenu" @keydown.escape="toggleNotificationsMenu = false"
-                                aria-label="Notifications" aria-haspopup="true">
+                                @click="toggleNotificationsMenu = ! toggleNotificationsMenu"
+                                @keydown.escape="toggleNotificationsMenu = false" aria-label="Notifications"
+                                aria-haspopup="true">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                     <path
                                         d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z">
@@ -97,7 +100,8 @@
                             <template x-if="toggleNotificationsMenu">
                                 <ul x-transition:leave="transition ease-in duration-150"
                                     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    @click.away="toggleNotificationsMenu = false" @keydown.escape="toggleNotificationsMenu = false"
+                                    @click.away="toggleNotificationsMenu = false"
+                                    @keydown.escape="toggleNotificationsMenu = false"
                                     class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
                                     <li class="flex">
                                         <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
@@ -131,8 +135,8 @@
                         <!-- Profile menu -->
                         <li x-data="{ toggleProfileMenu : false }" class="relative">
                             <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
-                                @click="toggleProfileMenu = ! toggleProfileMenu" @keydown.escape="toggleProfileMenu =  false" aria-label="Account"
-                                aria-haspopup="true">
+                                @click="toggleProfileMenu = ! toggleProfileMenu"
+                                @keydown.escape="toggleProfileMenu =  false" aria-label="Account" aria-haspopup="true">
                                 <img class="object-cover w-8 h-8 rounded-full"
                                     src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
                                     alt="" aria-hidden="true" />
@@ -193,19 +197,6 @@
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Dashboard </h2>
-                    <!-- CTA -->
-                    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-                        href="https://github.com/estevanmaito/windmill-dashboard">
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <span>Star this project on GitHub</span>
-                        </div>
-                        <span>View more &RightArrow;</span>
-                    </a>
                     <!-- Cards -->
                     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                         <!-- Card -->
@@ -271,9 +262,36 @@
                             </div>
                         </div>
                     </div>
+                    <!-- CTA -->
+                    {{-- <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-green-100 bg-green-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-green"
+                        href="https://github.com/estevanmaito/windmill-dashboard">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <span>Star this project on GitHub</span>
+                        </div>
+                        <span>View more &RightArrow;</span>
+                    </a> --}}
+                    <div class="flex flex-col items-center justify-center min-w-0 p-4 text-white bg-green-600 rounded-lg shadow-xs">
+                        <h4 class="mb-2 text-xl font-semibold">
+                            Assalamualaikum warahmatullahi wabarakatuh
+                        </h4>
+                        <h4 class="text-xl font-semibold">
+                            Selamat datang admin
+                        </h4>
+                        <p>
+                            Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan Kalukku, Kabupaten Mamuju, Provinsi Sulawesi Barat
+                        </p>
+                        <p>
+                            "Ikhlas Beramal"
+                        </p>
+                    </div>
 
                     <!-- New Table -->
-                    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                    {{-- <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
                             <table class="w-full whitespace-no-wrap">
                                 <thead>
@@ -662,10 +680,10 @@
                                 </nav>
                             </span>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Charts -->
-                    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Charts </h2>
+                    {{-- <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Charts </h2>
                     <div class="grid gap-6 mb-8 md:grid-cols-2">
                         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300"> Revenue </h4>
@@ -703,7 +721,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </main>
         </div>
@@ -727,4 +745,5 @@
     @livewireScripts
     {{-- <script src="{{ asset('js/init-alpine.js') }}"></script> --}}
 </body>
+
 </html>
