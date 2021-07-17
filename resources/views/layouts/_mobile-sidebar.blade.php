@@ -7,7 +7,7 @@
         x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="isSideMenuOpen = false"
         @keydown.escape="isSideMenuOpen = false">
-        <div class="py-4 text-gray-500 dark:text-gray-400">
+        <div x-data="{ isPagesMenuOpen : false }" class="py-4 text-gray-500 dark:text-gray-400">
             <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
                 Windmill
             </a>
@@ -97,7 +97,7 @@
                         <span class="ml-4">Tables</span>
                     </a>
                 </li>
-                {{-- <li class="relative px-6 py-3">
+                <li class="relative px-6 py-3">
                     <button
                         class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                         @click="isPagesMenuOpen = !isPagesMenuOpen" aria-haspopup="true">
@@ -149,7 +149,7 @@
                             </li>
                         </ul>
                     </template>
-                </li> --}}
+                </li>
             </ul>
             <div class="px-6 my-6">
                 <button
