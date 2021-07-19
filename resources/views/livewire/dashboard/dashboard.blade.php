@@ -63,7 +63,7 @@
     </div>
 
     <div class="flex flex-col items-center justify-center min-w-0 p-4 text-white bg-green-600 rounded-lg shadow-xs">
-        <h4 class="mb-2 text-xl font-semibold">
+        <h4 class="mb-2 text-2xl font-semibold">
             Assalamualaikum warahmatullahi wabarakatuh
         </h4>
         <h4 class="text-xl font-semibold">
