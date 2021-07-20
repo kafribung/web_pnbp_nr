@@ -24,7 +24,4 @@ Route::get('/', function () {
 
 Route::get('dashboard', Dashboard::class)->name('dashboard');
 
-
-
-
 require __DIR__.'/auth.php';
