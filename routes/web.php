@@ -15,13 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('layouts.app');
-// })->middleware(['auth'])->name('dashboard');
-
-Route::get('dashboard', Dashboard::class)->name('dashboard');
+Route::middleware('auth')->group(function (){
+    Route::middleware('role:admin')->group(function (){
+        Route::get('staf-kua', fn() => 'staf kua');
+    });
+    Route::middleware('role:admin|kalukku')->group(function (){
+        Route::get('dashboard', Dashboard::class)->name('dashboard');
+    });
+});
 
 require __DIR__.'/auth.php';
