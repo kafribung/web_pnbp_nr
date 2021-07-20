@@ -102,7 +102,7 @@
                     @click="toggleProfileMenu = ! toggleProfileMenu"
                     @keydown.escape="toggleProfileMenu =  false" aria-label="Account" aria-haspopup="true">
                     <img class="object-cover w-8 h-8 rounded-full"
-                        src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=059669&color=fff"
+                        src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=059669&color=fff&bold=true"
                         alt="" aria-hidden="true" />
                 </button>
                 <template x-if="toggleProfileMenu">
