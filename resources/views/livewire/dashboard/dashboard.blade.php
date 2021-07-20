@@ -66,12 +66,21 @@
         <h4 class="mb-2 text-2xl font-semibold">
             Assalamualaikum warahmatullahi wabarakatuh
         </h4>
+        @if (auth()->user()->getRoleNames()[0] == "admin")
+        <h4 class="text-xl font-semibold">
+            Selamat datang {{ auth()->user()->name }}
+        </h4>
+        <p class="mt-2 text-base">
+            Sistem Informasi Pelaporan PNBP-NR Kementian Agama Kabupaten Mamuju
+        </p>
+        @else
         <h4 class="text-xl font-semibold">
             Selamat datang staf KUA {{ auth()->user()->name }}
         </h4>
         <p class="mt-2 text-base">
             Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan {{ auth()->user()->getRoleNames()[0] }}, Kabupaten Mamuju, Provinsi Sulawesi Barat
         </p>
+        @endif
         <p class="text-base">
             "Ikhlas Beramal"
         </p>
