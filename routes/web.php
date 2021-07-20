@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard\Dashboard;
+use App\Http\Livewire\StafKua\StafKua;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function (){
     Route::middleware('role:admin')->group(function (){
-        Route::get('staf-kua', fn() => 'staf kua');
+        Route::get('staf-kua', StafKua::class)->name('staf-kua');
     });
     Route::middleware('role:admin|kalukku')->group(function (){
         Route::get('dashboard', Dashboard::class)->name('dashboard');
