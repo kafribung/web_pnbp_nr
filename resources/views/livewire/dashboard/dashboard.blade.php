@@ -67,10 +67,10 @@
             Assalamualaikum warahmatullahi wabarakatuh
         </h4>
         <h4 class="text-xl font-semibold">
-            Selamat datang admin
+            Selamat datang staf KUA {{ auth()->user()->name }}
         </h4>
-        <p class="text-base">
-            Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan Kalukku, Kabupaten Mamuju, Provinsi Sulawesi Barat
+        <p class="mt-2 text-base">
+            Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan {{ auth()->user()->getRoleNames()[0] }}, Kabupaten Mamuju, Provinsi Sulawesi Barat
         </p>
         <p class="text-base">
             "Ikhlas Beramal"
