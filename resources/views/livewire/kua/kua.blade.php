@@ -16,9 +16,9 @@
         <div class="w-full overflow-x-auto">
             <div class="flex justify-end">
                 <button
-                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                     aria-label="Edit">
-                    Tambah akun
+                    Tambah data
                     <span class="ml-2" aria-hidden="true">+</span>
                 </button>
             </div>
@@ -27,33 +27,17 @@
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
-                        <th class="px-4 py-3">Nama</th>
-                        <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Kua</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @foreach ($stafKuas as $stafKua)
+                    @foreach ($kuas as $kua)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-sm">
-                            {{ (($stafKuas->currentPage() - 1 ) * $stafKuas->perPage() ) + $loop->iteration }} </td>
-                        <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                    <img class="object-cover w-full h-full rounded-full"
-                                        src="https://ui-avatars.com/api/?name={{ $stafKua->name }}&background=059669&color=fff&bold=true"
-                                        alt="" loading="lazy" />
-                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">{{ $stafKua->name }}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400"> Staf KUA
-                                        {{ $stafKua->getRoleNames()[0] }} </p>
-                                </div>
-                            </div>
+                            {{ (($kuas->currentPage() - 1 ) * $kuas->perPage() ) + $loop->iteration }}
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $stafKua->email }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $kua->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <button
@@ -81,7 +65,7 @@
                 </tbody>
             </table>
         </div>
-        {{ $stafKuas->links() }}
+        {{ $kuas->links() }}
     </div>
 
 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\StafKua\StafKua;
+use App\Http\Livewire\Kua\Kua;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function (){
     Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('kua', Kua::class)->name('kua');
     Route::get('staf-kua', StafKua::class)->name('staf-kua');
 });
 

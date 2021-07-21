@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 class StafKua extends Component
 {
     use WithPagination;
+
     public $modal = false;
 
     public function render()
