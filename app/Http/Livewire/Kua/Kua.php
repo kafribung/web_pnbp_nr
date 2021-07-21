@@ -10,6 +10,8 @@ class Kua extends Component
 {
     use WithPagination;
 
+    public $modal = false;
+
     public function render()
     {
         $kuas = KuaModel::paginate(10);
@@ -19,5 +21,10 @@ class Kua extends Component
     public function paginationView()
     {
         return 'vendor.livewire.costume';
+    }
+
+    public function openCloseModal()
+    {
+        $this->modal = !$this->modal;
     }
 }
