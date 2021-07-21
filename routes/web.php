@@ -20,12 +20,8 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function (){
-    Route::middleware('role:admin')->group(function (){
-        Route::get('staf-kua', StafKua::class)->name('staf-kua');
-    });
-    Route::middleware('role:admin|kalukku')->group(function (){
-        Route::get('dashboard', Dashboard::class)->name('dashboard');
-    });
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('staf-kua', StafKua::class)->name('staf-kua');
 });
 
 require __DIR__.'/auth.php';
