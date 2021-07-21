@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 class StafKua extends Component
 {
     use WithPagination;
+    public $modal = false;
+
     public function render()
     {
         // $stafKuas = User::with('roles')->role(['kalukku', 'sampaga'])->get();
@@ -17,6 +19,11 @@ class StafKua extends Component
             $query->where('name','!=', 'admin');
         })->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));
+    }
+
+    public function openCloseModal()
+    {
+        $this->modal = $this->modal;
     }
 
     public function paginationView()
