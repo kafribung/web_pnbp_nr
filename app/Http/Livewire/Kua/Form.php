@@ -27,14 +27,14 @@ class Form extends Kua
         $this->openCloseModal();
     }
 
-    public function store()
+    public function storeOrUpdate()
     {
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
 
-        KuaModel::create($data);
+        KuaModel::updateOrCreate(['id' => $this->kuaId], $data);
 
-        session()->flash('message', 'Data KUA berhasil ditambhakan');
+        session()->flash('message', $this->kuaId ? 'Data KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
         $this->fieldsReset();
         $this->openCloseModal();
         return redirect('kua');
@@ -48,20 +48,6 @@ class Form extends Kua
         $this->openCloseModal();
     }
 
-    public function update()
-    {
-        $kua  = KuaModel::findOrFail($this->kuaId);
-        $data = $this->validate();
-        $data['updated_by'] = auth()->user()->id;
-
-        $kua->update($data);
-
-        session()->flash('message', 'Data KUA ' .$kua->name. ' berhasil diubah');
-        $this->fieldsReset();
-        $this->openCloseModal();
-        return redirect('kua');
-    }
-
     public function delete($id)
     {
         $this->kuaIdDelete = $id;
@@ -70,7 +56,6 @@ class Form extends Kua
 
     public function destroy()
     {
-        dd('bela');
         $kua = KuaModel::findOrFail($this->kuaIdDelete);
         $kua->delete();
         session()->flash('message', 'Data KUA ' . $kua->name .' berhasil dihapus');

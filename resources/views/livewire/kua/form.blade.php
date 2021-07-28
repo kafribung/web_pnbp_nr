@@ -1,6 +1,7 @@
 <x-modal maxWidth="md" wire:model="modal">
     @if($kuaIdDelete == null)
-    {{-- <form {{ $kuaId != null ? "wire:submit.prevent=update" : "wire:submit.prevent=store" }}  class="space-y-8 divide-y divide-gray-200">
+    {{-- {{ $kuaId != null ? "wire:submit.prevent=update" : "wire:submit.prevent=store" }} --}}
+    <form wire:submit.prevent="storeOrUpdate"  class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -23,15 +24,14 @@
                     </x-button>
 
                     <x-button type="submit"
-                        class="{{ !empty($kuaId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
+                        class="{{ !empty($kuaId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-blue-600 active:bg-blue-600 hover:bg-blue-700 focus:shadow-outline-blue'}}">
                         {{ !empty($kuaId) ? "Ubah" : "Simpan"}}
                     </x-button>
                 </div>
             </div>
         </div>
-    </form> --}}
+    </form>
     @else
-    <form wire.submit.prevent="destroy" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -49,13 +49,12 @@
                         Batal
                     </x-button>
 
-                    <x-button type="submit"
+                    <x-button wire:click="destroy"
                         class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
                         Hapus
                     </x-button>
                 </div>
             </div>
         </div>
-    </form>
     @endif
 </x-modal>
