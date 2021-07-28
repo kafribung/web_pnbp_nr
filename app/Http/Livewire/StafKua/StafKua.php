@@ -3,8 +3,7 @@
 namespace App\Http\Livewire\StafKua;
 
 use App\Models\User;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class StafKua extends Component
 {
@@ -23,7 +22,7 @@ class StafKua extends Component
 
     public function openCloseModal()
     {
-        $this->modal = $this->modal;
+        $this->modal = !$this->modal;
     }
 
     public function paginationView()

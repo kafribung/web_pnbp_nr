@@ -1,6 +1,5 @@
 <x-modal maxWidth="md" wire:model="modal">
     @if($kuaIdDelete == null)
-    {{-- {{ $kuaId != null ? "wire:submit.prevent=update" : "wire:submit.prevent=store" }} --}}
     <form wire:submit.prevent="storeOrUpdate"  class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
@@ -8,11 +7,11 @@
                     {{ !empty($kuaId) ? "Ubah KUA" : "Tambah KUA"}}
                 </h3>
                 <div class="mt-3">
-                    <label class="block text-sm">
+                    <div class="block text-sm">
                         <x-label for="name" :value="__('Kua')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" name="name" :value="old('name')" autofocus />
                         <x-input-error for="name" class="mt-2"/>
-                    </label>
+                    </div>
                 </div>
             </div>
 

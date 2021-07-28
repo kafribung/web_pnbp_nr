@@ -1,4 +1,5 @@
 <div>
+    @livewire('staf-kua.form')
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Staf KUA </h2>
     <!-- CTA -->
     <div
@@ -16,9 +17,9 @@
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <div class="flex justify-end">
-                <button
+                <button wire:click="$emitTo('staf-kua.form', 'create')"
                     class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                    aria-label="Create">
+                    aria-label="Edit">
                     Tambah data
                     <span class="ml-2" aria-hidden="true">+</span>
                 </button>
