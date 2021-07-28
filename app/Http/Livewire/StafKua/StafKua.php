@@ -14,11 +14,10 @@ class StafKua extends Component
 
     public function render()
     {
-        // $stafKuas = User::with('roles')->role(['kalukku', 'sampaga'])->get();
-        $stafKuas = User::with('roles')->paginate(1);
-        // $stafKuas = User::whereHas('roles', function($query) {
-        //     $query->where('name','!=', 'admin');
-        // })->paginate(10);
+        $stafKuas = User::paginate(1);
+        $stafKuas = User::with('roles')->whereHas('roles', function($query) {
+            $query->where('name', 'staf');
+        })->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));
     }
 
