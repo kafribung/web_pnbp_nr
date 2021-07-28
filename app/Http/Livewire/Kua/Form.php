@@ -17,6 +17,11 @@ class Form extends Kua
         'name' => ['required', 'string', 'min:3'],
     ];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function render()
     {
         return view('livewire.kua.form');

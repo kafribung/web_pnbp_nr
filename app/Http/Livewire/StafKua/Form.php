@@ -15,7 +15,7 @@ class Form extends StafKua
     ];
 
     protected $rules = [
-
+        'name' => 'required',
     ];
 
     public function render()
@@ -39,6 +39,7 @@ class Form extends StafKua
         $this->name        = '';
         $this->email       = '';
         $this->password    = '';
+        $this->kua    = '';
         $this->stafId      = '';
     }
 
