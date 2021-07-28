@@ -2,7 +2,7 @@
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Staf KUA </h2>
     <!-- CTA -->
     <div
-        class="flex items-center  p-4 mb-8 text-sm font-semibold text-green-100 bg-green-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-green">
+        class="flex items-center p-4 mb-8 text-sm font-semibold text-green-100 bg-green-600 rounded-tl-3xl rounded-br-xl shadow-lg focus:outline-none focus:shadow-outline-green">
         <div class="flex items-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -12,13 +12,14 @@
             <span class="text-base">Berisi data akun staf KUA di Kabupaten Mamuju</span>
         </div>
     </div>
+
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <div class="flex justify-end">
                 <button
-                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
-                    aria-label="Edit">
-                    Tambah akun
+                    class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                    aria-label="Create">
+                    Tambah data
                     <span class="ml-2" aria-hidden="true">+</span>
                 </button>
             </div>
