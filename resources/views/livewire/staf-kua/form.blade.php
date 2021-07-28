@@ -23,9 +23,17 @@
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="email" :value="__('Email')" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" name="email" :value="old('email')" required />
-                        <x-input-error for="email" class="mt-2"/>
+                        <x-label for="password" :value="__('Password')" />
+                        <x-input id="password" class="block mt-1 w-full" type="password" wire:model="password" name="password" required />
+                        <x-input-error for="password" class="mt-2"/>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <div class="block text-sm">
+                        <x-label for="password_confirmation" :value="__('Konfirmasi Password')" />
+                        <x-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" name="password_confirmation" required />
+                        <x-input-error for="password_confirmation" class="mt-2"/>
                     </div>
                 </div>
             </div>
