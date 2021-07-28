@@ -12,6 +12,8 @@ class Kua extends Component
 
     public $modal = false;
 
+    protected $paginationTheme = 'costume';
+
     public function render()
     {
         $kuas = KuaModel::paginate(10);

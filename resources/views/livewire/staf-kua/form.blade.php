@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="mt-3">
+                <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="kua" :value="__('KUA')" />
                         <select wire:model="kua" id="kua" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
@@ -48,7 +48,7 @@
                         </select>
                         <x-input-error for="kua" class="mt-2"/>
                     </div>
-                </div> --}}
+                </div>
             </div>
 
             <div class="pt-5">

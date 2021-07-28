@@ -11,6 +11,8 @@ class StafKua extends Component
 
     public $modal = false;
 
+    protected $paginationTheme = 'costume';
+
     public function render()
     {
         $stafKuas = User::with('roles')->whereHas('roles', function($query) {
@@ -23,10 +25,5 @@ class StafKua extends Component
     public function openCloseModal()
     {
         $this->modal = !$this->modal;
-    }
-
-    public function paginationView()
-    {
-        return 'vendor.livewire.costume';
     }
 }

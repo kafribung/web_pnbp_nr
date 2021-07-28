@@ -6,7 +6,7 @@ use App\Models\Kua;
 
 class Form extends StafKua
 {
-    public $name, $email, $password, $stafId;
+    public $name, $email, $password, $kua, $stafId;
 
     protected $listeners = [
         'create',
@@ -14,15 +14,24 @@ class Form extends StafKua
         'delete',
     ];
 
+    protected $rules = [
+
+    ];
+
     public function render()
     {
-        // $kuas = Kua::get(['id', 'name']);
-        return view('livewire.staf-kua.form');
+        $kuas = Kua::get(['id', 'name']);
+        return view('livewire.staf-kua.form', compact('kuas'));
     }
 
     public function create()
     {
         $this->openCloseModal();
+    }
+
+    public function storeOrUpdate()
+    {
+
     }
 
     public function fieldsReset()
