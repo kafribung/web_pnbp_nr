@@ -13,11 +13,11 @@ class StafKua extends Component
 
     public function render()
     {
-        $stafKuas = User::paginate(1);
         $stafKuas = User::with('roles')->whereHas('roles', function($query) {
             $query->where('name', 'staf');
         })->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));
+        dd($stafKuas);
     }
 
     public function openCloseModal()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\StafKua;
 
+use App\Models\Kua;
 
 class Form extends StafKua
 {
@@ -15,6 +16,7 @@ class Form extends StafKua
 
     public function render()
     {
+        // $kuas = Kua::get(['id', 'name']);
         return view('livewire.staf-kua.form');
     }
 
