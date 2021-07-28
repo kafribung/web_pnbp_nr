@@ -1,9 +1,10 @@
 <x-modal maxWidth="md" wire:model="modal">
-    <form wire:submit.prevent="store" class="space-y-8 divide-y divide-gray-200">
+    @if($kuaIdDelete == null)
+    {{-- <form {{ $kuaId != null ? "wire:submit.prevent=update" : "wire:submit.prevent=store" }}  class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Tambah KUA
+                    {{ !empty($kuaId) ? "Ubah KUA" : "Tambah KUA"}}
                 </h3>
                 <div class="mt-3">
                     <label class="block text-sm">
@@ -16,18 +17,45 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <x-button wire:click="openCloseModal" type="button"
+                    <x-button wire:click="closeModal" type="button"
                         class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
                         Batal
                     </x-button>
 
                     <x-button type="submit"
-                        class="bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green">
-                        Simpan
+                        class="{{ !empty($kuaId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
+                        {{ !empty($kuaId) ? "Ubah" : "Simpan"}}
+                    </x-button>
+                </div>
+            </div>
+        </div>
+    </form> --}}
+    @else
+    <form wire.submit.prevent="destroy" class="space-y-8 divide-y divide-gray-200">
+        <div class="space-y-6 divide-y divide-gray-200">
+            <div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Hapus KUA
+                </h3>
+                <div class="mt-3">
+                    <p>Data akan dihapus permanent?</p>
+                </div>
+            </div>
+
+            <div class="pt-5">
+                <div class="flex justify-end">
+                    <x-button wire:click="closeModal" type="button"
+                        class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+                        Batal
                     </x-button>
 
+                    <x-button type="submit"
+                        class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
+                        Hapus
+                    </x-button>
                 </div>
             </div>
         </div>
     </form>
+    @endif
 </x-modal>
