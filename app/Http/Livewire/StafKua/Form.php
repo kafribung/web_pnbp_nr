@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\StafKua;
 
 use App\Models\Kua;
+use App\Models\Role;
 use App\Models\User;
 
 class Form extends StafKua
@@ -45,7 +46,8 @@ class Form extends StafKua
         $data['password'] = bcrypt($this->password);
 
         $stafKua = User::updateOrcreate(['id' => $this->stafId], $data);
-        $stafKua->roles->attach(2);
+        $role_id = Role::where('name', 'staf')->first()->id;
+        $stafKua->roles()->sync([$role_id]);
 
         session()->flash('message', $this->stafId ? 'Data Staf KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
         $this->fieldsReset();
