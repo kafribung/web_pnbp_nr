@@ -20,11 +20,6 @@ class Kua extends Component
         return view('livewire.kua.kua', compact('kuas'));
     }
 
-    public function paginationView()
-    {
-        return 'vendor.livewire.costume';
-    }
-
     public function openCloseModal()
     {
         $this->modal = !$this->modal;

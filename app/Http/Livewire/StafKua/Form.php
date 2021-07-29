@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\StafKua;
 
 use App\Models\Kua;
+use App\Models\User;
 
 class Form extends StafKua
 {
-    public $name, $email, $password, $kua, $stafId;
+    public $name, $email, $password, $password_confirmation, $kua_id, $stafId;
 
     protected $listeners = [
         'create',
@@ -15,8 +16,16 @@ class Form extends StafKua
     ];
 
     protected $rules = [
-        'name' => 'required',
+        'name'     => 'required|string',
+        'email'    => 'required|string|email|unique:users,email',
+        'password' => ['required', 'confirmed', 'max:8' ],
+        'kua_id'   => ['required', 'numeric'],
     ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function render()
     {
@@ -31,7 +40,17 @@ class Form extends StafKua
 
     public function storeOrUpdate()
     {
+        $data = $this->validate();
+        $data['password'] = bcrypt($this->password);
+        $data['password'] = bcrypt($this->password);
 
+        $stafKua = User::updateOrcreate(['id' => $this->stafId], $data);
+        $stafKua->roles->attach(2);
+
+        session()->flash('message', $this->stafId ? 'Data Staf KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
+        $this->fieldsReset();
+        $this->openCloseModal();
+        return redirect('staf-kua');
     }
 
     public function fieldsReset()
@@ -39,10 +58,11 @@ class Form extends StafKua
         $this->name        = '';
         $this->email       = '';
         $this->password    = '';
-        $this->kua    = '';
+        $this->password_confirmation = '';
+        $this->kua_od      = '';
         $this->stafId      = '';
-    }
 
+    }
 
     public function closeModal()
     {

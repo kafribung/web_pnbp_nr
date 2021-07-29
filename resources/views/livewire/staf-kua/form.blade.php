@@ -8,7 +8,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="name" :value="__('Nama')" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" name="name" :value="old('name')" autofocus />
+                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" autofocus />
                         <x-input-error for="name" class="mt-2"/>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="email" :value="__('Email')" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" name="email" :value="old('email')" required />
+                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" required />
                         <x-input-error for="email" class="mt-2"/>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="password" :value="__('Password')" />
-                        <x-input id="password" class="block mt-1 w-full" type="password" wire:model="password" name="password" required />
+                        <x-input id="password" class="block mt-1 w-full" type="password" wire:model="password" />
                         <x-input-error for="password" class="mt-2"/>
                     </div>
                 </div>
@@ -32,21 +32,21 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="password_confirmation" :value="__('Konfirmasi Password')" />
-                        <x-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" name="password_confirmation" required />
+                        <x-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" />
                         <x-input-error for="password_confirmation" class="mt-2"/>
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="kua" :value="__('KUA')" />
-                        <select wire:model="kua" id="kua" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                        <x-label for="kua_id" :value="__('KUA')" />
+                        <select wire:model="kua_id" id="kua_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
                             <option value="">Silahkan Pilih KUA</option>
                             @foreach($kuas as $kua)
                                 <option value="{{ $kua->id }}">{{ $kua->name }}</option>
                             @endforeach
                         </select>
-                        <x-input-error for="kua" class="mt-2"/>
+                        <x-input-error for="kua_id" class="mt-2"/>
                     </div>
                 </div>
             </div>
