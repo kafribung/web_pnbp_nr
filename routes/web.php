@@ -3,6 +3,7 @@
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\StafKua\StafKua;
 use App\Http\Livewire\Kua\Kua;
+use App\Http\Livewire\Penghulu\Penghulu;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function (){
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('kua', Kua::class)->name('kua');
     Route::get('staf-kua', StafKua::class)->name('staf-kua');
+    Route::get('staf-kua', StafKua::class)->name('staf-kua');
+    Route::get('penghulu', Penghulu::class)->name('penghulu');
 });
 
 require __DIR__.'/auth.php';
