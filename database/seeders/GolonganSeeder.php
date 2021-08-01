@@ -14,7 +14,7 @@ class GolonganSeeder extends Seeder
      */
     public function run()
     {
-        $clusters = [
+        $names = [
             'Penghulu Pertama -  III/a',
             'Penghulu Pertama - III/b',
             'Penghulu Muda - III/c',
@@ -24,9 +24,9 @@ class GolonganSeeder extends Seeder
             'Penghulu Madya - IV/c',
         ];
 
-        foreach ($clusters as $cluster) {
+        foreach ($names as $name) {
             Golongan::create([
-                'cluster' => $cluster
+                'name' => $name
             ]);
         }
     }

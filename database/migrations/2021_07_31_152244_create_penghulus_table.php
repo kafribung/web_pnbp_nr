@@ -17,6 +17,9 @@ class CreatePenghulusTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('golongan_id')->constrained('golongans')->cascadeOnDelete();
+            $table->foreignId('kua_id')->constrained('kuas')->cascadeOnDelete();
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

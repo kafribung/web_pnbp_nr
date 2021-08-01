@@ -14,4 +14,9 @@ class Kua extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function penghulus()
+    {
+        return $this->hasMany(Penghulu::class);
+    }
 }

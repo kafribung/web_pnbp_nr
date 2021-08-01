@@ -15,7 +15,7 @@ class CreateGolongansTable extends Migration
     {
         Schema::create('golongans', function (Blueprint $table) {
             $table->id();
-            $table->string('cluster');
+            $table->string('name');
         });
     }
 

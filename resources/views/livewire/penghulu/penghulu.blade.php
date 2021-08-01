@@ -1,6 +1,6 @@
 <div>
-    @livewire('staf-kua.form')
-    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Staf KUA </h2>
+    @livewire('penghulu.form')
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Penghulu </h2>
     <!-- CTA -->
     <div
         class="flex items-center p-4 mb-8 text-sm font-semibold text-green-100 bg-green-600 rounded-tl-3xl rounded-br-xl shadow-lg focus:outline-none focus:shadow-outline-green">
@@ -10,7 +10,7 @@
                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                 </path>
             </svg>
-            <span class="text-base">Berisi data akun staf KUA di Kabupaten Mamuju</span>
+            <span class="text-base">Berisi data penghulu di Kabupaten Mamuju</span>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
             </div>
             @endif
             <div class="flex justify-end">
-                <button wire:click="$emitTo('staf-kua.form', 'create')"
+                <button wire:click="$emitTo('penghulu.form', 'create')"
                     class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                     aria-label="Edit">
                     Tambah data
@@ -36,31 +36,20 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
-                        <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Gologan</th>
+                        <th class="px-4 py-3">KUA</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @foreach ($stafKuas as $stafKua)
+                    @foreach ($penghulus as $penghulu)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-sm">
-                            {{ (($stafKuas->currentPage() - 1 ) * $stafKuas->perPage() ) + $loop->iteration }} </td>
-                        <td class="px-4 py-3">
-                            <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                    <img class="object-cover w-full h-full rounded-full"
-                                        src="https://ui-avatars.com/api/?name={{ $stafKua->name }}&background=059669&color=fff&bold=true"
-                                        alt="" loading="lazy" />
-                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">{{ $stafKua->name }}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400"> Staf KUA</p>
-                                </div>
-                            </div>
+                            {{ (($penghulus->currentPage() - 1 ) * $penghulus->perPage() ) + $loop->iteration }}
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $stafKua->email }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $penghulu->name }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $penghulu->kua->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <button
@@ -88,7 +77,7 @@
                 </tbody>
             </table>
         </div>
-        {{ $stafKuas->links() }}
+        {{ $penghulus->links() }}
     </div>
 
 </div>
