@@ -15,27 +15,27 @@
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="golongan_id" :value="__('Golongan')" />
-                        <select wire:model="golongan_id" id="golongan_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                        <x-label for="golonganId" :value="__('Golongan')" />
+                        <select wire:model="golonganId" id="golonganId" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
                             <option value="">Silahkan Pilih Golongan</option>
                             @foreach($golongans as $golongan)
                                 <option value="{{ $golongan->id }}">{{ $golongan->name }}</option>
                             @endforeach
                         </select>
-                        <x-input-error for="golongan_id" class="mt-2"/>
+                        <x-input-error for="golonganId" class="mt-2"/>
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="kua_id" :value="__('Kua')" />
-                        <select wire:model="kua_id" id="kua_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                        <x-label for="kuaId" :value="__('Kua')" />
+                        <select wire:model="kuaId" id="kuaId" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
                             <option value="">Silahkan Pilih KUA</option>
                             @foreach($kuas as $kua)
                                 <option value="{{ $kua->id }}">{{ $kua->name }}</option>
                             @endforeach
                         </select>
-                        <x-input-error for="kua_id" class="mt-2"/>
+                        <x-input-error for="kuaId" class="mt-2"/>
                     </div>
                 </div>
             </div>

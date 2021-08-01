@@ -6,7 +6,7 @@ use App\Models\{Golongan, Kua, Penghulu as PenghuluModel};
 
 class Form extends Penghulu
 {
-    public $name, $kua_id, $golongan_id, $penghuluId, $penghuluDeleteId;
+    public $name, $kuaId, $golonganId, $penghuluId, $penghuluDeleteId;
 
     protected $listeners = [
         'create',
@@ -16,8 +16,8 @@ class Form extends Penghulu
 
     protected $rules = [
         'name'        => 'required|string|min:3',
-        'golongan_id' => 'required',
-        'kua_id'      => 'required',
+        'golonganId'  => 'required',
+        'kuaId'       => 'required',
     ];
 
     public function render()
@@ -49,7 +49,7 @@ class Form extends Penghulu
     {
         $this->name             = '';
         $this->kuaId            = '';
-        $this->golongan_id      = '';
+        $this->golonganId       = '';
         $this->penghuluId       = '';
         $this->penghuluDeleteId = '';
     }

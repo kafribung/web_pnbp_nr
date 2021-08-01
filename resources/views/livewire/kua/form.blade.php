@@ -1,6 +1,6 @@
 <x-modal maxWidth="md" wire:model="modal">
     @if($kuaIdDelete == null)
-    <form wire:submit.prevent="storeOrUpdate"  class="space-y-8 divide-y divide-gray-200">
+    <form wire:submit.prevent="storeOrUpdate"  class="space-y-8 divide-y divide-gray-200" autocomplete="off">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">

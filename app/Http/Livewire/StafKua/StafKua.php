@@ -15,7 +15,7 @@ class StafKua extends Component
 
     public function render()
     {
-        $stafKuas = User::with('roles')->whereHas('roles', function($query) {
+        $stafKuas = User::with('roles', 'kua')->whereHas('roles', function($query) {
             $query->where('name', 'staf');
         })->latest()->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));

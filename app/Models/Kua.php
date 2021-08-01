@@ -19,4 +19,9 @@ class Kua extends Model
     {
         return $this->hasMany(Penghulu::class);
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

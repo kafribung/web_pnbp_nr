@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <p class="font-semibold">{{ $stafKua->name }}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400"> Staf KUA</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400"> Staf KUA {{ $stafKua->kua->name }}</p>
                                 </div>
                             </div>
                         </td>
