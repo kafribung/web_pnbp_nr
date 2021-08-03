@@ -16,7 +16,7 @@ class Kua extends Component
 
     public function render()
     {
-        $kuas = KuaModel::paginate(10);
+        $kuas = KuaModel::orderBy('id', 'desc')->paginate(10);
         return view('livewire.kua.kua', compact('kuas'));
     }
 
