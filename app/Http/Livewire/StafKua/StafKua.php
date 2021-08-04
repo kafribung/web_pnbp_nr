@@ -9,13 +9,14 @@ class StafKua extends Component
 {
     use WithPagination;
 
+    public $search;
     public $modal = false;
 
     protected $paginationTheme = 'costume';
 
     public function render()
     {
-        $stafKuas = User::with('roles', 'kua')->whereHas('roles', function($query) {
+        $stafKuas = User::with('roles', 'kua')->where('name', 'like', '%'.$this->search.'%')->whereHas('roles', function($query) {
             $query->where('name', 'staf');
         })->latest()->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));

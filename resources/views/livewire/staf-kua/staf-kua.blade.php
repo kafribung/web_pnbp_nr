@@ -7,7 +7,10 @@
             @if (session('message'))
             <x-message>{{ session('message') }}</x-message>
             @endif
-            <div class="flex justify-end">
+            <div class="flex justify-between mt-2">
+                <x-search>
+                    <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                </x-search>
                 <x-button-add wire:click="$emitTo('staf-kua.form', 'create')"></x-button-add>
             </div>
             <table class="w-full whitespace-no-wrap">
@@ -21,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @foreach ($stafKuas as $stafKua)
+                    @forelse ($stafKuas as $stafKua)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-sm">
                             {{ (($stafKuas->currentPage() - 1 ) * $stafKuas->perPage() ) + $loop->iteration }} </td>
@@ -48,7 +51,9 @@
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                        <td colspan="4" class="items-center text-center">Data tidak ditemukan !</td>
+                    @endforelse
                 </tbody>
             </table>
         </div>
