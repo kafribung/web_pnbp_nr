@@ -16,24 +16,21 @@ class KuaSeeder extends Seeder
     public function run()
     {
         $kuas = collect([
-            'Bonehau',
-            'Kalukku',
-            'Kalumpang',
-            'Kepulauan Balabalakang',
-            'Mamuju',
-            'Papalang',
-            'Sampaga',
-            'Simboro dan Kepulauan',
-            'Tapalang',
-            'Tapalang Barat',
-            'Tommo'
+            ['name' => 'Bonehau', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Kalukku', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Kalumpang', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Kepulauan Balabalakang', 'typology_id' => 4, 'created_by' => User::first()->id],
+            ['name' => 'Mamuju', 'typology_id' => 2, 'created_by' => User::first()->id],
+            ['name' => 'Papalang', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Sampaga', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Simboro dan Kepulauan', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Tapalang', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Tapalang Barat', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Tommo', 'typology_id' => 3, 'created_by' => User::first()->id],
         ]);
 
         $kuas->each(function($kua){
-            Kua::create([
-                'name' => $kua,
-                'created_by' => User::first()->id,
-            ]);
+            Kua::create($kua);
         });
     }
 }
