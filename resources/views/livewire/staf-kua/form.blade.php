@@ -1,4 +1,5 @@
 <x-modal maxWidth="md" wire:model="modal">
+    @if( empty($stafIdDelete) )
     <form wire:submit.prevent="storeOrUpdate"  class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
@@ -40,12 +41,12 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="kua_id" :value="__('KUA')" />
-                        <select wire:model="kua_id" id="kua_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
-                            <option value="">Silahkan Pilih KUA</option>
+                        <x-select wire:model="kua_id" id="kua_id">
+                            @slot('option_default', 'Silahkan Pilih KUA')
                             @foreach($kuas as $kua)
                                 <option value="{{ $kua->id }}">{{ $kua->name }}</option>
                             @endforeach
-                        </select>
+                        </x-select>
                         <x-input-error for="kua_id" class="mt-2"/>
                     </div>
                 </div>
@@ -66,4 +67,30 @@
             </div>
         </div>
     </form>
+    @else
+    <div class="space-y-6 divide-y divide-gray-200">
+        <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Hapus KUA
+            </h3>
+            <div class="mt-3">
+                <p>Data akan dihapus permanent?</p>
+            </div>
+        </div>
+
+        <div class="pt-5">
+            <div class="flex justify-end">
+                <x-button wire:click="closeModal" type="button"
+                    class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+                    Batal
+                </x-button>
+
+                <x-button wire:click="destroy"
+                    class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
+                    Hapus
+                </x-button>
+            </div>
+        </div>
+    </div>
+    @endif
 </x-modal>

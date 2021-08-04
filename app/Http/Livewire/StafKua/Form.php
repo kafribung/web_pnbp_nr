@@ -18,7 +18,7 @@ class Form extends StafKua
     {
         return [
             'name'     => 'required|string',
-            'email'    => ['required', 'string', 'email', 'unique:users,email, '. optional($this->stafId)->id],
+            'email'    => ['required', 'string', 'email', 'unique:users,email, '. $this->stafId],
             'password' => ['required', 'confirmed', 'max:8' ],
             'kua_id'   => ['required', 'numeric'],
         ];
@@ -74,21 +74,23 @@ class Form extends StafKua
     public function destroy()
     {
         $stafKua = User::findOrFail($this->stafIdDelete);
+
         $stafKua->delete();
+
         session()->flash('message', 'Data stafKua ' . $this->name .' berhasil dihapus');
         $this->closeModal();
-        return redirect('kua');
+        return redirect('staf-kua');
     }
-
 
     public function fieldsReset()
     {
-        $this->name        = '';
-        $this->email       = '';
-        $this->password    = '';
+        $this->name                  = '';
+        $this->email                 = '';
+        $this->password              = '';
         $this->password_confirmation = '';
-        $this->kua_od      = '';
-        $this->stafId      = '';
+        $this->kua_od                = '';
+        $this->stafId                = '';
+        $this->stafIdDelete          = '';
 
     }
 
