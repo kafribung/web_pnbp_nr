@@ -18,12 +18,12 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="typology_id" :value="__('Tipologi')" />
-                        <select wire:model="typology_id" id="typology_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
-                            <option value="">Silahkan Pilih Tipologi</option>
+                        <x-select wire:model="typology_id" id="typology_id">
+                            @slot('option_default', 'Silahkan Pilih Tipologi')
                             @foreach($typologies as $typology)
                                 <option value="{{ $typology->id }}">{{ $typology->name }}</option>
                             @endforeach
-                        </select>
+                        </x-select>
                         <x-input-error for="typology_id" class="mt-2"/>
                     </div>
                 </div>
