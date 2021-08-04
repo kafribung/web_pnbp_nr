@@ -37,7 +37,7 @@
                             {{ (($kuas->currentPage() - 1 ) * $kuas->perPage() ) + $loop->iteration }}
                         </td>
                         <td class="px-4 py-3 text-sm"> {{ $kua->name }} </td>
-                        <td class="px-4 py-3 text-sm"> C </td>
+                        <td class="px-4 py-3 text-sm"> {{ $kua->typology->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('kua.form', 'edit', {{ $kua->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>

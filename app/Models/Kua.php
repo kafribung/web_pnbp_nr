@@ -24,4 +24,10 @@ class Kua extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function typology()
+    {
+        return $this->belongsTo(Typology::class);
+    }
+
 }

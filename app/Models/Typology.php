@@ -14,4 +14,9 @@ class Typology extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function kuas()
+    {
+        return $this->hasMany(Kua::class);
+    }
 }
