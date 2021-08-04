@@ -5,7 +5,7 @@ use App\Models\Kua as KuaModel;
 
 class Form extends Kua
 {
-    public $name, $kuaId, $kuaIdDelete;
+    public $name,$typologi, $kuaId, $kuaIdDelete;
 
     protected $listeners =[
         'create',
