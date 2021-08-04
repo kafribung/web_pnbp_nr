@@ -16,6 +16,7 @@ class CreateKuasTable extends Migration
         Schema::create('kuas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('typology');
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();

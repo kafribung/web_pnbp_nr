@@ -16,7 +16,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-white border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-green-300 focus:outline-none focus:shadow-outline-green form-input" type="text" placeholder="Search for projects" aria-label="Search" />
+                    <x-input class="pl-8 pr-2 text-sm" name="search" type="text" placeholder="Search"></x-input>
                 </div>
                 <x-button-add wire:click="$emitTo('kua.form', 'create')"></x-button-add>
             </div>
@@ -26,6 +26,7 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Kua</th>
+                        <th class="px-4 py-3">Tipologi</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                             {{ (($kuas->currentPage() - 1 ) * $kuas->perPage() ) + $loop->iteration }}
                         </td>
                         <td class="px-4 py-3 text-sm"> {{ $kua->name }} </td>
+                        <td class="px-4 py-3 text-sm"> C </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('kua.form', 'edit', {{ $kua->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
