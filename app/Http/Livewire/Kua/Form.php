@@ -40,8 +40,7 @@ class Form extends Kua
         KuaModel::updateOrCreate(['id' => $this->kuaId], $data);
 
         session()->flash('message', $this->kuaId ? 'Data KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
-        $this->fieldsReset();
-        $this->openCloseModal();
+        $this->closeModal();
         return redirect('kua');
     }
 

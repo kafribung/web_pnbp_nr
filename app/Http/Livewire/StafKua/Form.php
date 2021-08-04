@@ -2,9 +2,7 @@
 
 namespace App\Http\Livewire\StafKua;
 
-use App\Models\Kua;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\{Kua, Role, User};
 
 class Form extends StafKua
 {
@@ -18,7 +16,7 @@ class Form extends StafKua
 
     protected $rules = [
         'name'     => 'required|string',
-        'email'    => 'required|string|email|unique:users,email',
+        'email'    => ['required', 'string', 'email', 'unique:users,email, '. optional($this->stafId)->id],
         'password' => ['required', 'confirmed', 'max:8' ],
         'kua_id'   => ['required', 'numeric'],
     ];
@@ -50,9 +48,18 @@ class Form extends StafKua
         $stafKua->roles()->sync([$role_id]);
 
         session()->flash('message', $this->stafId ? 'Data Staf KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
-        $this->fieldsReset();
-        $this->openCloseModal();
+        $this->closeModal();
         return redirect('staf-kua');
+    }
+
+    public function edit($id)
+    {
+        $this->stafId = $id;
+        $staf         = User::findOrFail($id);
+        $this->name   = $staf->name;
+        $this->email  = $staf->email;
+        $this->kua_id = $staf->kua_id;
+        $this->openCloseModal();
     }
 
     public function fieldsReset()
