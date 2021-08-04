@@ -45,29 +45,15 @@
         </div>
     </form>
     @else
-        <div class="space-y-6 divide-y divide-gray-200">
-            <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Hapus KUA
-                </h3>
-                <div class="mt-3">
-                    <p>Data akan dihapus permanent?</p>
-                </div>
-            </div>
-
-            <div class="pt-5">
-                <div class="flex justify-end">
-                    <x-button wire:click="closeModal" type="button"
-                        class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
-                        Batal
-                    </x-button>
-
-                    <x-button wire:click="destroy"
-                        class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
-                        Hapus
-                    </x-button>
-                </div>
-            </div>
-        </div>
+    <x-delete-card>
+        <x-button wire:click="closeModal" type="button"
+            class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+            Batal
+        </x-button>
+        <x-button wire:click="destroy"
+            class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
+            Hapus
+        </x-button>
+    </x-delete-card>
     @endif
 </x-modal>
