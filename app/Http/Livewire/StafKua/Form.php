@@ -6,7 +6,7 @@ use App\Models\{Kua, Role, User};
 
 class Form extends StafKua
 {
-    public $name, $email, $password, $password_confirmation, $kua_id, $stafId;
+    public $name, $email, $password, $password_confirmation, $kua_id, $stafId, $stafIdDelete ;
 
     protected $listeners = [
         'create',
@@ -14,12 +14,15 @@ class Form extends StafKua
         'delete',
     ];
 
-    protected $rules = [
-        'name'     => 'required|string',
-        'email'    => ['required', 'string', 'email', 'unique:users,email, '. optional($this->stafId)->id],
-        'password' => ['required', 'confirmed', 'max:8' ],
-        'kua_id'   => ['required', 'numeric'],
-    ];
+    protected function  rules()
+    {
+        return [
+            'name'     => 'required|string',
+            'email'    => ['required', 'string', 'email', 'unique:users,email, '. optional($this->stafId)->id],
+            'password' => ['required', 'confirmed', 'max:8' ],
+            'kua_id'   => ['required', 'numeric'],
+        ];
+    }
 
     public function updated($propertyName)
     {
@@ -55,12 +58,28 @@ class Form extends StafKua
     public function edit($id)
     {
         $this->stafId = $id;
-        $staf         = User::findOrFail($id);
-        $this->name   = $staf->name;
-        $this->email  = $staf->email;
-        $this->kua_id = $staf->kua_id;
+        $stafKua      = User::findOrFail($id);
+        $this->name   = $stafKua->name;
+        $this->email  = $stafKua->email;
+        $this->kua_id = $stafKua->kua_id;
         $this->openCloseModal();
     }
+
+    public function delete($id)
+    {
+        $this->stafIdDelete = $id;
+        $this->openCloseModal();
+    }
+
+    public function destroy()
+    {
+        $stafKua = User::findOrFail($this->stafIdDelete);
+        $stafKua->delete();
+        session()->flash('message', 'Data stafKua ' . $this->name .' berhasil dihapus');
+        $this->closeModal();
+        return redirect('kua');
+    }
+
 
     public function fieldsReset()
     {

@@ -19,7 +19,6 @@ class StafKua extends Component
             $query->where('name', 'staf');
         })->latest()->paginate(10);
         return view('livewire.staf-kua.staf-kua', compact('stafKuas'));
-        dd($stafKuas);
     }
 
     public function openCloseModal()

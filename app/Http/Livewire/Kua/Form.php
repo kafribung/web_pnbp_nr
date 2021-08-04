@@ -65,8 +65,7 @@ class Form extends Kua
         $kua = KuaModel::findOrFail($this->kuaIdDelete);
         $kua->delete();
         session()->flash('message', 'Data KUA ' . $kua->name .' berhasil dihapus');
-        $this->fieldsReset();
-        $this->openCloseModal();
+        $this->closeModal();
         return redirect('kua');
     }
 
