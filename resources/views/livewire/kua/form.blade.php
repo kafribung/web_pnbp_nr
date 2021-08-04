@@ -6,11 +6,25 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     {{ !empty($kuaId) ? "Ubah KUA" : "Tambah KUA"}}
                 </h3>
+
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="name" :value="__('Kua')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" required autofocus />
                         <x-input-error for="name" class="mt-2"/>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <div class="block text-sm">
+                        <x-label for="typology_id" :value="__('Tipologi')" />
+                        <select wire:model="typology_id" id="typology_id" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                            <option value="">Silahkan Pilih Tipologi</option>
+                            @foreach($typologies as $typology)
+                                <option value="{{ $typology->id }}">{{ $typology->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="typology_id" class="mt-2"/>
                     </div>
                 </div>
             </div>

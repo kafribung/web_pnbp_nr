@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Livewire\Kua;
 
-use App\Models\Kua as KuaModel;
-
+use App\Models\{Kua as KuaModel, Typology};
 class Form extends Kua
 {
-    public $name,$typologi, $kuaId, $kuaIdDelete;
+    public $name, $typology_id, $kuaId, $kuaIdDelete;
 
     protected $listeners =[
         'create',
@@ -14,7 +13,8 @@ class Form extends Kua
     ];
 
     protected $rules =[
-        'name' => ['required', 'string', 'min:3'],
+        'name'        => ['required', 'string', 'min:3'],
+        'typology_id'  => 'required',
     ];
 
     public function updated($propertyName)
@@ -24,7 +24,8 @@ class Form extends Kua
 
     public function render()
     {
-        return view('livewire.kua.form');
+        $typologies = Typology::get(['id', 'name']);
+        return view('livewire.kua.form', compact('typologies'));
     }
 
     public function create()
@@ -46,9 +47,10 @@ class Form extends Kua
 
     public function edit($id)
     {
-        $this->kuaId= $id;
-        $kua        = KuaModel::findOrFail($id);
-        $this->name = $kua->name;
+        $this->kuaId        = $id;
+        $kua                = KuaModel::findOrFail($id);
+        $this->name         = $kua->name;
+        $this->typology_id  = $kua->typology_id;
         $this->openCloseModal();
     }
 
