@@ -10,13 +10,14 @@ class Kua extends Component
 {
     use WithPagination;
 
+    public $search;
     public $modal = false;
 
     protected $paginationTheme = 'costume';
 
     public function render()
     {
-        $kuas = KuaModel::orderBy('id', 'desc')->paginate(10);
+        $kuas = KuaModel::orderBy('id', 'desc')->where('name', 'like', '%'. $this->search .'%')->paginate(10);
         return view('livewire.kua.kua', compact('kuas'));
     }
 
