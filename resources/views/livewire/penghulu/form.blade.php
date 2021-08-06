@@ -1,4 +1,5 @@
 <x-modal maxWidth="md" wire:model="modal">
+    @if( empty($penghuluIdDelete) )
     <form wire:submit.prevent="storeOrUpdate" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
@@ -8,34 +9,34 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="name" :value="__('Nama')" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" autofocus />
+                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" autofocus autocomplete="off"/>
                         <x-input-error for="name" class="mt-2"/>
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="golonganId" :value="__('Golongan')" />
-                        <select wire:model="golonganId" id="golonganId" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
-                            <option value="">Silahkan Pilih Golongan</option>
+                        <x-label for="golongan_id" :value="__('Golongan')" />
+                        <x-select wire:model="golongan_id" id="golongan_id">
+                            @slot('option_default', 'Silahkan Pilih Golongan')
                             @foreach($golongans as $golongan)
                                 <option value="{{ $golongan->id }}">{{ $golongan->name }}</option>
                             @endforeach
-                        </select>
-                        <x-input-error for="golonganId" class="mt-2"/>
+                        </x-select>
+                        <x-input-error for="golongan_id" class="mt-2"/>
                     </div>
                 </div>
 
                 <div class="mt-3">
                     <div class="block text-sm">
-                        <x-label for="kuaId" :value="__('Kua')" />
-                        <select wire:model="kuaId" id="kuaId" class="block mt-1 w-full rounded-md shadow-sm dark:border-gray-600 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green dark:text-gray-300 dark:focus:shadow-outline-gray focus:ring focus:ring-green-200 focus:ring-opacity-50">
-                            <option value="">Silahkan Pilih KUA</option>
+                        <x-label for="kua_id" :value="__('Kua')" />
+                        <x-select wire:model="kua_id" id="kua_id">
+                            @slot('option_default', 'Silahkan Pilih KUA')
                             @foreach($kuas as $kua)
                                 <option value="{{ $kua->id }}">{{ $kua->name }}</option>
                             @endforeach
-                        </select>
-                        <x-input-error for="kuaId" class="mt-2"/>
+                        </x-select>
+                        <x-input-error for="kua_id" class="mt-2"/>
                     </div>
                 </div>
             </div>
@@ -55,4 +56,16 @@
             </div>
         </div>
     </form>
+    @else
+    <x-delete-card>
+        <x-button wire:click="closeModal" type="button"
+            class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+            Batal
+        </x-button>
+        <x-button wire:click="destroy"
+            class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
+            Hapus
+        </x-button>
+    </x-delete-card>
+    @endif
 </x-modal>

@@ -6,7 +6,7 @@ use App\Models\{Golongan, Kua, Penghulu as PenghuluModel};
 
 class Form extends Penghulu
 {
-    public $name, $kuaId, $golonganId, $penghuluId, $penghuluDeleteId;
+    public $name, $kua_id, $golongan_id, $penghuluId, $penghuluIdDelete;
 
     protected $listeners = [
         'create',
@@ -15,10 +15,15 @@ class Form extends Penghulu
     ];
 
     protected $rules = [
-        'name'        => 'required|string|min:3',
-        'golonganId'  => 'required',
-        'kuaId'       => 'required',
+        'name'         => 'required|string|min:3',
+        'golongan_id'  => 'required',
+        'kua_id'       => 'required',
     ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function render()
     {
@@ -37,21 +42,47 @@ class Form extends Penghulu
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
 
-        PenghuluModel::updateOrCreate(['id', $this->penghuluId], $data);
+        PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
 
         session()->flash('message', $this->penghuluId ? 'Data penghulu ' . $this->name. ' berhasil diubah' : 'Data penghulu berhasil ditambhakan');
-        $this->fieldsReset();
+        $this->closeModal();
+        return redirect('penghulu');
+    }
+
+    public function edit($id)
+    {
+        $this->penghuluId = $id;
+        $penghulu = PenghuluModel::findOrFail($id);
+
+        $this->name             = $penghulu->name;
+        $this->kua_id           = $penghulu->kua_id;
+        $this->golongan_id      = $penghulu->golongan_id;
         $this->openCloseModal();
+    }
+
+    public function delete($id)
+    {
+        $this->penghuluIdDelete = $id;
+        $this->openCloseModal();
+    }
+
+    public function destroy()
+    {
+        $penghulu = PenghuluModel::findOrFail($this->penghuluIdDelete);
+        $penghulu->delete()
+        ;
+        session()->flash('message', 'Data penghulu ' . $penghulu->name .' berhasil dihapus');
+        $this->closeModal();
         return redirect('penghulu');
     }
 
     public function fieldsReset()
     {
         $this->name             = '';
-        $this->kuaId            = '';
-        $this->golonganId       = '';
+        $this->kua_id           = '';
+        $this->golongan_id      = '';
         $this->penghuluId       = '';
-        $this->penghuluDeleteId = '';
+        $this->penghuluIdDelete = '';
     }
 
     public function closeModal()
