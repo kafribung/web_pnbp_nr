@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypologiesTable extends Migration
+class CreatePeristiwaNikahsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTypologiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('typologies', function (Blueprint $table) {
+        Schema::create('peristiwa_nikahs', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30);
         });
@@ -26,6 +26,6 @@ class CreateTypologiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('typologies');
+        Schema::dropIfExists('peristiwa_nikahs');
     }
 }

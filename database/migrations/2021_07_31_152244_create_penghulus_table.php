@@ -15,7 +15,7 @@ class CreatePenghulusTable extends Migration
     {
         Schema::create('penghulus', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 30);
             $table->foreignId('golongan_id')->constrained('golongans')->cascadeOnDelete();
             $table->foreignId('kua_id')->constrained('kuas')->cascadeOnDelete();
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();

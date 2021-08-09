@@ -21,6 +21,6 @@ class Admin
             if ( $user->hasRole('admin') ) {
                 return $next($request);
             } else abort('403', 'Anda bukan admin');
-        } else abort('404');
+        } else return redirect('login');
     }
 }
