@@ -42,6 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -50,5 +52,13 @@ class User extends Authenticatable
     public function kua()
     {
         return $this->belongsTo(Kua::class);
+    }
+
+    /**
+    * Role
+    */
+    public function hasRole($role)
+    {
+        // $this->roles()->where('name', 'admin')->count() == 1;
     }
 }
