@@ -18,9 +18,9 @@ class Admin
     {
         $user = $request->user();
         if (auth()->check()) {
-            if ( $user->roles()->where('name', 'admin')->count() == 1 ) {
+            if ( $user->hasRole('admin') ) {
                 return $next($request);
             } else abort('403', 'Anda bukan admin');
-        } else abort('403', 'Anda belum login');
+        } else abort('404');
     }
 }

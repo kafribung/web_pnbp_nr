@@ -21,13 +21,11 @@ Route::get('/', function () {
     return redirect('dashboard');
 });
 
-Route::middleware('auth')->group(function (){
-    Route::middleware('admin')->group(function() {
-        Route::get('dashboard', Dashboard::class)->name('dashboard');
-        Route::get('kua', Kua::class)->name('kua');
-        Route::get('staf-kua', StafKua::class)->name('staf-kua');
-        Route::get('penghulu', Penghulu::class)->name('penghulu');
-    });
+Route::middleware('admin')->group(function() {
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('kua', Kua::class)->name('kua');
+    Route::get('staf-kua', StafKua::class)->name('staf-kua');
+    Route::get('penghulu', Penghulu::class)->name('penghulu');
 });
 
 require __DIR__.'/auth.php';

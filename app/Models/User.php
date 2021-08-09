@@ -59,6 +59,7 @@ class User extends Authenticatable
     */
     public function hasRole($role)
     {
-        // $this->roles()->where('name', 'admin')->count() == 1;
+        if ($this->roles()->where('name', $role)->count() == 1) return true;
+        else return false;
     }
 }
