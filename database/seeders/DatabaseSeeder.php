@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TypologySeeder::class,
             KuaSeeder::class,
             GolonganSeeder::class,
+            PeristiwaNikahSeeder::class,
         ]);
     }
 }

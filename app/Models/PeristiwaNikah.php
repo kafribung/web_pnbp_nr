@@ -13,7 +13,7 @@ class PeristiwaNikah extends Model
 
     protected $fillable = [
         'name',
-    ];  
+    ];
 
 
 }

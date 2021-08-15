@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PeristiwaNikah;
 use Illuminate\Database\Seeder;
 
 class PeristiwaNikahSeeder extends Seeder
@@ -13,6 +14,18 @@ class PeristiwaNikahSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $peristiwaNikahs = [
+            'Balai Nikah',
+            'Luar Balai Nikah',
+            'Kurang Mampu',
+            'Bencana Alam',
+            'Isbat'
+        ];
+
+        foreach ($peristiwaNikahs as $peristiwaNikah) {
+            PeristiwaNikah::create([
+                'name' => $peristiwaNikah,
+            ]);
+        }
     }
 }
