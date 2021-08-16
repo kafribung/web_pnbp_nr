@@ -68,6 +68,8 @@ class Form extends StafKua
     public function delete($id)
     {
         $this->stafIdDelete = $id;
+        $stafKua      = User::findOrFail($id);
+        $this->name   = $stafKua->name;
         $this->openCloseModal();
     }
 
@@ -77,7 +79,7 @@ class Form extends StafKua
 
         $stafKua->delete();
 
-        session()->flash('message', 'Data staf KUA ' . $this->name .' berhasil dihapus');
+        session()->flash('message', 'Data staf KUA ' . $stafKua->name .' berhasil dihapus');
         $this->closeModal();
         return redirect('staf-kua');
     }

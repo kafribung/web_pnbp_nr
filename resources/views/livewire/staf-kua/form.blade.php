@@ -69,6 +69,7 @@
     </form>
     @else
     <x-delete-card>
+        <x-slot name="name">{{ $name }}</x-slot>
         <x-button wire:click="closeModal" type="button"
             class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
             Batal
