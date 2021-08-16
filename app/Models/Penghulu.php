@@ -25,4 +25,9 @@ class Penghulu extends Model
         return $this->belongsTo(Kua::class);
     }
 
+    public function pernikahans()
+    {
+        return $this->hasMany(Pernikahan::class);
+    }
+
 }
