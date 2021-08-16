@@ -66,11 +66,9 @@
         <h4 class="mb-2 text-2xl font-semibold">
             Assalamualaikum warahmatullahi wabarakatuh
         </h4>
-        {{-- @if ( auth()->user()->roles()->where('name', 'admin')->count() == 1 ) --}}
         @if ( auth()->user()->hasRole('admin') )
-
         <h4 class="text-xl font-semibold">
-            Selamat datang {{ auth()->user()->name }}
+            Selamat datang admin {{ auth()->user()->name }}
         </h4>
         <p class="mt-2 text-base">
             Sistem Informasi Pelaporan PNBP-NR Kementrian Agama Kabupaten Mamuju
