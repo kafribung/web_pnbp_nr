@@ -9,7 +9,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="name" :value="__('Nama')" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" autofocus />
+                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="name" autocomplete="off" required autofocus />
                         <x-input-error for="name" class="mt-2"/>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="email" :value="__('Email')" />
-                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" required />
+                        <x-input id="email" class="block mt-1 w-full" type="email" wire:model="email" autocomplete="off" required />
                         <x-input-error for="email" class="mt-2"/>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     </x-button>
 
                     <x-button type="submit"
-                        class="{{ !empty($stafId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-blue-600 active:bg-blue-600 hover:bg-blue-700 focus:shadow-outline-blue'}}">
+                        class="{{ !empty($stafId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
                         {{ !empty($stafId) ? "Ubah" : "Simpan"}}
                     </x-button>
                 </div>
