@@ -58,6 +58,9 @@
     </form>
     @else
     <x-delete-card>
+        @slot('name')
+            {{ $name }}
+        @endslot
         <x-button wire:click="closeModal" type="button"
             class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
             Batal

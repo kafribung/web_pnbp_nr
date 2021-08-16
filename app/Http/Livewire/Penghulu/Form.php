@@ -63,14 +63,16 @@ class Form extends Penghulu
     public function delete($id)
     {
         $this->penghuluIdDelete = $id;
+        $penghulu = PenghuluModel::findOrFail($id);
+
+        $this->name             = $penghulu->name;
         $this->openCloseModal();
     }
 
     public function destroy()
     {
         $penghulu = PenghuluModel::findOrFail($this->penghuluIdDelete);
-        $penghulu->delete()
-        ;
+        $penghulu->delete();
         session()->flash('message', 'Data penghulu ' . $penghulu->name .' berhasil dihapus');
         $this->closeModal();
         return redirect('penghulu');

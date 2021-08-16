@@ -4,7 +4,7 @@
             Peringatan !
         </h3>
         <div class="mt-3">
-            <p>Data akan dihapus permanent?</p>
+            <p>Data {{ $name }} akan dihapus permanent?</p>
         </div>
     </div>
 
