@@ -17,7 +17,7 @@ class Form extends StafKua
     protected function  rules()
     {
         return [
-            'name'     => 'required|string',
+            'name'     => 'required|string|min:3',
             'email'    => ['required', 'string', 'email', 'unique:users,email, '. $this->stafId],
             'password' => ['required', 'confirmed', 'max:8' ],
             'kua_id'   => ['required', 'numeric'],
