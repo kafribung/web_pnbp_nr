@@ -37,7 +37,7 @@
                     </x-button>
 
                     <x-button type="submit"
-                        class="{{ !empty($kuaId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-blue-600 active:bg-blue-600 hover:bg-blue-700 focus:shadow-outline-blue'}}">
+                        class="{{ !empty($kuaId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
                         {{ !empty($kuaId) ? "Ubah" : "Simpan"}}
                     </x-button>
                 </div>
