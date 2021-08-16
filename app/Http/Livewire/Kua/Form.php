@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Livewire\Kua;
 
-use App\Models\{Kua as KuaModel, Typology};
+use App\Models\{Kua as ModelsKua, Typology};
 class Form extends Kua
 {
     public $name, $typology_id, $kuaId, $kuaIdDelete;
@@ -38,9 +38,9 @@ class Form extends Kua
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
 
-        KuaModel::updateOrCreate(['id' => $this->kuaId], $data);
+        ModelsKua::updateOrCreate(['id' => $this->kuaId], $data);
 
-        session()->flash('message', $this->kuaId ? 'Data KUA ' . $this->name. ' berhasil diubah' : 'Data KUA berhasil ditambhakan');
+        session()->flash('message', $this->kuaId ? 'Data KUA ' . $this->name. ' berhasil diubah' : 'Data KUA '.$this->name.' berhasil ditambhakan');
         $this->closeModal();
         return redirect('kua');
     }
@@ -48,7 +48,7 @@ class Form extends Kua
     public function edit($id)
     {
         $this->kuaId        = $id;
-        $kua                = KuaModel::findOrFail($id);
+        $kua                = ModelsKua::findOrFail($id);
         $this->name         = $kua->name;
         $this->typology_id  = $kua->typology_id;
         $this->openCloseModal();
@@ -57,14 +57,14 @@ class Form extends Kua
     public function delete($id)
     {
         $this->kuaIdDelete  = $id;
-        $kua                = KuaModel::findOrFail($id);
+        $kua                = ModelsKua::findOrFail($id);
         $this->name         = $kua->name;
         $this->openCloseModal();
     }
 
     public function destroy()
     {
-        $kua = KuaModel::findOrFail($this->kuaIdDelete);
+        $kua = ModelsKua::findOrFail($this->kuaIdDelete);
         $kua->delete();
         session()->flash('message', 'Data KUA ' . $kua->name .' berhasil dihapus');
         $this->closeModal();

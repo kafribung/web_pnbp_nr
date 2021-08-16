@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Kua;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Kua as KuaModel;
+use App\Models\Kua as ModelsKua;
 
 class Kua extends Component
 {
@@ -17,7 +17,7 @@ class Kua extends Component
 
     public function render()
     {
-        $kuas = KuaModel::orderBy('id', 'desc')->where('name', 'like', '%'. $this->search .'%')->paginate(10);
+        $kuas = ModelsKua::orderBy('id', 'desc')->where('name', 'like', '%'. $this->search .'%')->paginate(10);
         return view('livewire.kua.kua', compact('kuas'));
     }
 
