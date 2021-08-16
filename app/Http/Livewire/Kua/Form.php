@@ -56,7 +56,9 @@ class Form extends Kua
 
     public function delete($id)
     {
-        $this->kuaIdDelete = $id;
+        $this->kuaIdDelete  = $id;
+        $kua                = KuaModel::findOrFail($id);
+        $this->name         = $kua->name;
         $this->openCloseModal();
     }
 
