@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Pernikahan;
 
 use App\Models\{Kua, Role, User};
+use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
 {
@@ -20,25 +21,29 @@ class Form extends Pernikahan
         'delete',
     ];
 
-    protected function  rules()
-    {
-        return [
-            'name'     => 'required|string|min:3',
-            'email'    => ['required', 'string', 'email', 'unique:users,email, '. $this->pernikahanId],
-            'password' => ['required', 'confirmed', 'max:8' ],
-            'kua_id'   => ['required', 'numeric'],
-        ];
-    }
+    // protected function  rules()
+    // {
+    //     return [
+    //         'name'     => 'required|string|min:3',
+    //         'email'    => ['required', 'string', 'email', 'unique:users,email, '. $this->pernikahanId],
+    //         'password' => ['required', 'confirmed', 'max:8' ],
+    //         'kua_id'   => ['required', 'numeric'],
+    //     ];
+    // }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
+    // public function updated($propertyName)
+    // {
+    //     $this->validateOnly($propertyName);
+    // }
 
     public function render()
     {
-        $kuas = Kua::get(['id', 'name']);
-        return view('livewire.pernikahan.form', compact('kuas'));
+        $villages = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
+        $villages = $villages->json();
+
+        // dd($villages);
+
+        return view('livewire.pernikahan.form', compact('villages'));
     }
 
     public function create()
@@ -49,7 +54,6 @@ class Form extends Pernikahan
     public function storeOrUpdate()
     {
         $data = $this->validate();
-        $data['password'] = bcrypt($this->password);
         $data['password'] = bcrypt($this->password);
 
         $stafKua = User::updateOrcreate(['id' => $this->pernikahanId], $data);

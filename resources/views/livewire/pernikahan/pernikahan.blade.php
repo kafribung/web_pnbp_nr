@@ -1,5 +1,5 @@
 <div>
-    {{-- @livewire('staf-kua.form') --}}
+    @livewire('pernikahan.form')
     <x-navbar> Data Pernikahan </x-navbar>
     <x-cta> Berisi data pernikahan di KUA {{ auth()->user()->kua ?? '' }} </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">

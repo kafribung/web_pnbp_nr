@@ -23,6 +23,7 @@ class CreatePernikahansTable extends Migration
             $table->string('marriage_certificate_number', 15);
             $table->string('perforation_number', 15);
             $table->foreignId('penghulu_id')->constrained('penghulus')->cascadeOnDelete();
+            $table->foreignId('peristiwa_nikah_id')->constrained('peristiwa_nikahs')->cascadeOnDelete();
             $table->timestamps();
         });
     }
