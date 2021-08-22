@@ -11,7 +11,7 @@
                 <x-search>
                     <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                 </x-search>
-                {{-- <x-button-add wire:click="$emitTo('staf-kua.form', 'create')"></x-button-add> --}}
+                <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
             </div>
             <table class="w-full whitespace-no-wrap">
                 <thead>
