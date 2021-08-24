@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use App\Models\{Kua, Role, User};
+use App\Models\{Kua, Penghulu, Role, User, PeristiwaNikah};
 use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
@@ -12,6 +12,10 @@ class Form extends Pernikahan
         $male_age,
         $female_ag,
         $village,
+        $marriage_certificate_number,
+        $perforation_number,
+        $penghulu_id,
+        $peristiwa_nikah_id,
         $pernikahanId,
         $pernikahanIdDelete;
 
@@ -38,12 +42,16 @@ class Form extends Pernikahan
 
     public function render()
     {
-        $villages = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
-        $villages = $villages->json();
+        $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
+        $villages        = $villages->json();
+        $peristiwaNikahs = PeristiwaNikah::get(['id', 'name']);
+        $penghulus       = Penghulu::where('kua_id', auth()->user()->kua_id)->get(['id', 'name']);
 
-        // dd($villages);
-
-        return view('livewire.pernikahan.form', compact('villages'));
+        return view('livewire.pernikahan.form', compact(
+            'villages',
+            'peristiwaNikahs',
+            'penghulus',
+        ));
     }
 
     public function create()
@@ -96,13 +104,17 @@ class Form extends Pernikahan
 
     public function fieldsReset()
     {
-        $this->name                  = '';
-        $this->email                 = '';
-        $this->password              = '';
-        $this->password_confirmation = '';
-        $this->kua_id                = '';
-        $this->pernikahanId                = '';
-        $this->pernikahanIdDelete          = '';
+        $this->male                          = null;
+        $this->female                        = null;
+        $this->male_age                      = null;
+        $this->female_ag                     = null;
+        $this->village                       = null;
+        $this->marriage_certificate_number   = null;
+        $this->perforation_number            = null;
+        $this->penghulu_id                   = null;
+        $this->peristiwa_nikah_id            = null;
+        $this->pernikahanId                  = null;
+        $this->pernikahanIdDelete            = null;
     }
 
     public function closeModal()

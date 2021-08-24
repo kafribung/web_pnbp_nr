@@ -10,7 +10,7 @@ class Pernikahan extends Component
     public $modal= false;
     public function render()
     {
-        $pernikahans = ModelsPernikahan::with('penghulu')->paginate(10);
+        $pernikahans    = ModelsPernikahan::with('penghulu')->paginate(10);
         return view('livewire.pernikahan.pernikahan', compact('pernikahans'));
     }
 

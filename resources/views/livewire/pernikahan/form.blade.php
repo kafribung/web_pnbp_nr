@@ -12,36 +12,7 @@
                     </p>
                 </div>
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                    {{-- <div class="sm:col-span-2">
-                        <x-label for="registration_date" value="{{ __('Tgl Registrasi') }}" />
-                        <div class="mt-1">
-                            <x-input id="registration_date" wire:model.lazy="registration_date" type="date"
-                                :value="old('registration_date')" />
-                        </div>
-                        @error('registration_date')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="sm:col-span-2">
-                        <x-label for="no_registrasi" value="{{ __('No Registrasi') }}" />
-                        <div class="mt-1">
-                            <x-input id="no_registrasi" wire:model.lazy="no_registrasi" type="text"
-                                :value="old('no_registrasi')" />
-                        </div>
-                        @error('no_registrasi')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="sm:col-span-2">
-                        <x-label for="no_agenda_client" value="{{ __('No Agenda Klien') }}" />
-                        <div class="mt-1">
-                            <x-input id="no_agenda_client" wire:model.lazy="no_agenda_client" type="text"
-                                :value="old('no_agenda_client')" />
-                        </div>
-                        @error('no_agenda_client')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
+
                     <div class="sm:col-span-3">
                         <x-label for="male" value="{{ __('Catim Pria') }}" />
                         <x-input id="male" class="block mt-1 w-full" type="text" wire:model="male" autofocus autocomplete="off"/>
@@ -79,70 +50,80 @@
                     </p>
                 </div>
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-                    <div class="sm:col-span-4">
-                        <x-label for="village_id" :value="__('Desa/Kelurahan')" />
+                    <!-- Desa Keluarahan  -->
+                    <div class="sm:col-span-2">
+                        <x-label for="village_id" value="{{ __('Desa/Keluarahan') }}" />
                         <x-select wire:model="village_id" id="village_id">
-                            @slot('option_default', 'Silahkan Pilih Tipologi')
+                            @slot('option_default', 'Pilih Desa/Keluarahan')
                             @foreach($villages['kelurahan'] as $village)
-                                <option>{{ $village['nama'] }}</option>
+                                <option value="{{ $village['nama'] }}">{{ $village['nama'] }}</option>
                             @endforeach
                         </x-select>
                         <x-input-error for="village_id" class="mt-2"/>
                     </div>
+
+                    <!-- Peristiwa nikah  -->
+                    <div class="sm:col-span-2">
+                        <x-label for="peristiwa_nikah_id" value="{{ __('Peristiwa Nikah') }}" />
+                        <x-select wire:model="peristiwa_nikah_id" id="peristiwa_nikah_id">
+                            @slot('option_default', 'Pilih Peristiwa Nikah')
+                            @foreach($peristiwaNikahs as $peristiwaNikah)
+                                <option value="{{ $peristiwaNikah->id }}">{{ $peristiwaNikah->name }}</option>
+                            @endforeach
+                        </x-select>
+                        <x-input-error for="peristiwa_nikah_id" class="mt-2"/>
+                    </div>
+
+                    <!-- Penghulu  -->
+                    <div class="sm:col-span-2">
+                        <x-label for="penghulu_id" value="{{ __('Penghulu') }}" />
+                        <x-select wire:model="penghulu_id" id="penghulu_id">
+                            @slot('option_default', 'Pilih Penghulu')
+                            @foreach($penghulus as $penghulu)
+                                <option value="{{ $penghulu->id }}">{{ $penghulu->name }}</option>
+                            @endforeach
+                        </x-select>
+                        <x-input-error for="penghulu_id" class="mt-2"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8">
+                <div>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Tambah Data Detail Surat Nikah
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Isi menggunakan data yang valid
+                    </p>
+                </div>
+                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
                     <div class="sm:col-span-3">
-                        <x-label for="courier_name" value="{{ __('Nama Kurir') }}" />
-                        <div class="mt-1">
-                            <x-input id="courier_name" wire:model.lazy="courier_name" type="text"
-                                :value="old('courier_name')" />
-                        </div>
-                        @error('courier_name')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
+                        <x-label for="marriage_certificate_number" value="{{ __('Nomor Akta Nikah') }}" />
+                        <x-input id="marriage_certificate_number" class="block mt-1 w-full" type="text" wire:model="marriage_certificate_number" autocomplete="off"/>
+                        <x-input-error for="marriage_certificate_number" class="mt-2"/>
                     </div>
+
                     <div class="sm:col-span-3">
-                        <x-label for="courier_phone" value="{{ __('No Telpon') }}" />
-                        <div class="mt-1">
-                            <x-input id="courier_phone" wire:model.lazy="courier_phone" type="text"
-                                :value="old('courier_phone')" />
-                        </div>
-                        @error('courier_phone')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
+                        <x-label for="perforation_number" value="{{ __('Nomor Seri Porporasi') }}" />
+                        <x-input id="perforation_number" class="block mt-1 w-full" type="text" wire:model="perforation_number" autocomplete="off"/>
+                        <x-input-error for="perforation_number" class="mt-2"/>
                     </div>
-                    <div class="sm:col-span-6">
-                        <x-label for="perihal" value="{{ __('Perihal') }}" />
-                        <div class="mt-1">
-                            <textarea wire:model.lazy="perihal" id="perihal" rows="3" class="control-input">
-                                {{ old('perihal') }}
-                            </textarea>
-                        </div>
-                        @error('perihal')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="sm:col-span-6">
-                        <x-label for="note_general" value="{{ __('Catatan Umum') }}" />
-                        <div class="mt-1">
-                            <textarea wire:model.lazy="note_general" id="note_general" rows="3" class="control-input">
-                                {{ old('note_general') }}
-                            </textarea>
-                        </div>
-                        @error('note_general')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="sm:col-span-6">
-                        <x-label for="note_lab" value="{{ __('Catatan Lab') }}" />
-                        <div class="mt-1">
-                            <textarea wire:model.lazy="note_lab" id="note_lab" rows="3" class="control-input">
-                                {{ old('note_lab') }}
-                            </textarea>
-                        </div>
-                        @error('note_lab')
-                        <p class="input-error">{{ $message }}</p>
-                        @enderror
-                    </div>
+
+                </div>
+            </div>
+            <div class="pt-2">
+                <div class="flex justify-end">
+                    <x-button wire:click="closeModal" type="button"
+                        class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+                        Batal
+                    </x-button>
+
+                    <x-button type="submit"
+                        class="{{ !empty($penghuluId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
+                        {{ !empty($penghuluId) ? "Ubah" : "Simpan"}}
+                    </x-button>
                 </div>
             </div>
         </div>
