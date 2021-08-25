@@ -19,4 +19,9 @@ class Pernikahan extends Model
     {
         return $this->belongsTo(Penghulu::class);
     }
+
+    public function peristiwa_nikah()
+    {
+        return $this->belongsTo(PeristiwaNikah::class);
+    }
 }

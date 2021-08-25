@@ -44,7 +44,7 @@ class Form extends Penghulu
 
         PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
 
-        session()->flash('message', $this->penghuluId ? 'Data penghulu ' . $this->name. ' berhasil diubah' : 'Data penghulu '.$this->name.' berhasil ditambhakan');
+        session()->flash('message', $this->penghuluId ? 'Data penghulu ' . $this->name. ' berhasil diubah' : 'Data penghulu '.$this->name.' berhasil ditambahkan');
         $this->closeModal();
         return redirect('penghulu');
     }

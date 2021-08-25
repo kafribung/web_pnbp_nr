@@ -15,5 +15,9 @@ class PeristiwaNikah extends Model
         'name',
     ];
 
+    public function pernikahan()
+    {
+        return $this->hasMany(PeristiwaNikah::class);
+    }
 
 }

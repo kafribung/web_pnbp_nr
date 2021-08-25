@@ -50,7 +50,7 @@ class Form extends StafKua
         $role_id = Role::where('name', 'staf')->first()->id;
         $stafKua->roles()->sync([$role_id]);
 
-        session()->flash('message', $this->stafId ? 'Data staf KUA ' . $this->name. ' berhasil diubah' : 'Data staf KUA berhasil ditambhakan');
+        session()->flash('message', $this->stafId ? 'Data staf KUA ' . $this->name. ' berhasil diubah' : 'Data staf KUA '. $this->name. ' berhasil ditambahkan');
         $this->closeModal();
         return redirect('staf-kua');
     }
@@ -79,7 +79,7 @@ class Form extends StafKua
 
         $stafKua->delete();
 
-        session()->flash('message', 'Data staf KUA ' . $stafKua->name .' berhasil dihapus');
+        session()->flash('message', 'Data staf KUA ' .$stafKua->name. ' berhasil dihapus');
         $this->closeModal();
         return redirect('staf-kua');
     }

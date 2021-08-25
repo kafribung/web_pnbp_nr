@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use App\Models\{Kua, Penghulu, Role, User, PeristiwaNikah};
+use App\Models\{Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
 use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
@@ -10,12 +10,14 @@ class Form extends Pernikahan
     public $male,
         $female,
         $male_age,
-        $female_ag,
+        $female_age,
         $village,
         $marriage_certificate_number,
         $perforation_number,
         $penghulu_id,
         $peristiwa_nikah_id,
+        $date,
+        $date_time,
         $pernikahanId,
         $pernikahanIdDelete;
 
@@ -25,20 +27,26 @@ class Form extends Pernikahan
         'delete',
     ];
 
-    // protected function  rules()
-    // {
-    //     return [
-    //         'name'     => 'required|string|min:3',
-    //         'email'    => ['required', 'string', 'email', 'unique:users,email, '. $this->pernikahanId],
-    //         'password' => ['required', 'confirmed', 'max:8' ],
-    //         'kua_id'   => ['required', 'numeric'],
-    //     ];
-    // }
+    protected function  rules()
+    {
+        return [
+            'male'                       => 'required|string|min:3',
+            'female'                     => 'required|string|min:3',
+            'male_age'                   => 'required|numeric|min:2',
+            'female_age'                 => 'required|numeric|min:2',
+            'village'                    => 'required|string',
+            'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number'],
+            'perforation_number'         => ['required', 'string', 'min:12', 'unique:pernikahans,perforation_number'],
+            'penghulu_id'                => ['required', 'numeric'],
+            'peristiwa_nikah_id'         => ['required', 'numeric'],
+            'date_time'                  => ['required', 'date'],
+        ];
+    }
 
-    // public function updated($propertyName)
-    // {
-    //     $this->validateOnly($propertyName);
-    // }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function render()
     {
@@ -62,21 +70,18 @@ class Form extends Pernikahan
     public function storeOrUpdate()
     {
         $data = $this->validate();
-        $data['password'] = bcrypt($this->password);
 
-        $stafKua = User::updateOrcreate(['id' => $this->pernikahanId], $data);
-        $role_id = Role::where('name', 'staf')->first()->id;
-        $stafKua->roles()->sync([$role_id]);
+        ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
 
-        session()->flash('message', $this->pernikahanId ? 'Data staf KUA ' . $this->name. ' berhasil diubah' : 'Data staf KUA berhasil ditambhakan');
+        session()->flash('message', $this->pernikahanId ? 'Data pernikahan ' .$this->male. ' berhasil diubah' : 'Data pernikahan '.$this->male.' berhasil ditambahkan');
         $this->closeModal();
-        return redirect('staf-kua');
+        return redirect('pernikahan');
     }
 
     public function edit($id)
     {
         $this->pernikahanId = $id;
-        $stafKua      = User::findOrFail($id);
+        $stafKua      = ModelsPernikahan::findOrFail($id);
         $this->name   = $stafKua->name;
         $this->email  = $stafKua->email;
         $this->kua_id = $stafKua->kua_id;
@@ -86,14 +91,14 @@ class Form extends Pernikahan
     public function delete($id)
     {
         $this->pernikahanIdDelete = $id;
-        $stafKua      = User::findOrFail($id);
+        $stafKua      = ModelsPernikahan::findOrFail($id);
         $this->name   = $stafKua->name;
         $this->openCloseModal();
     }
 
     public function destroy()
     {
-        $stafKua = User::findOrFail($this->pernikahanIdDelete);
+        $stafKua = ModelsPernikahan::findOrFail($this->pernikahanIdDelete);
 
         $stafKua->delete();
 
@@ -107,12 +112,13 @@ class Form extends Pernikahan
         $this->male                          = null;
         $this->female                        = null;
         $this->male_age                      = null;
-        $this->female_ag                     = null;
+        $this->female_age                    = null;
         $this->village                       = null;
         $this->marriage_certificate_number   = null;
         $this->perforation_number            = null;
         $this->penghulu_id                   = null;
         $this->peristiwa_nikah_id            = null;
+        $this->date_time                     = null;
         $this->pernikahanId                  = null;
         $this->pernikahanIdDelete            = null;
     }
@@ -121,5 +127,6 @@ class Form extends Pernikahan
     {
         $this->modal = false;
         $this->fieldsReset();
+        $this->emit('refreshParent');
     }
 }

@@ -8,6 +8,11 @@ use Livewire\Component;
 class Pernikahan extends Component
 {
     public $modal= false;
+    
+    protected $listeners = [
+        'refreshParent' => '$refresh'
+    ];
+
     public function render()
     {
         $pernikahans    = ModelsPernikahan::with('penghulu')->paginate(10);

@@ -52,14 +52,14 @@
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                     <!-- Desa Keluarahan  -->
                     <div class="sm:col-span-2">
-                        <x-label for="village_id" value="{{ __('Desa/Keluarahan') }}" />
-                        <x-select wire:model="village_id" id="village_id">
+                        <x-label for="village" value="{{ __('Desa/Keluarahan') }}" />
+                        <x-select wire:model="village" id="village">
                             @slot('option_default', 'Pilih Desa/Keluarahan')
                             @foreach($villages['kelurahan'] as $village)
                                 <option value="{{ $village['nama'] }}">{{ $village['nama'] }}</option>
                             @endforeach
                         </x-select>
-                        <x-input-error for="village_id" class="mt-2"/>
+                        <x-input-error for="village" class="mt-2"/>
                     </div>
 
                     <!-- Peristiwa nikah  -->
@@ -84,6 +84,12 @@
                             @endforeach
                         </x-select>
                         <x-input-error for="penghulu_id" class="mt-2"/>
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <x-label for="date_time" value="{{ __('Nomor Akta Nikah') }}" />
+                        <x-input id="date_time" class="block mt-1 w-full" type="datetime-local" wire:model="date_time"/>
+                        <x-input-error for="date_time" class="mt-2"/>
                     </div>
                 </div>
             </div>

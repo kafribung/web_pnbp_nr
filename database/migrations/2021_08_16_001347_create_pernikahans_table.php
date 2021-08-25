@@ -20,10 +20,11 @@ class CreatePernikahansTable extends Migration
             $table->char('male_age', 3);
             $table->char('female_age', 3);
             $table->string('village', 30);
-            $table->string('marriage_certificate_number', 15);
-            $table->string('perforation_number', 15);
+            $table->string('marriage_certificate_number', 15)->unique();
+            $table->string('perforation_number', 15)->unique();
             $table->foreignId('penghulu_id')->constrained('penghulus')->cascadeOnDelete();
             $table->foreignId('peristiwa_nikah_id')->constrained('peristiwa_nikahs')->cascadeOnDelete();
+            $table->dateTime('date_time');
             $table->timestamps();
         });
     }

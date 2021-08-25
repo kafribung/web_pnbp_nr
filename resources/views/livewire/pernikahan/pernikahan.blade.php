@@ -37,20 +37,28 @@
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
-                                <!-- Avatar with inset shadow -->
-                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                    <img class="object-cover w-full h-full rounded-full"
-                                        src="https://ui-avatars.com/api/?name={{ $pernikahan->name }}&background=059669&color=fff&bold=true"
-                                        alt="" loading="lazy" />
-                                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                                </div>
                                 <div>
-                                    <p class="font-semibold">{{ $pernikahan->name }}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400"> Staf KUA {{ $pernikahan->kua->name }}</p>
+                                    <p class="font-semibold">{{ $pernikahan->male }}</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">{{ $pernikahan->male_age }} tahun</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->email }} </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center text-sm">
+                                <div>
+                                    <p class="font-semibold">{{ $pernikahan->female }}</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">{{ $pernikahan->female_age }} tahun</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->village }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->marriage_certificate_number }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->perforation_number }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->penghulu->name ?? null }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ date('D', strtotime($pernikahan->date_time))  }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ date('d M Y', strtotime($pernikahan->date_time)) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
+
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 {{-- <x-button-edit-delete metode='edit' wire:click="$emitTo('staf-kua.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
