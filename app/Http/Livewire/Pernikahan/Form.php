@@ -38,8 +38,8 @@ class Form extends Pernikahan
             'female_age'                 => 'required|numeric|min:2',
             'female_father'              => 'required|string|min:3',
             'village'                    => 'required|string',
-            'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number'],
-            'perforation_number'         => ['required', 'string', 'min:12', 'unique:pernikahans,perforation_number'],
+            'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number,'. $this->pernikahanId],
+            'perforation_number'         => ['required', 'string', 'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
@@ -75,8 +75,6 @@ class Form extends Pernikahan
         $data               = $this->validate();
         $data['created_by'] = auth()->id();
         $data['kua_id']     = auth()->user()->kua_id;
-        $data['male']       = $data['male']. ' Bin ' .$data['male_father'];
-        $data['female']       = $data['female']. ' Binti ' .$data['female_father'];
 
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
@@ -89,11 +87,22 @@ class Form extends Pernikahan
 
     public function edit($id)
     {
-        $this->pernikahanId = $id;
-        $stafKua      = ModelsPernikahan::findOrFail($id);
-        $this->name   = $stafKua->name;
-        $this->email  = $stafKua->email;
-        $this->kua_id = $stafKua->kua_id;
+        $this->pernikahanId                  = $id;
+        $pernikahan                          = ModelsPernikahan::findOrFail($id);
+
+        $this->male                          = $pernikahan->male;
+        $this->female                        = $pernikahan->female;
+        $this->male_age                      = $pernikahan->male_age;
+        $this->male_father                   = $pernikahan->male_father;
+        $this->female_father                 = $pernikahan->female_father;
+        $this->female_age                    = $pernikahan->female_age;
+        $this->village                       = $pernikahan->village;
+        $this->marriage_certificate_number   = $pernikahan->marriage_certificate_number;
+        $this->perforation_number            = $pernikahan->perforation_number;
+        $this->penghulu_id                   = $pernikahan->penghulu_id;
+        $this->peristiwa_nikah_id            = $pernikahan->peristiwa_nikah_id;
+        $this->date_time                     = $pernikahan->date_time;
+
         $this->openCloseModal();
     }
 

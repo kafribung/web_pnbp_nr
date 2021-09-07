@@ -120,13 +120,13 @@
 
                     <div class="sm:col-span-3">
                         <x-label for="marriage_certificate_number" value="{{ __('Nomor Akta Nikah') }}" />
-                        <x-input id="marriage_certificate_number" class="block mt-1 w-full" type="text" wire:model="marriage_certificate_number" autocomplete="off"/>
+                        <x-input id="marriage_certificate_number" class="block mt-1 w-full" type="text" wire:model="marriage_certificate_number" placeholder="Cnt: xxx/xxx/x/xxxx" autocomplete="off"/>
                         <x-input-error for="marriage_certificate_number" class="mt-2"/>
                     </div>
 
                     <div class="sm:col-span-3">
                         <x-label for="perforation_number" value="{{ __('Nomor Seri Porporasi') }}" />
-                        <x-input id="perforation_number" class="block mt-1 w-full" type="text" wire:model="perforation_number" autocomplete="off"/>
+                        <x-input id="perforation_number" class="block mt-1 w-full" type="text" wire:model="perforation_number" placeholder="Cnt: ST xxxxxxxxx" autocomplete="off"/>
                         <x-input-error for="perforation_number" class="mt-2"/>
                     </div>
 
@@ -140,8 +140,8 @@
                     </x-button>
 
                     <x-button type="submit"
-                        class="{{ !empty($penghuluId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
-                        {{ !empty($penghuluId) ? "Ubah" : "Simpan"}}
+                        class="{{ !empty($pernikahanId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
+                        {{ !empty($pernikahanId) ? "Ubah" : "Simpan"}}
                     </x-button>
                 </div>
             </div>

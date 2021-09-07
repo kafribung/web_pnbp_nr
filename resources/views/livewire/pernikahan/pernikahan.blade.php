@@ -27,6 +27,7 @@
                         <th class="px-4 py-3">Hari</th>
                         <th class="px-4 py-3">Tanggal</th>
                         <th class="px-4 py-3">Peristiwa Nikah</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -38,7 +39,7 @@
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
                                 <div>
-                                    <p class="font-semibold">{{ $pernikahan->male }}</p>
+                                    <p class="font-semibold">{{ $pernikahan->male }} Bin {{ $pernikahan->male_father }}</p>
                                     <p class="text-xs text-gray-600 dark:text-gray-400">{{ $pernikahan->male_age }} tahun</p>
                                 </div>
                             </div>
@@ -46,7 +47,7 @@
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
                                 <div>
-                                    <p class="font-semibold">{{ $pernikahan->female }}</p>
+                                    <p class="font-semibold">{{ $pernikahan->female }} Binti {{ $pernikahan->female_father }}</p>
                                     <p class="text-xs text-gray-600 dark:text-gray-400">{{ $pernikahan->female_age }} tahun</p>
                                 </div>
                             </div>
@@ -55,14 +56,15 @@
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->marriage_certificate_number }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->perforation_number }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->penghulu->name ?? null }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ date('D', strtotime($pernikahan->date_time))  }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ date('d M Y', strtotime($pernikahan->date_time)) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('dddd')  }} </td>
+                        {{-- <td class="px-4 py-3 text-sm"> {{  date('d M Y', strtotime($pernikahan->date_time)) }} </td> --}}
+                        <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
 
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                {{-- <x-button-edit-delete metode='edit' wire:click="$emitTo('staf-kua.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
-                                <x-button-edit-delete metode='delete' wire:click="$emitTo('staf-kua.form', 'delete', {{ $pernikahan->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete> --}}
+                                <x-button-edit-delete metode='edit' wire:click="$emitTo('pernikahan.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
+                                <x-button-edit-delete metode='delete' wire:click="$emitTo('pernikahan.form', 'delete', {{ $pernikahan->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>
                             </div>
                         </td>
                     </tr>
