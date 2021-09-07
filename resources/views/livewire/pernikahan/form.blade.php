@@ -1,4 +1,4 @@
-<x-modal maxWidth="4xl" wire:model="modal">
+<x-modal  maxWidth='4xl'  wire:model="modal">
     @if( empty($pernikahanIdDelete) )
     <form wire:submit.prevent="storeOrUpdate" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
@@ -149,9 +149,9 @@
     </form>
     @else
     <x-delete-card>
-        @slot('name')
-            {{ $name }}
-        @endslot
+        <x-slot name="name">
+            {{ $name ?? $male }}
+        </x-slot>
         <x-button wire:click="closeModal" type="button"
             class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
             Batal

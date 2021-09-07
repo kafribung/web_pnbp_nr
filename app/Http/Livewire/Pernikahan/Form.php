@@ -109,20 +109,20 @@ class Form extends Pernikahan
     public function delete($id)
     {
         $this->pernikahanIdDelete = $id;
-        $stafKua      = ModelsPernikahan::findOrFail($id);
-        $this->name   = $stafKua->name;
+
+        $pernikahan      = ModelsPernikahan::findOrFail($id);
+        $this->male      = $pernikahan->male;
         $this->openCloseModal();
     }
 
     public function destroy()
     {
-        $stafKua = ModelsPernikahan::findOrFail($this->pernikahanIdDelete);
+        $pernikahan      = ModelsPernikahan::findOrFail($this->pernikahanIdDelete);
+        $pernikahan->delete();
 
-        $stafKua->delete();
-
-        session()->flash('message', 'Data staf KUA ' . $stafKua->name .' berhasil dihapus');
+        session()->flash('message', 'Data pernikahan ' . $this->male .' berhasil dihapus');
         $this->closeModal();
-        return redirect('staf-kua');
+        return redirect('pernikahan');
     }
 
     public function fieldsReset()
