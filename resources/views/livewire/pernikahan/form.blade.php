@@ -13,29 +13,42 @@
                 </div>
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
                         <x-label for="male" value="{{ __('Catim Pria') }}" />
                         <x-input id="male" class="block mt-1 w-full" type="text" wire:model="male" autofocus autocomplete="off"/>
                         <x-input-error for="male" class="mt-2"/>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
+                        <x-label for="male_father" value="{{ __('Ayah Pria') }}" />
+                        <x-input id="male_father" class="block mt-1 w-full" type="text" wire:model="male_father" autocomplete="off"/>
+                        <x-input-error for="male_father" class="mt-2"/>
+                    </div>
+
+                    <div class="sm:col-span-2">
                         <x-label for="male_age" value="{{ __('Umur Pria') }}" />
                         <x-input id="male_age" class="block mt-1 w-full" type="number" wire:model="male_age" autocomplete="off"/>
                         <x-input-error for="male_age" class="mt-2"/>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
                         <x-label for="female" value="{{ __('Catim Wanita') }}" />
                         <x-input id="female" class="block mt-1 w-full" type="text" wire:model="female" autofocus autocomplete="off"/>
                         <x-input-error for="female" class="mt-2"/>
                     </div>
 
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-2">
+                        <x-label for="female_father" value="{{ __('Ayah Wanita') }}" />
+                        <x-input id="female_father" class="block mt-1 w-full" type="text" wire:model="female_father" autocomplete="off"/>
+                        <x-input-error for="female_father" class="mt-2"/>
+                    </div>
+
+                    <div class="sm:col-span-2">
                         <x-label for="female_age" value="{{ __('Umur Wanita') }}" />
                         <x-input id="female_age" class="block mt-1 w-full" type="number" wire:model="female_age" autocomplete="off"/>
                         <x-input-error for="female_age" class="mt-2"/>
                     </div>
+
 
                 </div>
             </div>
@@ -87,7 +100,7 @@
                     </div>
 
                     <div class="sm:col-span-6">
-                        <x-label for="date_time" value="{{ __('Nomor Akta Nikah') }}" />
+                        <x-label for="date_time" value="{{ __('Tanggal dan Waktu Pernikahan') }}" />
                         <x-input id="date_time" class="block mt-1 w-full" type="datetime-local" wire:model="date_time"/>
                         <x-input-error for="date_time" class="mt-2"/>
                     </div>

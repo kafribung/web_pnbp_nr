@@ -8,14 +8,14 @@ use Livewire\Component;
 class Pernikahan extends Component
 {
     public $modal= false;
-    
+
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
 
     public function render()
     {
-        $pernikahans    = ModelsPernikahan::with('penghulu')->paginate(10);
+        $pernikahans    = ModelsPernikahan::with('penghulu')->where('kua_id', auth()->user()->kua_id)->paginate(10);
         return view('livewire.pernikahan.pernikahan', compact('pernikahans'));
     }
 

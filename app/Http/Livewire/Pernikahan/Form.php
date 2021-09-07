@@ -10,13 +10,14 @@ class Form extends Pernikahan
     public $male,
         $female,
         $male_age,
+        $male_father,
+        $female_father,
         $female_age,
         $village,
         $marriage_certificate_number,
         $perforation_number,
         $penghulu_id,
         $peristiwa_nikah_id,
-        $date,
         $date_time,
         $pernikahanId,
         $pernikahanIdDelete;
@@ -31,9 +32,11 @@ class Form extends Pernikahan
     {
         return [
             'male'                       => 'required|string|min:3',
-            'female'                     => 'required|string|min:3',
             'male_age'                   => 'required|numeric|min:2',
+            'male_father'                => 'required|string|min:3',
+            'female'                     => 'required|string|min:3',
             'female_age'                 => 'required|numeric|min:2',
+            'female_father'              => 'required|string|min:3',
             'village'                    => 'required|string',
             'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number'],
             'perforation_number'         => ['required', 'string', 'min:12', 'unique:pernikahans,perforation_number'],
@@ -69,7 +72,13 @@ class Form extends Pernikahan
 
     public function storeOrUpdate()
     {
-        $data = $this->validate();
+        $data               = $this->validate();
+        $data['created_by'] = auth()->id();
+        $data['kua_id']     = auth()->user()->kua_id;
+        $data['male']       = $data['male']. ' Bin ' .$data['male_father'];
+        $data['female']       = $data['female']. ' Binti ' .$data['female_father'];
+
+        if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
 
@@ -112,6 +121,8 @@ class Form extends Pernikahan
         $this->male                          = null;
         $this->female                        = null;
         $this->male_age                      = null;
+        $this->male_father                   = null;
+        $this->female_father                 = null;
         $this->female_age                    = null;
         $this->village                       = null;
         $this->marriage_certificate_number   = null;
