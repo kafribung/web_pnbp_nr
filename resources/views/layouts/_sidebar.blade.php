@@ -23,6 +23,7 @@
             </li>
         </ul>
         <ul>
+            {{-- Admin --}}
             @if(auth()->user()->hasRole('admin'))
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('kua'))
@@ -40,7 +41,6 @@
                     <span class="ml-4">KUA</span>
                 </a>
             </li>
-            @endif
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('staf-kua'))
@@ -56,6 +56,7 @@
                     <span class="ml-4">Staf KUA</span>
                 </a>
             </li>
+
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('penghulu'))
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
@@ -72,6 +73,8 @@
                     <span class="ml-4">Penghulu</span>
                 </a>
             </li>
+            @endif
+
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('pernikahan'))
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
