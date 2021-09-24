@@ -10,6 +10,12 @@
             </svg>
         </button>
         <div> </div>
+        <div class="text-base animate-pulse" >
+            <marquee width="100%" direction="left">
+                Hi {{ auth()->user()->name }} sebagai staf KUA {{ auth()->user()->kua->name }}, selamat datang di sistem informasi pelaporan PNBP-NR Kabupaten Mamuju.
+                Semangat bekerja dan Sehat selalu.
+            </marquee>
+        </div>
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <!-- Theme toggler -->
             <li class="flex">
