@@ -4,9 +4,13 @@ namespace App\Http\Livewire\Penghulu;
 
 use Livewire\Component;
 use App\Models\Penghulu as PenghuluModel;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 class Penghulu extends Component
 {
+    use AuthorizesRequests;
+
     public $search;
     public $modal = false;
 
@@ -14,6 +18,8 @@ class Penghulu extends Component
 
     public function render()
     {
+        $this->authorize('viewAny', new PenghuluModel());
+
         $penghulus = PenghuluModel::with('golongan', 'kua')->where('name', 'like', '%'.$this->search.'%')->latest()->paginate(10);
         return view('livewire.penghulu.penghulu', compact('penghulus'));
     }

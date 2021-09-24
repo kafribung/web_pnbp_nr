@@ -27,6 +27,8 @@ class Form extends Penghulu
 
     public function render()
     {
+        $this->authorize('viewAny', new PenghuluModel());
+
         $golongans = Golongan::get(['id', 'name']);
         $kuas      = Kua::get(['id', 'name']);
         return view('livewire.penghulu.form', compact('golongans', 'kuas'));
@@ -34,6 +36,8 @@ class Form extends Penghulu
 
     public function create()
     {
+        $this->authorize('create', new PenghuluModel());
+
         $this->openCloseModal();
     }
 
@@ -42,7 +46,9 @@ class Form extends Penghulu
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
 
-        PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
+        $penghulu = PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
+
+        $this->authorize('update', $penghulu);
 
         session()->flash('message', $this->penghuluId ? 'Data penghulu ' . $this->name. ' berhasil diubah' : 'Data penghulu '.$this->name.' berhasil ditambahkan');
         $this->closeModal();
@@ -53,6 +59,8 @@ class Form extends Penghulu
     {
         $this->penghuluId = $id;
         $penghulu = PenghuluModel::findOrFail($id);
+
+        $this->authorize('update', $penghulu);
 
         $this->name             = $penghulu->name;
         $this->kua_id           = $penghulu->kua_id;
@@ -65,6 +73,8 @@ class Form extends Penghulu
         $this->penghuluIdDelete = $id;
         $penghulu = PenghuluModel::findOrFail($id);
 
+        $this->authorize('delete', $penghulu);
+
         $this->name             = $penghulu->name;
         $this->openCloseModal();
     }
@@ -72,6 +82,9 @@ class Form extends Penghulu
     public function destroy()
     {
         $penghulu = PenghuluModel::findOrFail($this->penghuluIdDelete);
+
+        $this->authorize('delete', $penghulu);
+
         $penghulu->delete();
         session()->flash('message', 'Data penghulu ' . $penghulu->name .' berhasil dihapus');
         $this->closeModal();
