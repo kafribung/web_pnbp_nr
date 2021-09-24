@@ -1,5 +1,5 @@
+@if( empty($pernikahanIdDelete) )
 <x-modal  maxWidth='4xl'  wire:model="modal">
-    @if( empty($pernikahanIdDelete) )
     <form wire:submit.prevent="storeOrUpdate" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
@@ -147,7 +147,9 @@
             </div>
         </div>
     </form>
-    @else
+</x-modal>
+@else
+<x-modal  maxWidth='md'  wire:model="modal">
     <x-delete-card>
         <x-slot name="name">
             {{ $name ?? $male }}
@@ -161,5 +163,6 @@
             Hapus
         </x-button>
     </x-delete-card>
-    @endif
 </x-modal>
+
+@endif
