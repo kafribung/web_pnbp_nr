@@ -126,7 +126,7 @@
 
                     <div class="sm:col-span-3">
                         <x-label for="perforation_number" value="{{ __('Nomor Seri Porporasi') }}" />
-                        <x-input id="perforation_number" class="block mt-1 w-full" type="text" wire:model="perforation_number" placeholder="Cnt: ST xxxxxxxxx" autocomplete="off"/>
+                        <x-input id="perforation_number" class="block mt-1 w-full capitalize" type="text" wire:model="perforation_number" placeholder="Cnt: ST xxxxxxxxx" autocomplete="off"/>
                         <x-input-error for="perforation_number" class="mt-2"/>
                     </div>
 

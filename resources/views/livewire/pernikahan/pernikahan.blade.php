@@ -57,8 +57,8 @@
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->perforation_number }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->penghulu->name ?? null }} </td>
                         <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('dddd')  }} </td>
-                        {{-- <td class="px-4 py-3 text-sm"> {{  date('d M Y', strtotime($pernikahan->date_time)) }} </td> --}}
-                        <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td>
+                        <td class="px-4 py-3 text-sm"> {{  date('d M Y', strtotime($pernikahan->date_time)) }} </td>
+                        {{-- <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td> --}}
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
 
                         <td class="px-4 py-3">
