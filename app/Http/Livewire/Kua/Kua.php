@@ -17,7 +17,13 @@ class Kua extends Component
 
     public function render()
     {
-        $kuas = ModelsKua::orderBy('id', 'desc')->where('name', 'like', '%'. $this->search .'%')->paginate(10);
+        $kuas = ModelsKua::when($this->search, function($query){
+            $query->where('name', 'like', '%'.$this->search.'%')
+            ->orWhereHas('typology', function($query){
+                $query->where('name', 'like', '%'.$this->search.'%' );
+            });
+        })
+        ->orderBy('id', 'desc')->paginate(10);
         return view('livewire.kua.kua', compact('kuas'));
     }
 
