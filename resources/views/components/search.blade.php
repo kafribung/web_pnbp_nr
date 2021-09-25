@@ -1,4 +1,4 @@
-<div class="relative ml-2 focus-within:text-green-500">
+<div class="relative focus-within:text-green-500">
     <div class="absolute inset-y-0 flex items-center pl-2">
         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd"

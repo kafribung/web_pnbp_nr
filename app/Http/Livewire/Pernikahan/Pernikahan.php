@@ -44,6 +44,9 @@ class Pernikahan extends Component
                                         ->where('kua_id', auth()->user()->kua_id)
                                     ->orWhereHas('penghulu', function($query){
                                         $query->where('name', 'like', '%'. $this->search .'%');
+                                    })
+                                    ->orWhereHas('peristiwa_nikah', function($query){
+                                        $query->where('name', 'like', '%'. $this->search .'%');
                                     });
                             })
                             ->when($this->filterYear, function($query){

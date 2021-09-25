@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Pernikahan;
 
 use App\Models\{Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
+use App\Rules\UppercaseRule;
 use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
@@ -39,7 +40,7 @@ class Form extends Pernikahan
             'female_father'              => 'required|string|min:3',
             'village'                    => 'required|string',
             'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number,'. $this->pernikahanId],
-            'perforation_number'         => ['required', 'string', 'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
+            'perforation_number'         => ['required', 'string', new UppercaseRule ,'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
