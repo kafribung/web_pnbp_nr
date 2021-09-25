@@ -20,7 +20,18 @@ class Penghulu extends Component
     {
         $this->authorize('viewAny', new PenghuluModel());
 
-        $penghulus = PenghuluModel::with('golongan', 'kua')->where('name', 'like', '%'.$this->search.'%')->latest()->paginate(10);
+        $penghulus = PenghuluModel::with('golongan', 'kua')
+        ->when($this->search, function($query){
+            $query->where('name', 'like', '%'.$this->search.'%');
+            $query->orWhereHas('golongan', function($query){
+                $query->where('name', 'like', '%'.$this->search.'%');
+            });
+            $query->orWhereHas('kua', function($query){
+                $query->where('name', 'like', '%'.$this->search.'%');
+            });
+        })
+        ->latest()
+        ->paginate(10);
         return view('livewire.penghulu.penghulu', compact('penghulus'));
     }
 
