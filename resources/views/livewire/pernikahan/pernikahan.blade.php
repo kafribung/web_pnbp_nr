@@ -7,12 +7,27 @@
             @if (session('message'))
             <x-message>{{ session('message') }}</x-message>
             @endif
-            <div class="flex justify-between mt-2">
-                <x-search>
-                    <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
-                </x-search>
-                <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
+            <div>
+                <div class="flex justify-start">
+                    <div class="mt-1">
+                        <x-search>
+                            <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                        </x-search>
+                    </div>
+                    <div class="ml-2">
+                        <x-select  wire:model="filterYear">
+                            @slot('option_default', 'Filter Tahun')
+                            @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
+                            <option value="{{ $oldYear }}">{{ $oldYear }}</option>
+                            @endfor
+                        </x-select>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
+                </div>
             </div>
+
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr

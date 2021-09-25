@@ -12,9 +12,19 @@ class Pernikahan extends Component
     public $search;
     protected $queryString = ['search'];
 
+    public $lastYear,
+            $oldYear,
+            $filterYear;
+
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
+
+    public function mount()
+    {
+        $this->lastYear  = (int)ModelsPernikahan::latest()->first()->created_at->format('Y');
+        $this->oldYear   = (int)ModelsPernikahan::oldest()->first()->created_at->format('Y');
+    }
 
     public function render()
     {
@@ -35,7 +45,9 @@ class Pernikahan extends Component
                                     ->orWhereHas('penghulu', function($query){
                                         $query->where('name', 'like', '%'. $this->search .'%');
                                     });
-
+                            })
+                            ->when($this->filterYear, function($query){
+                                $query->whereYear('created_at', $this->filterYear);
                             })
                             ->where('kua_id', auth()->user()->kua_id)
                             ->latest()
