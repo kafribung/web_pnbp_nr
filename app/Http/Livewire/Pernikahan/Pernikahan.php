@@ -15,7 +15,8 @@ class Pernikahan extends Component
     public $lastYear,
             $oldYear,
             $filterYear,
-            $filterAge;
+            $filterAge,
+            $filterMonth;
 
     protected $listeners = [
         'refreshParent' => '$refresh'
@@ -49,6 +50,10 @@ class Pernikahan extends Component
                                     ->orWhereHas('peristiwa_nikah', function($query){
                                         $query->where('name', 'like', '%'. $this->search .'%');
                                     });
+                            })
+                            ->when($this->filterMonth, function($query){
+                                $query->whereMonth('date_time', $this->filterMonth)
+                                        ->where('kua_id', auth()->user()->kua_id);
                             })
                             ->when($this->filterYear, function($query){
                                 $query->whereYear('date_time', $this->filterYear)
@@ -92,7 +97,7 @@ class Pernikahan extends Component
                             })
                             ->where('kua_id', auth()->user()->kua_id)
                             ->latest()
-                            ->paginate(10);
+                            ->paginate(30);
         return view('livewire.pernikahan.pernikahan', compact('pernikahans'));
     }
 

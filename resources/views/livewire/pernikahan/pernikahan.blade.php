@@ -15,6 +15,17 @@
                         </x-search>
                     </div>
                     <div class="ml-2">
+                        <x-select  wire:model="filterMonth">
+                            @slot('option_default', 'Filter Bulan')
+                            @php
+                                $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+                            @endphp
+                            @for ($i = 0; $i < count($month); $i++)
+                            <option value="{{ $i + 1 }}">{{ $month[$i] }}</option>
+                            @endfor
+                        </x-select>
+                    </div>
+                    <div class="ml-2">
                         <x-select  wire:model="filterYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
