@@ -34,11 +34,18 @@
                         </x-select>
                     </div>
                     <div class="ml-2">
-                        <x-select  wire:model="filterAge">
+                        <x-select wire:model="filterAge">
                             @slot('option_default', 'Filter Umur')
-                            <option value="<19">Di bawah 19 Tahun</option>
-                            <option value=">=19&&<=21">19 Tahun - 21 Tahun</option>
-                            <option value=">21">Di atas 21 Tahun</option>
+                            <optgroup label="Pria">
+                                <option value="p<19">Pria < 19 Tahun</option>
+                                <option value="p>=19&&<=21">Pria 19 - 21 Tahun</option>
+                                <option value="p>21">Pria > 21 Tahun</option>
+                            </optgroup>
+                            <optgroup label="Wanita">
+                                <option value="w<19">Wanita < 19 Tahun</option>
+                                <option value="w>=19&&<=21">Wanita 19 - 21 Tahun</option>
+                                <option value="w>21">Wanita > 21 Tahun</option>
+                            </optgroup>
                         </x-select>
                     </div>
                 </div>

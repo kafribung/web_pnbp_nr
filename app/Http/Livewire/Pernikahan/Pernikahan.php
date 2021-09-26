@@ -61,38 +61,42 @@ class Pernikahan extends Component
                             })
                             ->when($this->filterAge, function($query){
                                 switch ($this->filterAge) {
-                                    case '<19':
+                                    case 'p<19':
                                         $query->where([
                                             ['male_age', '<', 19],
                                             ['kua_id', auth()->user()->kua_id],
-                                        ])
-                                        ->orWhere([
-                                            ['female_age', '<', 19],
-                                            ['kua_id', auth()->user()->kua_id],
                                         ]);
                                         break;
-                                    case '>=19&&<=21':
+                                    case 'p>=19&&<=21':
                                         $query->where([
                                             ['male_age', '>=', 19],
                                             ['male_age', '<=', 21],
                                             ['kua_id', auth()->user()->kua_id],
-                                        ])
-                                        ->orWhere([
+                                        ]);
+                                        break;
+                                    case 'p>21':
+                                        $query->where([
+                                            ['male_age', '>', 21],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ]);
+                                    case 'w<19':
+                                        $query->where([
+                                            ['female_age', '<', 19],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ]);
+                                        break;
+                                    case 'w>=19&&<=21':
+                                        $query->where([
                                             ['female_age', '>=', 19],
                                             ['female_age', '<=', 21],
                                             ['kua_id', auth()->user()->kua_id],
                                         ]);
                                         break;
-                                    default:
+                                    case 'w>21':
                                         $query->where([
-                                            ['male_age', '>', 21],
-                                            ['kua_id', auth()->user()->kua_id],
-                                        ])
-                                        ->orWhere([
                                             ['female_age', '>', 21],
                                             ['kua_id', auth()->user()->kua_id],
                                         ]);
-                                        break;
                                 }
                             })
                             ->where('kua_id', auth()->user()->kua_id)
