@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <div x-data="{ isSideMenuOpen : false }" class="flex h-screen bg-gray-50 dark:bg-gray-900"
+    <div x-data="{ isSideMenuOpen : false}" class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
         @include('layouts._sidebar')

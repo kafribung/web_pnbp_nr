@@ -20,6 +20,22 @@
             <!-- Theme toggler -->
             <li class="flex">
                 <button class="rounded-md focus:outline-none focus:shadow-outline-green"
+                x-data="{
+                    dark: false,
+                    toggleTheme: () => {
+                        if (localStorage.theme === 'dark') {
+                            localStorage.theme = 'light';
+                            document.documentElement.classList.remove('dark');
+                            dark = false;
+
+                        } else {
+                            localStorage.theme = 'dark';
+                            dark = true;
+                            document.documentElement.classList.add('dark');
+                        }
+                    },
+                }"
+
                     @click="toggleTheme" aria-label="Toggle color mode">
                     <template x-if="!dark">
                         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -130,7 +146,7 @@
                             </a>
                         </li>
                         <li class="flex">
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form  method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <a  href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 href="#">
