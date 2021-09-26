@@ -51,7 +51,7 @@ class Pernikahan extends Component
                                     });
                             })
                             ->when($this->filterYear, function($query){
-                                $query->whereYear('created_at', $this->filterYear)
+                                $query->whereYear('date_time', $this->filterYear)
                                         ->where('kua_id', auth()->user()->kua_id);
                             })
                             ->when($this->filterAge, function($query){

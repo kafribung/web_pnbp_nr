@@ -54,7 +54,29 @@ class Form extends Pernikahan
 
     public function render()
     {
-        $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
+        if (auth()->user()->kua->name == 'Bonehau')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604041');
+        elseif(auth()->user()->kua->name == 'Kalukku')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
+        elseif(auth()->user()->kua->name == 'Kalumpang')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604040');
+        elseif(auth()->user()->kua->name == 'Kepulauan Balabalakang')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604023');
+        elseif(auth()->user()->kua->name == 'Mamuju')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604020');
+        elseif(auth()->user()->kua->name == 'Papalang')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604031');
+        elseif(auth()->user()->kua->name == 'Sampaga')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604032');
+        elseif(auth()->user()->kua->name == 'Simboro dan Kepulauan')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604022');
+        elseif(auth()->user()->kua->name == 'Tapalang')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604010');
+        elseif(auth()->user()->kua->name == 'Tapalang Barat')
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604011');
+        else
+            $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604033');
+
         $villages        = $villages->json();
         $peristiwaNikahs = PeristiwaNikah::get(['id', 'name']);
         $penghulus       = Penghulu::where('kua_id', auth()->user()->kua_id)->get(['id', 'name']);
