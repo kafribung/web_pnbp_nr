@@ -14,7 +14,8 @@ class Pernikahan extends Component
 
     public $lastYear,
             $oldYear,
-            $filterYear;
+            $filterYear,
+            $filterAge;
 
     protected $listeners = [
         'refreshParent' => '$refresh'
@@ -50,7 +51,44 @@ class Pernikahan extends Component
                                     });
                             })
                             ->when($this->filterYear, function($query){
-                                $query->whereYear('created_at', $this->filterYear);
+                                $query->whereYear('created_at', $this->filterYear)
+                                        ->where('kua_id', auth()->user()->kua_id);
+                            })
+                            ->when($this->filterAge, function($query){
+                                switch ($this->filterAge) {
+                                    case '<19':
+                                        $query->where([
+                                            ['male_age', '<', 19],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ])
+                                        ->orWhere([
+                                            ['female_age', '<', 19],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ]);
+                                        break;
+                                    case '>=19&&<=21':
+                                        $query->where([
+                                            ['male_age', '>=', 19],
+                                            ['male_age', '<=', 21],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ])
+                                        ->orWhere([
+                                            ['female_age', '>=', 19],
+                                            ['female_age', '<=', 21],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ]);
+                                        break;
+                                    default:
+                                        $query->where([
+                                            ['male_age', '>', 21],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ])
+                                        ->orWhere([
+                                            ['female_age', '>', 21],
+                                            ['kua_id', auth()->user()->kua_id],
+                                        ]);
+                                        break;
+                                }
                             })
                             ->where('kua_id', auth()->user()->kua_id)
                             ->latest()

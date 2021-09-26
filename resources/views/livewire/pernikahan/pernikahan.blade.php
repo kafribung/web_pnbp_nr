@@ -22,6 +22,14 @@
                             @endfor
                         </x-select>
                     </div>
+                    <div class="ml-2">
+                        <x-select  wire:model="filterAge">
+                            @slot('option_default', 'Filter Umur')
+                            <option value="<19">Di bawah 19 Tahun</option>
+                            <option value=">=19&&<=21">19 Tahun - 21 Tahun</option>
+                            <option value=">21">Di atas 21 Tahun</option>
+                        </x-select>
+                    </div>
                 </div>
                 <div class="flex justify-end">
                     <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
