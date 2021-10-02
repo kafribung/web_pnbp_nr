@@ -2,9 +2,10 @@
     <x-auth-card-login>
         <x-slot name="logo">
             <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            <div class="flex  flex-col items-center justify-center mt-2 max-w-xs text-gray-700 dark:text-gray-200">
-                <div class="text-base fonr-semibold">Kementrian Agama Kabupaten Mamuju</div>
-                <div class="text-sm"> Jl. KS Tubun No.5 Mamuju</div>
+            <div class="flex flex-col items-center justify-center mt-2 max-w-xs text-gray-700 dark:text-gray-200">
+                <div class="text-2xl font-bold">Seksi BIMAS Islam</div>
+                <div class="text-sm md:text-base font-semibold">Kementrian Agama Kabupaten Mamuju</div>
+                <div class="text-xs md:text-sm"> Jl. KS Tubun No.70 Mamuju</div>
             </div>
         </x-slot>
 
