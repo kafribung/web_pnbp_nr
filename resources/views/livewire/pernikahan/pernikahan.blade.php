@@ -15,7 +15,7 @@
                         </x-search>
                     </div>
                     <div class="ml-2">
-                        <x-select  wire:model="filterMonth">
+                        <x-select class="text-sm" wire:model="filterMonth">
                             @slot('option_default', 'Filter Bulan')
                             @php
                                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -26,7 +26,7 @@
                         </x-select>
                     </div>
                     <div class="ml-2">
-                        <x-select  wire:model="filterYear">
+                        <x-select class="text-sm" wire:model="filterYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
                             <option value="{{ $oldYear }}">{{ $oldYear }}</option>
@@ -34,7 +34,7 @@
                         </x-select>
                     </div>
                     <div class="ml-2">
-                        <x-select wire:model="filterAge">
+                        <x-select class="text-sm" wire:model="filterAge">
                             @slot('option_default', 'Filter Umur')
                             <optgroup label="Pria">
                                 <option value="p<19">Pria < 19 Tahun</option>
