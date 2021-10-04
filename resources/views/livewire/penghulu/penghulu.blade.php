@@ -20,6 +20,7 @@
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Gologan</th>
+                        <th class="px-4 py-3">Jabatan</th>
                         <th class="px-4 py-3">KUA</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
@@ -30,8 +31,9 @@
                         <td class="px-4 py-3 text-sm">
                             {{ (($penghulus->currentPage() - 1 ) * $penghulus->perPage() ) + $loop->iteration }}
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $penghulu->name }} </td>
+                        <td class="px-4 py-3 text-sm font-bold"> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ ($penghulu->kua_leader == 1) ? 'Kepala KUA' : 'Penghulu' }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->kua->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">

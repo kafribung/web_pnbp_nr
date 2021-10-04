@@ -39,6 +39,26 @@
                         <x-input-error for="kua_id" class="mt-2"/>
                     </div>
                 </div>
+
+                <div class="mt-3">
+                    <div class="block text-sm">
+                        <x-label for="kua_leader" :value="__('Profesi Utama')" />
+                        <x-input id="kua_leader" class="inline-block" type="checkbox" wire:model="kua_leader" autofocus autocomplete="off"/>
+                        <x-label class="inline-block ml-1 mt-1s" for="kua_leader" :value="__('Kepala KUA')" />
+                        <x-input-error for="kua_leader" class="mt-2"/>
+                    </div>
+                </div>
+
+                @if ($kua_leader)
+                <div class="mt-3">
+                    <div class="block text-sm">
+                        <x-label for="ttd_digital" :value="__('Tanda tangan')" />
+                        <x-input id="name" class="block mt-1 w-full" type="file" accept="image/jpeg" wire:model="ttd_digital" autofocus autocomplete="off"/>
+                        <x-input-error for="ttd_digital" class="mt-2"/>
+                    </div>
+                </div>
+                @endif
+
             </div>
 
             <div class="pt-5">

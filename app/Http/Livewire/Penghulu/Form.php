@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Penghulu;
 
 use App\Models\{Golongan, Kua, Penghulu as PenghuluModel};
+use Livewire\WithFileUploads;
 
 class Form extends Penghulu
 {
-    public $name, $kua_id, $golongan_id, $penghuluId, $penghuluIdDelete;
+    use WithFileUploads;
+
+    public $name, $kua_id, $golongan_id, $penghuluId, $penghuluIdDelete, $kua_leader = 0, $ttd_digital;
 
     protected $listeners = [
         'create',
@@ -18,6 +21,8 @@ class Form extends Penghulu
         'name'         => 'required|string|min:3',
         'golongan_id'  => 'required',
         'kua_id'       => 'required',
+        'kua_leader'   => '',
+        'ttd_digital'  => '',
     ];
 
     public function updated($propertyName)
@@ -45,6 +50,15 @@ class Form extends Penghulu
     {
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
+
+        if (PenghuluModel::where('kua_id', $data['kua_id'])->where('kua_leader', 1)->count() == 1) {
+            session()->flash('message', 'Kepala KUA sudah ada');
+            return redirect('penghulu');
+        }
+
+        if ($this->kua_leader) {
+            $data['ttd_digital'] = $this->ttd_digital->storeAs('ttd_digitals', time() . '.' . $this->ttd_digital->extension(), 'public');
+        }
 
         $penghulu = PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
 
