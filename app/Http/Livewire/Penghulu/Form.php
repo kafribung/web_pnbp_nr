@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Penghulu;
 
 use App\Models\{Golongan, Kua, Penghulu as PenghuluModel};
-use Livewire\WithFileUploads;
 
+use Livewire\WithFileUploads;
 class Form extends Penghulu
 {
     use WithFileUploads;
@@ -22,7 +22,7 @@ class Form extends Penghulu
         'golongan_id'  => 'required',
         'kua_id'       => 'required',
         'kua_leader'   => '',
-        'ttd_digital'  => '',
+        'ttd_digital'  => 'image|max:1024',
     ];
 
     public function updated($propertyName)
@@ -56,8 +56,9 @@ class Form extends Penghulu
             return redirect('penghulu');
         }
 
+        dd($this->ttd_digital);
         if ($this->kua_leader) {
-            $data['ttd_digital'] = $this->ttd_digital->storeAs('ttd_digitals', time() . '.' . $this->ttd_digital->extension(), 'public');
+            $data['ttd_digital'] = $this->ttd_digital->storeAs('ttd_digitals', time() . '.' . $this->ttd_digital->extension());
         }
 
         $penghulu = PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);

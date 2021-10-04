@@ -52,9 +52,15 @@
                 @if ($kua_leader)
                 <div class="mt-3">
                     <div class="block text-sm">
+                        <div wire:loading wire:target="ttd_digital">Uploading...</div>
                         <x-label for="ttd_digital" :value="__('Tanda tangan')" />
                         <x-input id="name" class="block mt-1 w-full" type="file" accept="image/jpeg" wire:model="ttd_digital" autofocus autocomplete="off"/>
                         <x-input-error for="ttd_digital" class="mt-2"/>
+
+                         @if ($ttd_digital)
+                            Photo Preview:
+                            <img src="{{ $ttd_digital->temporaryUrl() }}">
+                        @endif
                     </div>
                 </div>
                 @endif

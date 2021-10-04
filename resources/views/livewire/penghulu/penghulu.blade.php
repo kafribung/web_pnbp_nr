@@ -37,6 +37,9 @@
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->kua->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
+                                @if ($penghulu->kua_leader == 1)
+                                <x-button-edit-delete metode='image' wire:click="$emitTo('penghulu.form', 'edit', {{ $penghulu->id }})" class="hover:text-blue-700 text-blue-600 focus:shadow-outline-blue"></x-button-edit-delete>
+                                @endif
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('penghulu.form', 'edit', {{ $penghulu->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
                                 <x-button-edit-delete metode='delete' wire:click="$emitTo('penghulu.form', 'delete', {{ $penghulu->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>
                             </div>
