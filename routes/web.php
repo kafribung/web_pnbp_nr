@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard\Dashboard;
+use App\Http\Livewire\JasaProfesiDanTransport\JasaProfesiDanTransport;
 use App\Http\Livewire\StafKua\StafKua;
 use App\Http\Livewire\Kua\Kua;
 use App\Http\Livewire\Penghulu\Penghulu;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
+    Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
 });
 
 require __DIR__.'/auth.php';
