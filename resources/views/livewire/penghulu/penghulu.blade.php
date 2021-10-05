@@ -1,5 +1,6 @@
 <div>
     @livewire('penghulu.form')
+    @livewire('penghulu.form-show')
     <x-navbar> Penghulu </x-navbar>
     <x-cta> Berisi daftar penghulu di Kabupaten Mamuju </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -33,12 +34,12 @@
                         </td>
                         <td class="px-4 py-3 text-sm font-bold"> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ ($penghulu->kua_leader == 1) ? 'Kepala KUA' : 'Penghulu' }} </td>
+                        <td class="px-4 py-3 text-sm {{ ($penghulu->kua_leader == 1) ? 'font-semibold' : '' }} "> {{ ($penghulu->kua_leader == 1) ? 'Kepala KUA' : 'Penghulu' }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->kua->name }} </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
                                 @if ($penghulu->kua_leader == 1)
-                                <x-button-edit-delete metode='image' wire:click="$emitTo('penghulu.form', 'edit', {{ $penghulu->id }})" class="hover:text-blue-700 text-blue-600 focus:shadow-outline-blue"></x-button-edit-delete>
+                                <x-button-edit-delete metode='image' wire:click="$emitTo('penghulu.form-show', 'show', {{ $penghulu->id }})" class="hover:text-blue-700 text-blue-600 focus:shadow-outline-blue"></x-button-edit-delete>
                                 @endif
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('penghulu.form', 'edit', {{ $penghulu->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
                                 <x-button-edit-delete metode='delete' wire:click="$emitTo('penghulu.form', 'delete', {{ $penghulu->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>

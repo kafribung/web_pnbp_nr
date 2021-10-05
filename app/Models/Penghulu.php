@@ -30,4 +30,10 @@ class Penghulu extends Model
         return $this->hasMany(Pernikahan::class);
     }
 
+    // Mutator
+    public function getTakeImgAttribute()
+    {
+        return url('storage', $this->ttd_digital);
+    }
+
 }

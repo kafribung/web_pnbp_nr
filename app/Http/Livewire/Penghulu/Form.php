@@ -9,7 +9,15 @@ class Form extends Penghulu
 {
     use WithFileUploads;
 
-    public $name, $kua_id, $golongan_id, $penghuluId, $penghuluIdDelete, $kua_leader = 0, $ttd_digital;
+    public $name,
+            $kua_id,
+            $golongan_id,
+            $penghuluId,
+            $penghuluIdDelete,
+            $kua_leader = 0,
+            $ttd_digital,
+            $penghuluIdShow,
+            $penghulu;
 
     protected $listeners = [
         'create',
@@ -56,7 +64,6 @@ class Form extends Penghulu
             return redirect('penghulu');
         }
 
-        dd($this->ttd_digital);
         if ($this->kua_leader) {
             $data['ttd_digital'] = $this->ttd_digital->storeAs('ttd_digitals', time() . '.' . $this->ttd_digital->extension());
         }
@@ -113,11 +120,13 @@ class Form extends Penghulu
         $this->golongan_id      = '';
         $this->penghuluId       = '';
         $this->penghuluIdDelete = '';
+        $this->kua_leader       = 0;
+        $this->ttd_digital      = '';
     }
 
     public function closeModal()
     {
-        $this->modal = false;
+        $this->modal     = false;
         $this->fieldsReset();
     }
 }

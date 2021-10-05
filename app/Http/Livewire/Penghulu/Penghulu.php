@@ -12,7 +12,8 @@ class Penghulu extends Component
     use AuthorizesRequests;
 
     public $search;
-    public $modal = false;
+    public $modal = false,
+            $modalShow = false;
 
     protected $paginationTheme = 'costume';
 
