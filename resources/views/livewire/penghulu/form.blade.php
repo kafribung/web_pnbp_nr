@@ -6,6 +6,7 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     {{ !empty($penghuluId) ? "Ubah Penghulu" : "Tambah Penghulu"}}
                 </h3>
+
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="name" :value="__('Nama')" />
@@ -53,7 +54,7 @@
                 <div class="mt-3">
                     <div class="block text-sm">
                         <x-label for="ttd_digital" :value="__('Tanda tangan')" />
-                        <x-input id="name" class="block mt-1 w-full" type="file" accept="image/jpeg" wire:model="ttd_digital" autofocus autocomplete="off"/>
+                        <x-input id="ttd_digital" class="block mt-1 w-full" type="file" accept="image/jpeg" wire:model="ttd_digital" autofocus autocomplete="off"/>
                         <x-input-error for="ttd_digital" class="mt-2"/>
 
                         <div wire:loading wire:target="ttd_digital">Uploading...</div>
