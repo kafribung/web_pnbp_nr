@@ -16,17 +16,23 @@ class KuaSeeder extends Seeder
     public function run()
     {
         $kuas = collect([
-            ['name' => 'Bonehau', 'typology_id' => 3, 'created_by' => User::first()->id],
+            // Tipologi C
+            ['name' => 'Tapalang', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Simboro dan Kepulauan', 'typology_id' => 3, 'created_by' => User::first()->id],
+            ['name' => 'Mamuju', 'typology_id' => 3, 'created_by' => User::first()->id],
             ['name' => 'Kalukku', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Kalumpang', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Kepulauan Balabalakang', 'typology_id' => 4, 'created_by' => User::first()->id],
-            ['name' => 'Mamuju', 'typology_id' => 2, 'created_by' => User::first()->id],
             ['name' => 'Papalang', 'typology_id' => 3, 'created_by' => User::first()->id],
             ['name' => 'Sampaga', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Simboro dan Kepulauan', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Tapalang', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Tapalang Barat', 'typology_id' => 3, 'created_by' => User::first()->id],
-            ['name' => 'Tommo', 'typology_id' => 3, 'created_by' => User::first()->id],
+
+            // Tipologi D1
+            ['name' => 'Tapalang Barat', 'typology_id' => 4, 'created_by' => User::first()->id],
+            ['name' => 'Bonehau', 'typology_id' => 4, 'created_by' => User::first()->id],
+            ['name' => 'Kalumpang', 'typology_id' => 4, 'created_by' => User::first()->id],
+            ['name' => 'Tommo', 'typology_id' => 4, 'created_by' => User::first()->id],
+
+            // Tipologi D2
+            ['name' => 'Kepulauan Balabalakang', 'typology_id' => 5, 'created_by' => User::first()->id],
+
         ]);
 
         $kuas->each(function($kua){
