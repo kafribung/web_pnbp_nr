@@ -20,7 +20,7 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
-                        <th class="px-4 py-3">Gologan</th>
+                        <th class="px-4 py-3">Jasa Profesi</th>
                         <th class="px-4 py-3">Jabatan</th>
                         <th class="px-4 py-3">KUA</th>
                         <th class="px-4 py-3">Aksi</th>
@@ -32,8 +32,15 @@
                         <td class="px-4 py-3 text-sm">
                             {{ (($penghulus->currentPage() - 1 ) * $penghulus->perPage() ) + $loop->iteration }}
                         </td>
-                        <td class="px-4 py-3 text-sm font-bold"> {{ $penghulu->name }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center text-sm">
+                                <div>
+                                    <p class="font-semibold">{{ $penghulu->name }}</p>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">{{ $penghulu->golongan->name }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($penghulu->jasa_profesi, 2) }}  </td>
                         <td class="px-4 py-3 text-sm {{ ($penghulu->kua_leader == 1) ? 'font-semibold' : '' }} "> {{ ($penghulu->kua_leader == 1) ? 'Kepala KUA' : 'Penghulu' }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->kua->name }} </td>
                         <td class="px-4 py-3">
