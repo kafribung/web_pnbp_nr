@@ -30,19 +30,19 @@
                         <th class="px-4 py-3" rowspan="2">Jml NR</th>
                         <th class="px-4 py-3" rowspan="2">Satuan PNBP</th>
                         <th class="px-4 py-3" rowspan="2">Jumlah PNBP</th>
-                        <th class="px-4 py-3 text-center" colspan="2">Transport</th>
+                        {{-- <th class="px-4 py-3 text-center" colspan="2">Transport</th> --}}
                         <th class="px-4 py-3 text-center" colspan="4">Jasa Profesi</th>
                         <th class="px-4 py-3" rowspan="2">Jumlah Permohonan Pembayaran</th>
                         <th class="px-4 py-3" rowspan="2">Aksi</th>
                     </tr>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Satuan</th>
-                        <th class="px-4 py-3">Jumalah</th>
+                        {{-- <th class="px-4 py-3">Satuan</th>
+                        <th class="px-4 py-3">Jumalah</th> --}}
 
                         <th class="px-4 py-3">Satuan</th>
-                        <th class="px-4 py-3">Jumalah</th>
+                        <th class="px-4 py-3">Jml</th>
                         <th class="px-4 py-3">PPH</th>
-                        <th class="px-4 py-3">Jumlah Setelah Pengurahan PPH</th>
+                        <th class="px-4 py-3">Jml Setelah Pengurahan PPH</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -55,7 +55,13 @@
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $jumlahNR = $penghulu->pernikahans->count() }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr * $jumlahNR) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
+
+                        {{-- Jasa Profesi --}}
+                        <td class="px-4 py-3 text-sm"> {{ number_format($penghulu->jasa_profesi, 2) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi = $penghulu->jasa_profesi * $jumlahNR, 2) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi, 2)) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi - $pph) }} </td>
 
                         {{-- <td class="px-4 py-3">
                             <div class="flex items-center text-sm">

@@ -36,4 +36,11 @@ class Penghulu extends Model
         return url('storage', $this->ttd_digital);
     }
 
+    public function pph($jasaProfesi)
+    {
+        if ($this->golongan->name == 'Penghulu Pertama -  III/a' || $this->golongan->name == 'Penghulu Pertama - III/b' || $this->golongan->name == 'Penghulu Muda - III/c'  || $this->golongan->name == 'Penghulu Muda - III/d')
+            return ($jasaProfesi * (5/100));
+        else return ($jasaProfesi * (15/100));
+    }
+
 }
