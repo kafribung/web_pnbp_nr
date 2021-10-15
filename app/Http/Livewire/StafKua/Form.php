@@ -75,7 +75,14 @@ class Form extends StafKua
 
     public function destroy()
     {
-        $stafKua = User::findOrFail($this->stafIdDelete);
+        $stafKua = User::withCount('pernikahans')->findOrFail($this->stafIdDelete);
+
+        // Jika KUA memiliki penghulu
+        if ($stafKua->pernikahans_count > 0) {
+            session()->flash('message', 'Data staf KUA ' .$stafKua->name. ' tidak dapat dihapus');
+            $this->closeModal();
+            return redirect('staf-kua');
+        }
 
         $stafKua->delete();
 

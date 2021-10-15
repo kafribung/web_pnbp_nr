@@ -42,6 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function pernikahans()
+    {
+        return $this->hasMany(Pernikahan::class, 'created_by');
+    }
 
 
     public function roles()

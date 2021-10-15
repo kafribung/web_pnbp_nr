@@ -24,4 +24,9 @@ class Pernikahan extends Model
     {
         return $this->belongsTo(PeristiwaNikah::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
