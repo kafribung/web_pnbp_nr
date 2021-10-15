@@ -133,9 +133,16 @@ class Form extends Penghulu
 
     public function destroy()
     {
-        $penghulu = PenghuluModel::findOrFail($this->penghuluIdDelete);
+        $penghulu = PenghuluModel::withCount('pernikahans')->findOrFail($this->penghuluIdDelete);
 
         $this->authorize('delete', $penghulu);
+
+        // Jika Penghulu memiliki data pernikahan
+        if ($penghulu->pernikahans_count > 0) {
+            session()->flash('message', 'Data penghulu ' . $penghulu->name .' tidak dapat dihapus');
+            $this->closeModal();
+            return redirect('penghulu');
+        }
 
         $penghulu->delete();
         session()->flash('message', 'Data penghulu ' . $penghulu->name .' berhasil dihapus');

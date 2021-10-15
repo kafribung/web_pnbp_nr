@@ -77,7 +77,7 @@ class Form extends StafKua
     {
         $stafKua = User::withCount('pernikahans')->findOrFail($this->stafIdDelete);
 
-        // Jika KUA memiliki penghulu
+        // Jika Staf KUA memiliki data pernikahan
         if ($stafKua->pernikahans_count > 0) {
             session()->flash('message', 'Data staf KUA ' .$stafKua->name. ' tidak dapat dihapus');
             $this->closeModal();
