@@ -62,6 +62,20 @@ class Form extends Penghulu
         $data = $this->validate();
         $data['created_by'] = auth()->user()->id;
 
+        // Set jasa profesi penguhulu
+        if (Kua::findOrFail($data['kua_id'])->typology->name == 'A')
+            $data['jasa_profesi'] = 125000;
+        elseif (Kua::findOrFail($data['kua_id'])->typology->name == 'B')
+            $data['jasa_profesi'] = 150000;
+        elseif (Kua::findOrFail($data['kua_id'])->typology->name == 'C')
+            $data['jasa_profesi'] = 175000;
+        elseif (Kua::findOrFail($data['kua_id'])->typology->name == 'D1') {
+            $data['jasa_profesi'] = 400000;
+        } elseif (Kua::findOrFail($data['kua_id'])->typology->name == 'D2') {
+            $data['jasa_profesi'] = 400000;
+        }
+
+        // Jika kepala KUA sudah ada
         if (!$this->penghuluId) {
             if (PenghuluModel::where('kua_id', $data['kua_id'])->where('kua_leader', 1)->count() == 1) {
                 session()->flash('message', 'Kepala KUA sudah ada');
@@ -69,6 +83,7 @@ class Form extends Penghulu
             }
         }
 
+        // Jika sebagai kepala KUA maka data TDD akan disimpan
         if ($this->kua_leader) {
             if ($this->penghuluId) {
                 $penghulu = PenghuluModel::find($this->penghuluId);
@@ -97,7 +112,7 @@ class Form extends Penghulu
         $this->kua_id           = $penghulu->kua_id;
         $this->golongan_id      = $penghulu->golongan_id;
         $this->kua_leader       = $penghulu->kua_leader;
-        
+
         $this->openCloseModal();
     }
 
