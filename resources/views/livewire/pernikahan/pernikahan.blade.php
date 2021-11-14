@@ -110,7 +110,7 @@
                         </td>
                     </tr>
                     @empty
-                        <td colspan="10" class="items-center text-center">Data tidak ditemukan !</td>
+                        <td colspan="20" class="items-center text-center">Data tidak ditemukan !</td>
                     @endforelse
                 </tbody>
             </table>
