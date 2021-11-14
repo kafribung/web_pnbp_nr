@@ -99,6 +99,14 @@
                         <x-input-error for="penghulu_id" class="mt-2"/>
                     </div>
 
+                    @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                    <div class="sm:col-span-6">
+                        <x-label for="transport" value="{{ __('Estimasi biaya transport') }}" />
+                        <x-input id="transport" class="block mt-1 w-full" type="number" wire:model="transport"/>
+                        <x-input-error for="transport" class="mt-2"/>
+                    </div>
+                    @endif
+
                     <div class="sm:col-span-6">
                         <x-label for="date_time" value="{{ __('Tanggal dan Waktu Pernikahan') }}" />
                         <x-input id="date_time" class="block mt-1 w-full" type="datetime-local" wire:model="date_time"/>

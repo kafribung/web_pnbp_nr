@@ -21,7 +21,8 @@ class Form extends Pernikahan
         $peristiwa_nikah_id,
         $date_time,
         $pernikahanId,
-        $pernikahanIdDelete;
+        $pernikahanIdDelete,
+        $transport;
 
     protected $listeners = [
         'create',
@@ -44,6 +45,7 @@ class Form extends Pernikahan
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
+            'transport'                  => (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang') ? 'required|numeric' : '',
         ];
     }
 
