@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    <tr class="text-center text-sm">
+                    <tr class="text-center text-sm text-bold">
                         <td>a</td>
                         <td>b</td>
                         <td>c</td>
