@@ -1,10 +1,5 @@
 <x-modal maxWidth="md" wire:model="modal">
     @if( empty($penghuluIdDelete) )
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-    @endif
     <form wire:submit.prevent="storeOrUpdate" class="space-y-8 divide-y divide-gray-200">
         <div class="space-y-6 divide-y divide-gray-200">
             <div>
