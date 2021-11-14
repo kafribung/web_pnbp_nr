@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\JasaProfesiDanTransport;
 
 use App\Models\Penghulu;
-use App\Models\Pernikahan;
 use Carbon\Carbon;
 use Livewire\Component;
 
