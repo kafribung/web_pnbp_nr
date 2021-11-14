@@ -28,13 +28,15 @@ class Form extends Penghulu
         'delete',
     ];
 
-    protected $rules = [
-        'name'         => 'required|string|min:3',
-        'golongan_id'  => 'required',
-        'kua_id'       => 'required',
-        'kua_leader'   => '',
-        'ttd_digital'  => 'image|max:1024',
-    ];
+    public function rules() {
+        return [
+            'name'         => 'required|string|min:3',
+            'golongan_id'  => 'required',
+            'kua_id'       => 'required',
+            'kua_leader'   => '',
+            'ttd_digital'  => !empty($this->ttd_digital) ? 'image|max:1024' : '',
+        ];
+    }
 
     public function updated($propertyName)
     {
@@ -75,26 +77,27 @@ class Form extends Penghulu
             $data['jasa_profesi'] = 400000;
         }
 
-        // Jika kepala KUA sudah ada
-        if (!$this->penghuluId) {
-            if (PenghuluModel::where('kua_id', $data['kua_id'])->where('kua_leader', 1)->count() == 1) {
-                session()->flash('message', 'Kepala KUA sudah ada');
-                return redirect('penghulu');
-            }
-        }
-
         // Jika sebagai kepala KUA maka data TDD akan disimpan
-        if ($this->kua_leader) {
+        if ($this->kua_leader == true) {
+
+            // Jika kepala KUA sudah ada
+            if (!$this->penghuluId) {
+                if (PenghuluModel::where('kua_id', $data['kua_id'])->where('kua_leader', 1)->count() == 1) {
+                    session()->flash('message', 'Kepala KUA sudah ada');
+                    return redirect('penghulu');
+                }
+            }
+
+            // Jika diedit maka gambar yang lama akan dihapus
             if ($this->penghuluId) {
                 $penghulu = PenghuluModel::find($this->penghuluId);
                 Storage::delete($penghulu->ttd_digital);
             }
+
             $data['ttd_digital'] = $this->ttd_digital->storeAs('ttd_digitals', time() . '.' . $this->ttd_digital->extension(), 'public');
         }
 
         $penghulu = PenghuluModel::updateOrCreate(['id' => $this->penghuluId], $data);
-
-        $this->authorize('update', $penghulu);
 
         session()->flash('message', $this->penghuluId ? 'Data penghulu ' . $this->name. ' berhasil diubah' : 'Data penghulu '.$this->name.' berhasil ditambahkan');
         $this->closeModal();
