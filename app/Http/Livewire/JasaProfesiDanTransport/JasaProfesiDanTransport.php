@@ -13,8 +13,12 @@ class JasaProfesiDanTransport extends Component
     {
         $penghulus = Penghulu::with('pernikahans', 'golongan')
                     ->whereHas('pernikahans', function($query){
-                        $query->whereMonth('date_time', Carbon::now()->month)
-                                ->whereYear('date_time', Carbon::now()->year);
+                        $query
+                            ->whereHas('peristiwa_nikah', function($query){
+                                $query->where('name', 'Luar Balai Nikah');
+                            })
+                            ->whereMonth('date_time', Carbon::now()->month)
+                            ->whereYear('date_time', Carbon::now()->year);
                     })
                     ->where('kua_id', auth()->user()->kua_id)
                     ->get();
