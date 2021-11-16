@@ -45,7 +45,7 @@ class Form extends Pernikahan
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
-            'transport'                  => (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang') ? 'required|numeric' : '',
+            'transport'                  => (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang') ? 'required|numeric|' : '',
         ];
     }
 
@@ -97,11 +97,36 @@ class Form extends Pernikahan
 
     public function storeOrUpdate()
     {
+        if(auth()->user()->kua->name == 'Tommo'|| auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau'|| auth()->user()->kua->name == 'Kalumpang'){
+            if ($this->transport > 750000) {
+                session()->flash('error','Estimasi transport tidak boleh lebih dari 750.000');
+                return redirect('pernikahan');
+            }
+        }
+
+        if (auth()->user()->kua->name == 'Kepulauan Balabalakang') {
+            if ($this->transport > 1000000) {
+                session()->flash('error', 'Estimasi transport tidak boleh lebih dari 1.000.000');
+                return redirect('pernikahan');
+            }
+        }
+
         $data               = $this->validate();
         $data['created_by'] = auth()->id();
         $data['kua_id']     = auth()->user()->kua_id;
 
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
+
+
+
+
+
+        // Costume biaya transport jika login sebagai KUA tipologi DI dan D2
+        if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+            $data['transport'] = $this->transport;
+        else  $data['transport'] = 100000;
+
+
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
 
