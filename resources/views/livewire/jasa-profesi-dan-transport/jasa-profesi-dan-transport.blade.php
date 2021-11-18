@@ -14,6 +14,25 @@
                             <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
+                    <div class="ml-2">
+                        <x-select class="text-sm" wire:model="currnetMonth">
+                            @slot('option_default', 'Filter Bulan')
+                            @php
+                                $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+                            @endphp
+                            @for ($i = 0; $i < count($month); $i++)
+                            <option value="{{ $i + 1 }}">{{ $month[$i] }}</option>
+                            @endfor
+                        </x-select>
+                    </div>
+                    <div class="ml-2">
+                        <x-select class="text-sm" wire:model="currnetYear">
+                            @slot('option_default', 'Filter Tahun')
+                            @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
+                            <option value="{{ $oldYear }}">{{ $oldYear }}</option>
+                            @endfor
+                        </x-select>
+                    </div>
                 </div>
             </div>
 
@@ -38,7 +57,7 @@
                         <th class="px-4 py-3">Satuan</th>
                         <th class="px-4 py-3">Jml</th>
                         <th class="px-4 py-3">PPH</th>
-                        <th class="px-4 py-3">Jml Pengurahan PPH</th>
+                        <th class="px-4 py-3">Jml Pengurangan PPH</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -64,7 +83,7 @@
                         </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ $jumlahNR = $penghulu->pernikahans->count() }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', \Carbon\Carbon::now()->month)->whereYear('date_time', \Carbon\Carbon::now()->year)->count() }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
 
@@ -73,8 +92,8 @@
                         <td class="px-4 py-3 text-sm">Masih develop</td>
 
                         {{-- Jasa Profesi --}}
-                        <td class="px-4 py-3 text-sm"> {{ number_format($penghulu->jasa_profesi, 2) }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi = $penghulu->jasa_profesi * $jumlahNR, 2) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($jasPro = $penghulu->jasa_profesi, 2) }} </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi = $jasPro * $jumlahNR, 2) }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi, 2)) }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi - $pph) }} </td>
                         <td class="px-4 py-3 text-sm">Masih develop</td>
@@ -84,6 +103,9 @@
                     @endforelse
                 </tbody>
             </table>
+
+
+
         </div>
     </div>
 </div>
