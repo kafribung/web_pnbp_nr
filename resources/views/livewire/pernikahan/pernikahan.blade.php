@@ -18,7 +18,7 @@
                         </x-search>
                     </div>
                     <div class="ml-2">
-                        <x-select class="text-sm" wire:model="filterMonth">
+                        <x-select class="text-sm" wire:model="currnetMonth">
                             @slot('option_default', 'Filter Bulan')
                             @php
                                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -29,7 +29,7 @@
                         </x-select>
                     </div>
                     <div class="ml-2">
-                        <x-select class="text-sm" wire:model="filterYear">
+                        <x-select class="text-sm" wire:model="currnetYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
                             <option value="{{ $oldYear }}">{{ $oldYear }}</option>

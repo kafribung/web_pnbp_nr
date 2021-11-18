@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use App\Models\Pernikahan as ModelsPernikahan;
+use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Pernikahan as ModelsPernikahan;
 
 class Pernikahan extends Component
 {
@@ -14,9 +15,9 @@ class Pernikahan extends Component
 
     public $lastYear,
             $oldYear,
-            $filterYear,
+            $currnetYear,
             $filterAge,
-            $filterMonth;
+            $currnetMonth;
 
     protected $listeners = [
         'refreshParent' => '$refresh'
@@ -24,8 +25,13 @@ class Pernikahan extends Component
 
     public function mount()
     {
+        // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
         $this->lastYear  = (int)ModelsPernikahan::latest()->first()->created_at->format('Y');
         $this->oldYear   = (int)ModelsPernikahan::oldest()->first()->created_at->format('Y');
+
+        // Get mount
+        $this->currnetMonth  = Carbon::now()->month;
+        $this->currnetYear   = Carbon::now()->year;
     }
 
     public function render()
@@ -51,12 +57,12 @@ class Pernikahan extends Component
                                         $query->where('name', 'like', '%'. $this->search .'%');
                                     });
                             })
-                            ->when($this->filterMonth, function($query){
-                                $query->whereMonth('date_time', $this->filterMonth)
+                            ->when($this->currnetMonth, function($query){
+                                $query->whereMonth('date_time', $this->currnetMonth)
                                         ->where('kua_id', auth()->user()->kua_id);
                             })
-                            ->when($this->filterYear, function($query){
-                                $query->whereYear('date_time', $this->filterYear)
+                            ->when($this->currnetYear, function($query){
+                                $query->whereYear('date_time', $this->currnetYear)
                                         ->where('kua_id', auth()->user()->kua_id);
                             })
                             ->when($this->filterAge, function($query){
