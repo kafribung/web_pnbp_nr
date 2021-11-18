@@ -36,17 +36,8 @@ class JasaProfesiDanTransport extends Component
                             ->whereHas('peristiwa_nikah', function($query){
                                 $query->where('name', 'Luar Balai Nikah');
                             })
-                            // ->when($this->filterMonth, function($query){
-                            //     $query->whereMonth('date_time', $this->filterMonth)
-                            //             ->where('kua_id', auth()->user()->kua_id);
-                            // })
-                            // ->when($this->filterYear, function($query){
-                            //     $query->whereYear('date_time', $this->filterYear)
-                            //             ->where('kua_id', auth()->user()->kua_id);
-                            // });
                             ->whereMonth('date_time', $this->currnetMonth)
-                            ->whereYear('date_time', $this->currnetYear)
-                            ;
+                            ->whereYear('date_time', $this->currnetYear);
                         })
                         ->where('kua_id', auth()->user()->kua_id)
                         ->get();

@@ -57,14 +57,9 @@ class Pernikahan extends Component
                                         $query->where('name', 'like', '%'. $this->search .'%');
                                     });
                             })
-                            ->when($this->currnetMonth, function($query){
-                                $query->whereMonth('date_time', $this->currnetMonth)
-                                        ->where('kua_id', auth()->user()->kua_id);
-                            })
-                            ->when($this->currnetYear, function($query){
-                                $query->whereYear('date_time', $this->currnetYear)
-                                        ->where('kua_id', auth()->user()->kua_id);
-                            })
+                            ->whereMonth('date_time', $this->currnetMonth)
+                            ->whereYear('date_time', $this->currnetYear)
+
                             ->when($this->filterAge, function($query){
                                 switch ($this->filterAge) {
                                     case 'p<19':
