@@ -39,18 +39,11 @@ class JasaProfesiDanTransport extends Component
                             ->whereMonth('date_time', $this->currnetMonth)
                             ->whereYear('date_time', $this->currnetYear);
                         })
+                        ->when($this->search, function($query){
+                            $query->where('name', 'like',  '%'.$this->search.'%');
+                        })
                         ->where('kua_id', auth()->user()->kua_id)
                         ->get();
-
-        // $pernikahans= Pernikahan::with('peristiwa_nikah', 'penghulu', 'penghulu.name', 'penghulu.golongan')
-        //                 ->whereHas('peristiwa_nikah', function($query){
-        //                     $query->where('name', 'Luar Balai Nikah');
-        //                 })
-        //                 ->groupBy('penghulu_id')
-        //                 ->whereMonth('date_time', Carbon::now()->month)
-        //                 ->whereYear('date_time', Carbon::now()->year)
-        //                 ->where('kua_id', auth()->user()->kua_id)
-        //                 ->get();
         return view('livewire.jasa-profesi-dan-transport.jasa-profesi-dan-transport', compact('penghulus'));
     }
 }
