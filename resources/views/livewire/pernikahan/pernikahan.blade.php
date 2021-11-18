@@ -5,7 +5,7 @@
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             @if (session('message'))
-            <x-message>{{ session('message') }}</x-message>
+            <x-message type="message">{{ session('message') }}</x-message>
             @endif
             @if (session('error'))
             <x-message type="error" >{{ session('error') }}</x-message>

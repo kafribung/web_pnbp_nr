@@ -117,16 +117,10 @@ class Form extends Pernikahan
 
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
-
-
-
-
         // Costume biaya transport jika login sebagai KUA tipologi DI dan D2
         if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
             $data['transport'] = $this->transport;
         else  $data['transport'] = 100000;
-
-
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
 
