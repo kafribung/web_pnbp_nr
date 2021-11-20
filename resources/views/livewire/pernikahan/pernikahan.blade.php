@@ -12,7 +12,7 @@
             @if (session('error'))
             <x-message type="error" >{{ session('error') }}</x-message>
             @endif
-            <div>
+            <div class="mb-6">
                 <div class="flex justify-start">
                     <div class="mt-1">
                         <x-search>

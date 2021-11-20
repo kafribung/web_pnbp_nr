@@ -9,7 +9,7 @@
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
             @endif
-            <div>
+            <div class="mb-6">
                 <div class="flex justify-start">
                     <div class="mt-1">
                         <x-search>
@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    <tr class="text-center text-xs text-bold">
+                    <tr class="text-center text-xs font-bold">
                         <td>a</td>
                         <td>b</td>
                         <td>c</td>
@@ -74,30 +74,35 @@
                         <td>i</td>
                         <td>j=d*i</td>
                         <td>k=j*5% | j*15%</td>
-                        <td>i=j-k</td>
-                        <td>m=h+i</td>
+                        <td>l=j-k</td>
+                        <td>m=h+l</td>
                     </tr>
                     @forelse ($penghulus as $index => $penghulu)
                     <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 text-xs">
                             {{ $index+1 }}
                         </td>
-                        <td class="px-4 py-3 text-sm font-semibold "> {{ $penghulu->name }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', \Carbon\Carbon::now()->month)->whereYear('date_time', \Carbon\Carbon::now()->year)->count() }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
+                        <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->count() }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
 
                         {{-- Transport --}}
-                        <td class="px-4 py-3 text-sm">Masih develop</td>
-                        <td class="px-4 py-3 text-sm">Masih develop</td>
+                        @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jasaTransport = $penghulu->pernikahans()->sum('transport'), 2) }} </td>
+                        @else
+                        {{-- Jika KUa tipologi C --}}
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jasaTransport = 100000, 2) }} </td>
+                        @endif
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jumTransport = $jumlahNR * $jasaTransport, 2) }} </td>
 
                         {{-- Jasa Profesi --}}
-                        <td class="px-4 py-3 text-sm"> {{ number_format($jasPro = $penghulu->jasa_profesi, 2) }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi = $jasPro * $jumlahNR, 2) }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi, 2)) }} </td>
-                        <td class="px-4 py-3 text-sm"> {{ number_format($jumJasaProfesi - $pph) }} </td>
-                        <td class="px-4 py-3 text-sm">Masih develop</td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jasPro = $penghulu->jasa_profesi, 2) }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jumJasaProfesi = $jasPro * $jumlahNR, 2) }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi, 2)) }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jumPengPPH = $jumJasaProfesi - $pph) }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ number_format($jumTransport + $jumPengPPH, 2) }} </td>
                     </tr>
                     @empty
                         <td colspan="20" class="items-center text-center">Data tidak ditemukan !</td>
