@@ -43,12 +43,12 @@
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3" rowspan="2">No</th>
                         <th class="px-4 py-3" rowspan="2">Penghulu</th>
-                        <th class="px-4 py-3" rowspan="2">Pangkat</th>
+                        <th class="px-4 py-3" rowspan="2">Gol</th>
                         <th class="px-4 py-3" rowspan="2">Jml NR</th>
                         <th class="px-4 py-3" rowspan="2">Satuan PNBP</th>
                         <th class="px-4 py-3" rowspan="2">Jml PNBP</th>
                         <th class="px-4 py-3 text-center" colspan="2">Transport</th>
-                        <th class="px-4 py-3 text-center" colspan="4">Jasa Profesi</th>
+                        <th class="px-4 py-3 text-center" colspan="4">Jasprof</th>
                         <th class="px-4 py-3" rowspan="2">Jml Permhn Pembyaran</th>
                     </tr>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    <tr class="text-center text-sm text-bold">
+                    <tr class="text-center text-xs text-bold">
                         <td>a</td>
                         <td>b</td>
                         <td>c</td>
@@ -82,7 +82,7 @@
                         <td class="px-4 py-3 text-sm">
                             {{ $index+1 }}
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $penghulu->name }} </td>
+                        <td class="px-4 py-3 text-sm font-semibold "> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $penghulu->golongan->name }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', \Carbon\Carbon::now()->month)->whereYear('date_time', \Carbon\Carbon::now()->year)->count() }} </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
