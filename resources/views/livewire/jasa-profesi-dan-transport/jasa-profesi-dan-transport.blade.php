@@ -1,6 +1,8 @@
 <div>
     @livewire('pernikahan.form')
-    <x-navbar> Data Profesi dan Transport Layanan Pernikahan </x-navbar>
+    <x-navbar>
+        <a href="{{ route('jasa-profesi-dan-transport') }}" class="font-bold">Jasa profesi & transport</a>
+    </x-navbar>
     <x-cta> Berisi data Profesi dan Transport di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
@@ -35,7 +37,6 @@
                     </div>
                 </div>
             </div>
-
             <table class="w-12">
                 <thead>
                     <tr
@@ -48,7 +49,7 @@
                         <th class="px-4 py-3" rowspan="2">Jml PNBP</th>
                         <th class="px-4 py-3 text-center" colspan="2">Transport</th>
                         <th class="px-4 py-3 text-center" colspan="4">Jasa Profesi</th>
-                        <th class="px-4 py-3" rowspan="2">Jml Permohonan Pembayaran</th>
+                        <th class="px-4 py-3" rowspan="2">Jml Permhn Pembyaran</th>
                     </tr>
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">Satuan</th>

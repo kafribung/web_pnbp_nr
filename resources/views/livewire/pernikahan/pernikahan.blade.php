@@ -1,6 +1,8 @@
 <div>
     @livewire('pernikahan.form')
-    <x-navbar> Data Pernikahan </x-navbar>
+    <x-navbar>
+        <a href="{{ route('pernikahan') }}" class="font-bold">Pernikahan</a>
+    </x-navbar>
     <x-cta> Berisi data pernikahan di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">

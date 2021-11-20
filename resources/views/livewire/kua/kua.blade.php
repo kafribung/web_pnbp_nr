@@ -1,6 +1,8 @@
 <div>
     @livewire('kua.form')
-    <x-navbar> KUA </x-navbar>
+    <x-navbar>
+        <a href="{{ route('kua') }}" class="font-bold">kua</a>
+    </x-navbar>
     <x-cta> Berisi daftar kantor KUA di Kabupaten Mamuju </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">

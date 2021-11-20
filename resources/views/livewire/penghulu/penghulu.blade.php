@@ -1,7 +1,9 @@
 <div>
     @livewire('penghulu.form')
     @livewire('penghulu.form-show')
-    <x-navbar> Penghulu </x-navbar>
+    <x-navbar>
+        <a href="{{ route('penghulu') }}" class="font-bold">Penghulu</a>
+    </x-navbar>
     <x-cta> Berisi daftar penghulu di Kabupaten Mamuju </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
