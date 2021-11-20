@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+>
 
 <head>
     <meta charset="utf-8">
@@ -21,8 +23,7 @@
         }
     </style>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -43,6 +44,13 @@
         </div>
     </div>
     @livewireScripts
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script>
+        console.log(localStorage.getItem('thema'));
+    </script>
 </body>
 
 </html>

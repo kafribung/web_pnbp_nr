@@ -23,18 +23,18 @@
                 x-data="{
                     dark: false,
                     toggleTheme: () => {
-                        if (localStorage.theme === 'dark') {
-                            localStorage.theme = 'light';
+                        if (localStorage.thema == 'dark') {
+                            localStorage.thema = 'light';
                             document.documentElement.classList.remove('dark');
                             dark = false;
 
-                        } else {
-                            localStorage.theme = 'dark';
-                            dark = true;
-                            document.documentElement.classList.add('dark');
-                        }
-                    },
-                }"
+                            } else {
+                                localStorage.thema = 'dark';
+                                dark = true;
+                                document.documentElement.classList.add('dark');
+                            }
+                        },
+                    }"
 
                     @click="toggleTheme" aria-label="Toggle color mode">
                     <template x-if="!dark">
