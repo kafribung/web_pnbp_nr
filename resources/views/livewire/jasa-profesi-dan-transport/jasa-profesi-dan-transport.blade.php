@@ -100,13 +100,10 @@
                         <td class="px-4 py-3 text-sm">Masih develop</td>
                     </tr>
                     @empty
-                        <td colspan="10" class="items-center text-center">Data tidak ditemukan !</td>
+                        <td colspan="20" class="items-center text-center">Data tidak ditemukan !</td>
                     @endforelse
                 </tbody>
             </table>
-
-
-
         </div>
     </div>
 </div>
