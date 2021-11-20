@@ -3,7 +3,7 @@
     <x-navbar>
         <a href="{{ route('jasa-profesi-dan-transport') }}" class="font-bold">Jasa profesi & transport</a>
     </x-navbar>
-    <x-cta> Berisi data Profesi dan Transport di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
+    <x-cta> Menampilan semua biaya jasa profesi dan tansport di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             @if (session('message'))
