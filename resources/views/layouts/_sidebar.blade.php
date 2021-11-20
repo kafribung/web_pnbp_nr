@@ -10,7 +10,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('dashboard') ? 'text-gray-800' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('dashboard') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                     href="{{ route('dashboard') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,7 +30,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('kua') ? 'text-gray-800' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('kua') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('kua') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +47,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('staf-kua') ? 'text-gray-800' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('staf-kua') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('staf-kua') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +62,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('penghulu') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('penghulu') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +80,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('pernikahan') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('pernikahan') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,7 +95,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('jasa-profesi-dan-transport') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('jasa-profesi-dan-transport') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
