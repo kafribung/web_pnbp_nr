@@ -146,6 +146,7 @@ class Form extends Pernikahan
         $this->penghulu_id                   = $pernikahan->penghulu_id;
         $this->peristiwa_nikah_id            = $pernikahan->peristiwa_nikah_id;
         $this->date_time                     = $pernikahan->date_time;
+        $this->transport                     = $pernikahan->transport;
 
         $this->openCloseModal();
     }
@@ -183,6 +184,7 @@ class Form extends Pernikahan
         $this->penghulu_id                   = null;
         $this->peristiwa_nikah_id            = null;
         $this->date_time                     = null;
+        $this->transport                     = null;
         $this->pernikahanId                  = null;
         $this->pernikahanIdDelete            = null;
     }
