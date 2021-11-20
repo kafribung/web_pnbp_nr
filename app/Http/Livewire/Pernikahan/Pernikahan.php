@@ -35,7 +35,7 @@ class Pernikahan extends Component
 
     public function render()
     {
-        $pernikahans    = ModelsPernikahan::with('penghulu')
+        $pernikahans    = ModelsPernikahan::with('penghulu', 'peristiwa_nikah')
                             ->when($this->search, function($query){
                                 $query->where('male', 'like',  '%'.$this->search.'%')
                                         ->where('kua_id', auth()->user()->kua_id)
@@ -79,6 +79,7 @@ class Pernikahan extends Component
                                             ['male_age', '>', 21],
                                             ['kua_id', auth()->user()->kua_id],
                                         ]);
+                                        break;
                                     case 'w<19':
                                         $query->where([
                                             ['female_age', '<', 19],
@@ -97,6 +98,7 @@ class Pernikahan extends Component
                                             ['female_age', '>', 21],
                                             ['kua_id', auth()->user()->kua_id],
                                         ]);
+                                        break;
                                 }
                             })
                             ->where('kua_id', auth()->user()->kua_id)

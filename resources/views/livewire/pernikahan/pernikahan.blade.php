@@ -98,7 +98,16 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->village }} </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center text-sm">
+                                <div>
+                                    <p class="font-semibold"> {{ $pernikahan->village }} </p>
+                                    @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">{{ number_format($pernikahan->transport, 2) }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->marriage_certificate_number }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->perforation_number }} </td>
                         <td class="px-4 py-3 text-sm"> {{ $pernikahan->penghulu->name ?? null }} </td>
