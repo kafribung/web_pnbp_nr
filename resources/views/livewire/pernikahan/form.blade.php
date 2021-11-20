@@ -101,7 +101,7 @@
 
                     @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
                     <div class="sm:col-span-6">
-                        <x-label for="transport" value="{{ __('Estimasi biaya transport') }}" />
+                        <x-label for="transport" value="{{ __(auth()->user()->kua->name == 'Kepulauan Balabalakang' ? 'Estimasi biaya transport max:1.000.000' : 'Estimasi biaya transport max:750.000' ) }}" />
                         <x-input id="transport" class="block mt-1 w-full" type="number" wire:model="transport"/>
                         <x-input-error for="transport" class="mt-2"/>
                     </div>

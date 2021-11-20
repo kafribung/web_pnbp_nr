@@ -11,7 +11,6 @@ class Pernikahan extends Component
     public $modal= false;
 
     public $search;
-    protected $queryString = ['search'];
 
     public $lastYear,
             $oldYear,
