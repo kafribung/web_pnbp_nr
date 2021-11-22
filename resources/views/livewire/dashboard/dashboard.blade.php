@@ -126,4 +126,21 @@
                 </div>
             </div>
         </div> --}}
+        <table class="mt-6 w-12">
+            <thead>
+                <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    <th class="px-4 py-3" rowspan="2">No</th>
+                    <th class="px-4 py-3" rowspan="2">Penghulu</th>
+                    <th class="px-4 py-3" rowspan="2">Gol</th>
+                    <th class="px-4 py-3" rowspan="2">Jml NR</th>
+                    <th class="px-4 py-3" rowspan="2">Satuan PNBP</th>
+                    <th class="px-4 py-3" rowspan="2">Jml PNBP</th>
+                    <th class="px-4 py-3" rowspan="2">Jml Permhn Pembyaran</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+            </tbody>
+        </table>
 </div>
