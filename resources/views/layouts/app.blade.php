@@ -23,6 +23,8 @@
         }
     </style>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
 
@@ -44,9 +46,6 @@
         </div>
     </div>
     @livewireScripts
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script>
         console.log(localStorage.getItem('thema'));
