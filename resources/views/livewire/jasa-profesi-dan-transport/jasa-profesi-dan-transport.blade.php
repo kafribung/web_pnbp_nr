@@ -4,7 +4,7 @@
         <a href="{{ route('jasa-profesi-dan-transport') }}" class="font-bold">Jasa profesi & transport</a>
     </x-navbar>
     <x-cta> Menampilan semua biaya jasa profesi dan tansport di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <table class="w-12">
+            <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">

@@ -40,7 +40,7 @@
             @include('layouts._header')
             <main class="h-full overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
-                {{ $slot }}
+                    {{ $slot }}
                 </div>
             </main>
         </div>

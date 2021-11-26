@@ -4,7 +4,7 @@
         <a href="{{ route('pernikahan') }}" class="font-bold">Pernikahan</a>
     </x-navbar>
     <x-cta> Menampikan semua data pernikahan di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
