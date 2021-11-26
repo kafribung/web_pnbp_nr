@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 class Dashboard extends Component
 {
     public $currnetMonth,
-            $currnetYear;
+            $currnetYear,
+            $filterMonth;
 
     public function mount()
     {
@@ -21,6 +22,7 @@ class Dashboard extends Component
 
     public function render()
     {
+        
         $pernikahans = Pernikahan::
                         whereMonth('date_time', $this->currnetMonth)
                         ->whereYear('date_time', $this->currnetYear)
@@ -28,6 +30,8 @@ class Dashboard extends Component
                         ->get()
                         ->groupBy('village')
                         ->all();
+
+        // dd($pernikahans);
 
         return view('livewire.dashboard.dashboard', compact('pernikahans'));
     }
