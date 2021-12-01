@@ -84,7 +84,7 @@
                         </td>
                         <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-xs"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->count() }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->count() }} </td>
                         <td class="px-4 py-3 text-xs"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
 
