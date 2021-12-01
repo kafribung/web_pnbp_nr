@@ -199,7 +199,7 @@
                         @php
                             $angkaAwal = 1;
                         @endphp
-                        @foreach ($pernikahans as $index => $pernikahan)
+                        @forelse ($pernikahans as $index => $pernikahan)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3 text-sm">{{ $angkaAwal++ }}</td>
                                 <td class="px-4 py-3 text-sm">{{ $index }}</td>
@@ -241,7 +241,11 @@
 
                                 @endforeach
                             </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="20" class="px-4 py-3 text-base font-bold justify-center text-center">Data pernikahan di bulan {{ \Carbon\Carbon::now()->month }} tidak ditemukan</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
