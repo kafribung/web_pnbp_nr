@@ -25,8 +25,8 @@ class Pernikahan extends Component
     public function mount()
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
-        $this->lastYear  = (int)ModelsPernikahan::latest()->first()->created_at->format('Y');
-        $this->oldYear   = (int)ModelsPernikahan::oldest()->first()->created_at->format('Y');
+        $this->lastYear  = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
+        $this->oldYear   = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
 
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
