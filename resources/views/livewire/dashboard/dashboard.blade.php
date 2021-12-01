@@ -201,43 +201,43 @@
                         @endphp
                         @forelse ($pernikahans as $index => $pernikahan)
                             <tr class="text-gray-700 dark:text-gray-400">
-                                <td class="px-4 py-3 text-sm">{{ $angkaAwal++ }}</td>
-                                <td class="px-4 py-3 text-sm">{{ $index }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $angkaAwal++ }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $index }}</td>
                                 @foreach ($pernikahan->unique('village') as $item)
                                     {{-- Luar Kantor --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Kantor/Balai Nikah --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Miskin --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Bencana Alam --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Isbat --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
 
                                     {{-- Jumlah NR --}}
-                                    <td class="px-4 py-3 text-sm">{{$jumlahNr = $item->where('village', $item->village)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{$jumlahNr = $item->where('village', $item->village)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
 
                                     {{-- Total PNBP --}}
-                                    <td class="px-4 py-3 text-sm">{{ number_format($jumlahNr * 600000, 2) }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ number_format($jumlahNr * 600000, 2) }}</td>
 
                                     {{-- Di bawah 19 tahun --}}
                                     {{-- Pria --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Wanita --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
 
                                     {{-- 19-21 tahun --}}
                                     {{-- Pria --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Wanita --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
 
                                     {{-- Di atas 21 tahun --}}
                                     {{-- Pria --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
                                     {{-- Wanita --}}
-                                    <td class="px-4 py-3 text-sm">{{ $item->where('village', $item->village)->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                    <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
 
                                 @endforeach
                             </tr>
