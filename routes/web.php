@@ -6,6 +6,7 @@ use App\Http\Livewire\StafKua\StafKua;
 use App\Http\Livewire\Kua\Kua;
 use App\Http\Livewire\Penghulu\Penghulu;
 use App\Http\Livewire\Pernikahan\Pernikahan;
+use App\Http\Livewire\ValidasiPnbpNr\ValidasiPnbpNr;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
     Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
+    Route::get('validasi-pnbp-nr', ValidasiPnbpNr::class)->name('validasi-pnbp-nr');
 });
 
 require __DIR__.'/auth.php';
