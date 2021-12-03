@@ -37,7 +37,7 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-            <x-button-block class="bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green"> {{ __('Log in') }} </x-button-block>
+            <x-button-block class="bg-green-400 active:bg-green-400 hover:bg-green-500 focus:shadow-outline-green"> {{ __('Log in') }} </x-button-block>
         </form>
 
     </x-auth-card-login>

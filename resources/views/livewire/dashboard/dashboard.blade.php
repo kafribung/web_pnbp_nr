@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col items-center justify-center min-w-0 p-4 text-white bg-green-600 rounded-lg shadow-xs">
+    <div class="flex flex-col items-center justify-center min-w-0 p-4 text-white bg-green-400 rounded-lg shadow-xs">
         <h4 class="mb-2 text-2xl font-semibold">
             Assalamualaikum warahmatullahi wabarakatuh
         </h4>
@@ -202,7 +202,7 @@
                         @forelse ($pernikahans as $index => $pernikahan)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3 text-xs text-center">{{ $angkaAwal++ }}</td>
-                                <td class="px-4 py-3 text-xs text-center">{{ $index }}</td>
+                                <td class="px-4 py-3 text-xs">{{ $index }}</td>
                                 @foreach ($pernikahan->unique('village') as $item)
                                     {{-- Luar Kantor --}}
                                     <td class="px-4 py-3 text-xs text-center">{{ $item->where('village', $item->village)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>

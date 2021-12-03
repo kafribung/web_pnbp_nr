@@ -1,5 +1,5 @@
 <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
-    <div class="container flex items-center justify-between h-full px-6 mx-auto text-green-600 dark:text-green-300">
+    <div class="container flex items-center justify-between h-full px-6 mx-auto text-green-400 dark:text-green-300">
         <!-- Mobile hamburger -->
         <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-green"
             @click="isSideMenuOpen = !isSideMenuOpen" aria-label="Menu">
@@ -10,7 +10,7 @@
             </svg>
         </button>
         <div> </div>
-        <div class="text-base animate-pulse" >
+        <div class="text-base font-bold animate-pulse" >
             <marquee width="100%" direction="left">
                 Hi {{ auth()->user()->name }} {{ auth()->user()->hasRole('admin') ? 'sebagai staf KEMENAG' : 'sebagai staf KUA ' . auth()->user()->kua->name }}, selamat datang di sistem informasi pelaporan PNBP-NR Kabupaten Mamuju.
                 Semangat bekerja dan Sehat selalu.
@@ -109,7 +109,7 @@
                     @click="toggleProfileMenu = ! toggleProfileMenu"
                     @keydown.escape="toggleProfileMenu =  false" aria-label="Account" aria-haspopup="true">
                     <img class="object-cover w-8 h-8 rounded-full"
-                        src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=059669&color=fff&bold=true"
+                        src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=34D399&color=fff&bold=true"
                         alt="" aria-hidden="true" />
                 </button>
                 <template x-if="toggleProfileMenu">

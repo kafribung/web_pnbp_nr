@@ -7,7 +7,7 @@
         <ul class="mt-6">
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('dashboard'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('dashboard') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
@@ -27,7 +27,7 @@
             @if(auth()->user()->hasRole('admin'))
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('kua'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('kua') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -44,7 +44,7 @@
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('staf-kua'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('staf-kua') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -59,7 +59,7 @@
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('penghulu'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('penghulu') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -77,7 +77,7 @@
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('pernikahan'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('pernikahan') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -92,7 +92,7 @@
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('jasa-profesi-dan-transport'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('jasa-profesi-dan-transport') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -107,7 +107,7 @@
 
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('validasi-pnbp-nr'))
-                <span class="absolute inset-y-0 left-0 w-1 bg-green-600 rounded-tr-lg rounded-br-lg"
+                <span class="absolute inset-y-0 left-0 w-1 bg-green-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm font-semibold {{ request()->routeIs('validasi-pnbp-nr') ? 'text-gray-900' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
