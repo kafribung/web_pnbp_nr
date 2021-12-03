@@ -243,7 +243,7 @@
                             </tr>
                         @empty
                         <tr>
-                            <td colspan="20" class="px-4 py-3 text-base font-bold justify-center text-center">Data pernikahan di bulan {{ \Carbon\Carbon::now()->month }} tidak ditemukan</td>
+                            <td colspan="20" class="px-4 py-3 text-base font-bold justify-center text-center">Data pernikahan di bulan {{ $currnetMonth }} tidak ditemukan</td>
                         </tr>
                         @endforelse
                     </tbody>

@@ -21,7 +21,7 @@ class CreatePernikahansTable extends Migration
             $table->string('female', 30);
             $table->char('female_age', 3);
             $table->string('female_father', 30);
-            $table->string('village', 30);
+            $table->foreignId('desa_id')->constrained('desas')->cascadeOnDelete();
             $table->string('marriage_certificate_number', 15)->unique();
             $table->string('perforation_number', 15)->unique();
             $table->foreignId('penghulu_id')->constrained('penghulus')->cascadeOnDelete();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use App\Models\{Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
+use App\Models\{Desa, Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
 use App\Rules\UppercaseRule;
 use Illuminate\Support\Facades\Http;
 
@@ -56,65 +56,13 @@ class Form extends Pernikahan
 
     public function render()
     {
-        // if (auth()->user()->kua->name == 'Bonehau')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604041');
-        // elseif(auth()->user()->kua->name == 'Kalukku')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604030');
-        // elseif(auth()->user()->kua->name == 'Kalumpang')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604040');
-        // elseif(auth()->user()->kua->name == 'Kepulauan Balabalakang')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604023');
-        // elseif(auth()->user()->kua->name == 'Mamuju')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604020');
-        // elseif(auth()->user()->kua->name == 'Papalang')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604031');
-        // elseif(auth()->user()->kua->name == 'Sampaga')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604032');
-        // elseif(auth()->user()->kua->name == 'Simboro dan Kepulauan')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604022');
-        // elseif(auth()->user()->kua->name == 'Tapalang')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604010');
-        // elseif(auth()->user()->kua->name == 'Tapalang Barat')
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604011');
-        // else
-        //     $villages        = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=7604033');
 
-        // Untuk Kalukku
-
-        // $villages = [
-        //     'kelurahan' => [
-        //                         ['nama' => 'Bebanga'],
-        //                        [ 'nama' => 'Kalukku'],
-        //                     ]
-        // ];
-
-        $villages        = Http::get('https://ibnux.github.io/data-indonesia/kelurahan/760201.json');
-
-        // 'nama' => [ 'Kalukku',
-        //                                     'Bebanga',
-        //                                     'Sinyonyoi Selatan',
-        //                                     'Belang Belang',
-        //                                     'Beru-beru',
-        //                                     'Guliling',
-        //                                     'Kabuloang',
-        //                                     'Kalukku Barat',
-        //                                     'Keang',
-        //                                     'Pammulukang',
-        //                                     'Pokkang',
-        //                                     'Sondoang',
-        //                                     'Uhaimate'
-        //                                 ]
-
-
-        $villages        = $villages->json();
-        // $villages        = $villages;
-
-        dd($villages);
+        $desas           = Desa::where('kua_id', auth()->user()->kua_id)->get();
         $peristiwaNikahs = PeristiwaNikah::get(['id', 'name']);
         $penghulus       = Penghulu::where('kua_id', auth()->user()->kua_id)->get(['id', 'name']);
 
         return view('livewire.pernikahan.form', compact(
-            'villages',
+            'desas',
             'peristiwaNikahs',
             'penghulus',
         ));

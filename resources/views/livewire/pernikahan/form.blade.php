@@ -49,7 +49,6 @@
                         <x-input-error for="female_age" class="mt-2"/>
                     </div>
 
-
                 </div>
             </div>
 
@@ -68,8 +67,8 @@
                         <x-label for="village" value="{{ __('Desa/Keluarahan') }}" />
                         <x-select wire:model="village" id="village">
                             @slot('option_default', 'Pilih Desa/Keluarahan')
-                            @foreach($villages['kelurahan'] as $village)
-                                <option value="{{ $village['nama'] }}">{{ $village['nama'] }}</option>
+                            @foreach($desas as $desa)
+                                <option value="{{ $desa->name }}">{{ $desa->name }}</option>
                             @endforeach
                         </x-select>
                         <x-input-error for="village" class="mt-2"/>

@@ -78,12 +78,12 @@ class Form extends Kua
 
     public function destroy()
     {
-        $kua = ModelsKua::withCount('penghulus')->findOrFail($this->kuaIdDelete);
+        $kua = ModelsKua::withCount('penghulus', 'desas')->findOrFail($this->kuaIdDelete);
 
         $this->authorize('delete', $kua);
 
         // Jika KUA memiliki penghulu
-        if ($kua->penghulus_count > 0) {
+        if ($kua->penghulus_count > 0 || $kua->desas_count > 0) {
             session()->flash('message', 'Data KUA ' . $kua->name .' tidak dapat dihapus');
             $this->closeModal();
             return redirect('kua');
