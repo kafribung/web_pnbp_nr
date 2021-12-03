@@ -30,4 +30,9 @@ class Kua extends Model
         return $this->belongsTo(Typology::class);
     }
 
+    public function desas()
+    {
+        return $this->hasMany(Desa::class);
+    }
+
 }
