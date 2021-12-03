@@ -1,7 +1,7 @@
 <div>
     @livewire('kua.form')
     <x-navbar>
-        <a href="{{ route('kua') }}" class="font-bold">kua</a>
+        <a href="{{ route('kua') }}" class="font-bold">Kua</a>
     </x-navbar>
     <x-cta> Berisi daftar kantor KUA di Kabupaten Mamuju </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -9,7 +9,7 @@
             @if (session('message'))
             <x-message type="message" >{{ session('message') }}</x-message>
             @endif
-            <div class="flex justify-between mt-2">
+            <div class="flex justify-between mt-2 mb-2">
                 <x-search>
                     <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                 </x-search>
@@ -18,7 +18,7 @@
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Kua</th>
                         <th class="px-4 py-3">Tipologi</th>

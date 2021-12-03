@@ -54,7 +54,7 @@
                         @if ($page == $paginator->currentPage())
                         <span aria-current="page">
                             <span
-                                class="px-3 py-1 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 rounded-md focus:outline-none focus:shadow-outline-green">{{ $page }}</span>
+                                class="px-3 py-1 text-white transition-colors duration-150 bg-green-400 border border-r-0 border-green-400 rounded-md focus:outline-none focus:shadow-outline-green">{{ $page }}</span>
                         </span>
                         @else
                         <button wire:click="gotoPage({{ $page }})" class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
