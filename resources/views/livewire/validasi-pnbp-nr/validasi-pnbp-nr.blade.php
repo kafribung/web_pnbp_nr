@@ -32,7 +32,7 @@
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Bulan</th>
                         <th class="px-4 py-3">Status</th>
@@ -53,13 +53,6 @@
                             </span>
                         </td>
                         <td class="px-4 py-3 text-sm"> - </td>
-
-                        {{-- <td class="px-4 py-3">
-                            <div class="flex items-center space-x-4 text-sm">
-                                <x-button-edit-delete metode='edit' wire:click="$emitTo('pernikahan.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
-                                <x-button-edit-delete metode='delete' wire:click="$emitTo('pernikahan.form', 'delete', {{ $pernikahan->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>
-                            </div>
-                        </td> --}}
                     </tr>
                     @empty
                         <td colspan="20" class="items-center text-center">Data tidak ditemukan !</td>

@@ -10,7 +10,7 @@
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
             @endif
-            <div class="flex justify-between mt-2">
+            <div class="flex justify-between my-2">
                 <x-search>
                     <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                 </x-search>
@@ -19,7 +19,7 @@
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Jasa Profesi</th>
