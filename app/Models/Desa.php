@@ -18,4 +18,9 @@ class Desa extends Model
     {
         $this->belongsTo(Kua::class);
     }
+
+    public function pernikahans()
+    {
+        return $this->hasMany(Pernikahan::class);
+    }
 }

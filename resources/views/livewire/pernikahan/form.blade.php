@@ -64,14 +64,14 @@
                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                     <!-- Desa Keluarahan  -->
                     <div class="sm:col-span-2">
-                        <x-label for="village" value="{{ __('Desa/Keluarahan') }}" />
-                        <x-select wire:model="village" id="village">
+                        <x-label for="desa_id" value="{{ __('Desa/Keluarahan') }}" />
+                        <x-select wire:model="desa_id" id="desa_id">
                             @slot('option_default', 'Pilih Desa/Keluarahan')
                             @foreach($desas as $desa)
-                                <option value="{{ $desa->name }}">{{ $desa->name }}</option>
+                                <option value="{{ $desa->id }}">{{ $desa->name }}</option>
                             @endforeach
                         </x-select>
-                        <x-input-error for="village" class="mt-2"/>
+                        <x-input-error for="desa_id" class="mt-2"/>
                     </div>
 
                     <!-- Peristiwa nikah  -->

@@ -14,7 +14,7 @@ class Form extends Pernikahan
         $male_father,
         $female_father,
         $female_age,
-        $village,
+        $desa_id,
         $marriage_certificate_number,
         $perforation_number,
         $penghulu_id,
@@ -39,9 +39,9 @@ class Form extends Pernikahan
             'female'                     => 'required|string|min:3',
             'female_age'                 => 'required|numeric|min:2',
             'female_father'              => 'required|string|min:3',
-            'village'                    => 'required|string',
-            'marriage_certificate_number'=> ['required', 'string', 'min:14', 'unique:pernikahans,marriage_certificate_number,'. $this->pernikahanId],
-            'perforation_number'         => ['required', 'string', new UppercaseRule ,'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
+            'desa_id'                    => 'required|numeric',
+            'marriage_certificate_number'=> ['required', 'string', new UppercaseRule, 'min:14', 'unique:pernikahans,marriage_certificate_number,'. $this->pernikahanId],
+            'perforation_number'         => ['required', 'string', new UppercaseRule,'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
@@ -118,7 +118,7 @@ class Form extends Pernikahan
         $this->male_father                   = $pernikahan->male_father;
         $this->female_father                 = $pernikahan->female_father;
         $this->female_age                    = $pernikahan->female_age;
-        $this->village                       = $pernikahan->village;
+        $this->desa_id                       = $pernikahan->desa_id;
         $this->marriage_certificate_number   = $pernikahan->marriage_certificate_number;
         $this->perforation_number            = $pernikahan->perforation_number;
         $this->penghulu_id                   = $pernikahan->penghulu_id;
@@ -156,7 +156,7 @@ class Form extends Pernikahan
         $this->male_father                   = null;
         $this->female_father                 = null;
         $this->female_age                    = null;
-        $this->village                       = null;
+        $this->desa_id                       = null;
         $this->marriage_certificate_number   = null;
         $this->perforation_number            = null;
         $this->penghulu_id                   = null;

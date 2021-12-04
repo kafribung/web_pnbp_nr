@@ -25,8 +25,13 @@ class Pernikahan extends Component
     public function mount()
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
-        $this->lastYear  = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
-        $this->oldYear   = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
+        if(ModelsPernikahan::count() == 0) {
+            $this->lastYear = 2021;
+            $this->oldYear  = 2020;
+        } else {
+            $this->lastYear  = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
+            $this->oldYear   = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
+        }
 
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
@@ -35,14 +40,15 @@ class Pernikahan extends Component
 
     public function render()
     {
-        $pernikahans    = ModelsPernikahan::with('penghulu', 'peristiwa_nikah')
+        $pernikahans    = ModelsPernikahan::with('penghulu', 'peristiwa_nikah', 'desa')
                             ->when($this->search, function($query){
                                 $query->where('male', 'like',  '%'.$this->search.'%')
                                         ->where('kua_id', auth()->user()->kua_id)
                                     ->orWhere('female', 'like',  '%'.$this->search.'%')
                                         ->where('kua_id', auth()->user()->kua_id)
-                                    ->orWhere('village', 'like',  '%'.$this->search.'%')
-                                        ->where('kua_id', auth()->user()->kua_id)
+                                    ->orWhereHas('desa', function($query){
+                                        $query->where('name', 'like', '%'. $this->search. '%');
+                                    })
                                     ->orWhere('marriage_certificate_number', 'like',  '%'.$this->search.'%')
                                         ->where('kua_id', auth()->user()->kua_id)
                                     ->orWhere('perforation_number', 'like',  '%'.$this->search.'%')

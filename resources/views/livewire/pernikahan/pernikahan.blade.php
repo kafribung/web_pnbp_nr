@@ -101,7 +101,7 @@
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
                                 <div>
-                                    <p class="font-semibold"> {{ $pernikahan->village }} </p>
+                                    <p class="font-semibold"> {{ $pernikahan->desa->name }} </p>
                                     @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
                                     <p class="text-xs text-gray-600 dark:text-gray-400">{{ number_format($pernikahan->transport, 2) }}</p>
                                     @endif
@@ -114,7 +114,7 @@
                         <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('dddd')  }} </td>
                         <td class="px-4 py-3 text-sm"> {{  date('d M Y', strtotime($pernikahan->date_time)) }} </td>
                         {{-- <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td> --}}
-                        <td class="px-4 py-3 text-sm"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
+                        <td class="px-4 py-3 text-sm font-semibold"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
 
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">

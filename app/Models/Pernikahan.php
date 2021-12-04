@@ -29,4 +29,9 @@ class Pernikahan extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class);
+    }
 }
