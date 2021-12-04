@@ -41,8 +41,6 @@ class Dashboard extends Component
         //                 ->where()
         //                 ->get();
 
-
-
         // dd($pernikahans);
 
         return view('livewire.dashboard.dashboard', compact('pernikahans'));
