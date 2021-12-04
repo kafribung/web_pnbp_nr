@@ -204,39 +204,39 @@
                                 <td class="px-4 py-3 text-xs text-center">{{ $angkaAwal++ }}</td>
                                 <td class="px-4 py-3 text-xs">{{ $pernikahan->desa->name }}</td>
                                 {{-- Luar Kantor --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $luarBalai = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Kantor/Balai Nikah --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $balai = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Miskin --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $kurangMampu = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Bencana Alam --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $bencanaAlam = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Isbat --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $isbat = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
 
                                 {{-- Jumlah NR --}}
-                                <td class="px-4 py-3 text-xs text-center">{{$jumlahNr = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $luarBalai + $balai + $kurangMampu + $bencanaAlam + $isbat }}</td>
 
                                 {{-- Total PNBP --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ number_format($jumlahNr * 600000, 2) }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ number_format($luarBalai * 600000, 2) }}</td>
 
                                 {{-- Di bawah 19 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
 
                                 {{-- 19-21 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
 
                                 {{-- Di atas 21 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
 
                             </tr>
                         @empty
