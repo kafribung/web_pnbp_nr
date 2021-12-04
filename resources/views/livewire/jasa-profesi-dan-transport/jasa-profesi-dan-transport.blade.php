@@ -51,14 +51,14 @@
                         <th class="px-4 py-3 text-center" colspan="4">Jasprof</th>
                         <th class="px-4 py-3" rowspan="2">Jml Permhn Pembyaran</th>
                     </tr>
-                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Satuan</th>
-                        <th class="px-4 py-3">Jml</th>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
+                        <th class="px-4 py-3 text-center bg-gray-300">Satuan</th>
+                        <th class="px-4 py-3 text-center bg-gray-300">Jml</th>
 
-                        <th class="px-4 py-3">Satuan</th>
-                        <th class="px-4 py-3">Jml</th>
-                        <th class="px-4 py-3">PPH</th>
-                        <th class="px-4 py-3">Jml Pengurangan PPH</th>
+                        <th class="px-4 py-3 text-center bg-gray-200">Satuan</th>
+                        <th class="px-4 py-3 text-center bg-gray-200">Jml</th>
+                        <th class="px-4 py-3 text-center bg-gray-200">PPH</th>
+                        <th class="px-4 py-3 text-center bg-gray-200">Jml Pengurangan PPH</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
