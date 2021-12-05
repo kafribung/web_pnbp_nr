@@ -36,6 +36,8 @@
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Bulan</th>
                         <th class="px-4 py-3">Peristiwa Nikah</th>
+                        <th class="px-4 py-3">Total PNBP NR</th>
+                        <th class="px-4 py-3">Kategori Usia</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Keterangan</th>
                         <th class="px-4 py-3">Aksi</th>
@@ -48,14 +50,32 @@
                             {{ $index+1 }}
                         </td>
                         <td class="px-4 py-3 text-sm"> {{ $month }} </td>
-
                         <td class="px-4 py-3 text-sm">
                             <ul class="list-disc">
-                                <li>Luar Balai: {{ $luarBalaiNikah[$index] }}</li>
-                                <li>Balai: {{ $balaiNikah[$index] }}</li>
-                                <li>Kurang Mampu: {{ $kurangMampu[$index] }}</li>
-                                <li>Bencana Alam: {{ $bencanaAlam[$index] }}</li>
-                                <li>Isbat: {{ $isbat[$index] }}</li>
+                                <li>Luar Balai: {{ $luarBalai = $luarBalaiNikah[$index] }}</li>
+                                <li>Balai: {{ $balai = $balaiNikah[$index] }}</li>
+                                <li>Kurang Mampu: {{ $tidakMampu = $kurangMampu[$index] }}</li>
+                                <li>Bencana Alam: {{ $bencana = $bencanaAlam[$index] }}</li>
+                                <li>Isbat: {{$sidang = $isbat[$index] }}</li>
+                                <li class="font-bold">Total: {{ $luarBalai + $balai + $tidakMampu + $bencana + $sidang }}</li>
+                            </ul>
+                        </td>
+                        <td class="px-4 py-3 text-sm"> {{ number_format($luarBalai * 600000, 2)  }} </td>
+                        <td class="px-4 py-3 text-sm">
+                            <ul id="custom-list" class="list-disc">
+                                <p class="font-bold">Di bawah 19 tahun:</p>
+                                <li>Laki-laki: {{ $lakiLakidiBawah19Tahun[$index] }}</li>
+                                <li>Perempuan: {{ $perempuandiBawah19Tahun[$index] }}</li>
+                            </ul>
+                            <ul id="custom-list" class="list-disc">
+                                <p class="font-bold">19 s.d 21 tahun:</p>
+                                <li>Laki-laki: {{ $lakiLaki19Sampai21Tahun[$index] }}</li>
+                                <li>Perempuan: {{ $perempuan19Sampai21Tahun[$index] }}</li>
+                            </ul>
+                            <ul id="custom-list" class="list-disc">
+                                <p class="font-bold">Di atas 21 tahun:</p>
+                                <li>Laki-laki: {{ $lakiLakidiAtas21Tahun[$index] }}</li>
+                                <li>Perempuan: {{ $perempuandiAtas21Tahun[$index] }}</li>
                             </ul>
                         </td>
                         <td class="px-4 py-3 text-xs">
@@ -72,4 +92,11 @@
             </table>
         </div>
     </div>
+@push('mycss')
+<style>
+    #custom-list > li {
+        margin-left: 30px;
+    }
+</style>
+@endpush
 </div>
