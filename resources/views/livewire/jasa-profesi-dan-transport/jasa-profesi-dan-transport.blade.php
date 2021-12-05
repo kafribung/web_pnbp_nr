@@ -82,8 +82,8 @@
                         <td class="px-4 py-3 text-xs text-center">
                             {{ $index+1 }}
                         </td>
-                        <td class="px-4 py-3 text-xs text-center font-semibold "> {{ $penghulu->name }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{ $penghulu->golongan->name }} </td>
+                        <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
+                        <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->count() }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
@@ -100,8 +100,8 @@
                         {{-- Jasa Profesi --}}
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasPro = $penghulu->jasa_profesi, 2) }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumJasaProfesi = $jasPro * $jumlahNR, 2) }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi, 2)) }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumPengPPH = $jumJasaProfesi - $pph) }} </td>
+                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($pph = $penghulu->pph($jumJasaProfesi), 2) }} </td>
+                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumPengPPH = $jumJasaProfesi - $pph, 2) }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumTransport + $jumPengPPH, 2) }} </td>
                     </tr>
                     @empty
