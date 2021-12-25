@@ -26,6 +26,8 @@ class ValidasiPnbpNr extends Component
 
     public $months;
 
+    protected $listeners = ['render'];
+
     public function mount()
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
@@ -41,7 +43,15 @@ class ValidasiPnbpNr extends Component
         $this->currnetYear     = Carbon::now()->year;
 
         $this->months          = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    }
 
+    public function updatedcurrnetYear($value)
+    {
+       $this->emit('render') ;
+    }
+
+    public function data()
+    {
         foreach ($this->months as $index => $month) {
             // Peristiwa nikah
             $this->luarBalaiNikah[] .= Pernikahan::with('peristiwa_nikah', 'desa')->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
@@ -61,13 +71,12 @@ class ValidasiPnbpNr extends Component
             // Di atas 21 tahun
             $this->lakiLakidiAtas21Tahun[] .= Pernikahan::with('peristiwa_nikah', 'desa')->where('male_age', '>', 21)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->perempuandiAtas21Tahun[].= Pernikahan::with('peristiwa_nikah', 'desa')->where('female_age', '>', 21)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-
         };
-
     }
 
     public function render()
     {
+        $this->data();
         return view('livewire.validasi-pnbp-nr.validasi-pnbp-nr');
     }
 }
