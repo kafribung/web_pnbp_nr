@@ -12,6 +12,8 @@ class ValidasiPnbpNr extends Component
             $oldYear,
             $currnetYear,
 
+            $test,
+
             $luarBalaiNikah = [],
             $balaiNikah     = [],
             $kurangMampu    = [],
@@ -26,7 +28,7 @@ class ValidasiPnbpNr extends Component
 
     public $months;
 
-    protected $listeners = ['render'];
+    // protected $listeners = ['render'];
 
     public function mount()
     {
@@ -47,7 +49,7 @@ class ValidasiPnbpNr extends Component
 
     public function updatedcurrnetYear($value)
     {
-       $this->emit('render') ;
+        $this->resetFields();
     }
 
     public function data()
@@ -60,6 +62,7 @@ class ValidasiPnbpNr extends Component
             $this->bencanaAlam[]    .= Pernikahan::with('peristiwa_nikah', 'desa')->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->isbat[]          .= Pernikahan::with('peristiwa_nikah', 'desa')->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
 
+            $this->test = $this->currnetYear;
             // Dibawah 19 tahun
             $this->lakiLakidiBawah19Tahun[] .= Pernikahan::with('peristiwa_nikah', 'desa')->where('male_age', '<', 19)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->perempuandiBawah19Tahun[].= Pernikahan::with('peristiwa_nikah', 'desa')->where('female_age', '<', 19)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
@@ -78,5 +81,20 @@ class ValidasiPnbpNr extends Component
     {
         $this->data();
         return view('livewire.validasi-pnbp-nr.validasi-pnbp-nr');
+    }
+
+    public function resetFields()
+    {
+        $this->luarBalaiNikah          = [];
+        $this->balaiNikah              = [];
+        $this->kurangMampu             = [];
+        $this->bencanaAlam             = [];
+        $this->isbat                   = [];
+        $this->lakiLakidiBawah19Tahun  = [];
+        $this->perempuandiBawah19Tahun = [];
+        $this->lakiLaki19Sampai21Tahun = [];
+        $this->perempuan19Sampai21Tahun= [];
+        $this->lakiLakidiAtas21Tahun   = [];
+        $this->perempuandiAtas21Tahun  = [];
     }
 }

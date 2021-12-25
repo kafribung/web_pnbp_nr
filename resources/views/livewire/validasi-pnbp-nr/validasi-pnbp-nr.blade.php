@@ -26,7 +26,6 @@
             </div>
 
             <div class="my-3">
-                <p>{{ $currnetYear }}</p>
                 <p class="text-sm"><span class="font-semibold">**Catatan!</span> Setiap tanggal 5 data akan direkap dan diperiksa oleh admin KEMENAG Mamuju.</p>
             </div>
 
