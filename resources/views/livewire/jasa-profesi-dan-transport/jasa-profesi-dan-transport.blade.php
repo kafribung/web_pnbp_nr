@@ -78,13 +78,16 @@
                         <td>m=h+l</td>
                     </tr>
                     @forelse ($penghulus as $index => $penghulu)
+                    @php
+                            $totaljumlahNr = [];
+                    @endphp
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-xs text-center">
                             {{ $index+1 }}
                         </td>
                         <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{ $jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->count() }} </td>
+                        <td class="px-4 py-3 text-xs text-center"> {{$jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->count() }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr * $jumlahNR, 2) }} </td>
 
@@ -107,6 +110,19 @@
                     @empty
                         <td colspan="20" class="items-center text-center">Data tidak ditemukan !</td>
                     @endforelse
+                    <tr class="text-center text-xs font-extrabold">
+                        <td colspan="3">Jumlah</td>
+                        <td>{{ 'sa' }}</td>
+                        <td>c</td>
+                        <td>d</td>
+                        <td>e</td>
+                        <td>f=d*e</td>
+                        <td>g</td>
+                        <td>h=d*g</td>
+                        <td>i</td>
+                        <td>j=d*i</td>
+                        <td>k=j*5% | j*15%</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

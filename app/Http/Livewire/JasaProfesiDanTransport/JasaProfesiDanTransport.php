@@ -21,8 +21,13 @@ class JasaProfesiDanTransport extends Component
     public function mount()
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
-        $this->lastYear  = (int)Pernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
-        $this->oldYear   = (int)Pernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
+        if(ModelsPernikahan::count() == 0) {
+            $this->lastYear = 2021;
+            $this->oldYear  = 2020;
+        } else {
+            $this->lastYear  = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
+            $this->oldYear   = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
+        }
 
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
