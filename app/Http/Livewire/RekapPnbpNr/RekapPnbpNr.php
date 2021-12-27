@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\ValidasiPnbpNr;
+namespace App\Http\Livewire\RekapPnbpNr;
 
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Pernikahan;
 
-class ValidasiPnbpNr extends Component
+class RekapPnbpNr extends Component
 {
     public $lastYear,
             $oldYear,
@@ -80,7 +80,7 @@ class ValidasiPnbpNr extends Component
     public function render()
     {
         $this->data();
-        return view('livewire.validasi-pnbp-nr.validasi-pnbp-nr');
+        return view('livewire.rekap-pnbp-nr.rekap-pnbp-nr');
     }
 
     public function resetFields()

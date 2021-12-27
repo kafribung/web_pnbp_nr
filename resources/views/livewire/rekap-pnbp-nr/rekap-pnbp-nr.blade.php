@@ -1,7 +1,7 @@
 <div>
     @livewire('pernikahan.form')
     <x-navbar>
-        <a href="{{ route('validasi-pnbp-nr') }}" class="font-bold">Validasi PNBP-NR</a>
+        <a href="{{ route('rekap-pnbp-nr') }}" class="font-bold">Rekapan PNBP-NR</a>
     </x-navbar>
     <x-cta> Menampikan semua data rekapan PNBP-NR di KUA {{ auth()->user()->kua->name ?? '' }} </x-cta>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
