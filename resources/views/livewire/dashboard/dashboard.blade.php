@@ -71,14 +71,14 @@
             Selamat datang admin {{ auth()->user()->name }}
         </h4>
         <p class="mt-2 text-base">
-            Sistem Informasi Pelaporan PNBP-NR Kementrian Agama Kabupaten Mamuju
+            Di Sistem Informasi Pelaporan PNBP-NR Kementrian Agama Kabupaten Mamuju
         </p>
         @else
         <h4 class="text-xl font-semibold">
             Selamat datang staf KUA {{ auth()->user()->name }}
         </h4>
         <p class="mt-2 text-base">
-            Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan {{ auth()->user()->kua->name }}, Kabupaten Mamuju, Provinsi Sulawesi Barat
+            Di Sistem Informasi Pelaporan PNBP-NR Kantor KUA Kecamatan {{ auth()->user()->kua->name }}, Kabupaten Mamuju, Provinsi Sulawesi Barat
         </p>
         @endif
         <p class="text-base">
@@ -147,7 +147,7 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
+                            class="text-xs font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3" rowspan="3">No</th>
                             <th class="px-4 py-3" rowspan="3">Kelurahan/Desa</th>
                             <th class="px-4 py-3" rowspan="3">Luar Kantor</th>
@@ -156,7 +156,7 @@
                             <th class="px-4 py-3" rowspan="3">Total PNBP</th>
                             <th class="px-4 py-3 text-center" colspan="6">Berdasarkan Usia</th>
                         </tr>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3" rowspan="2">Kantor</th>
                             <th class="px-4 py-3" rowspan="2">Miskin</th>
                             <th class="px-4 py-3" rowspan="2">Bencana Alam</th>
@@ -166,7 +166,7 @@
                             <th class="px-4 py-3" colspan="2">19 s.d 21 Thn</th>
                             <th class="px-4 py-3" colspan="2">Di Atas 21 Thn</th>
                         </tr>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             <th class="px-4 py-3">Pria</th>
                             <th class="px-4 py-3">Wanita</th>
 
