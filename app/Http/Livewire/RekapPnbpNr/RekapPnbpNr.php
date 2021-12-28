@@ -77,6 +77,11 @@ class RekapPnbpNr extends Component
         };
     }
 
+    public function print($month)
+    {
+        dd($month);
+    }
+
     public function render()
     {
         $this->data();

@@ -86,7 +86,7 @@
                         <td class="px-4 py-3 text-sm"> - </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <x-button-edit-delete metode='print' wire:click="" class="hover:text-gray-700 text-gray-600 focus:shadow-outline-gray"></x-button-edit-delete>
+                                <x-button-edit-delete metode='print' wire:click="print({{ $index+1 }})" class="hover:text-gray-700 text-gray-600 focus:shadow-outline-gray"></x-button-edit-delete>
                             </div>
                         </td>
                     </tr>

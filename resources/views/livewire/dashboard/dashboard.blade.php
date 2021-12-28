@@ -178,6 +178,7 @@
 
                         </tr>
                     </thead>
+
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                         <tr class="text-center text-xs font-semibold">
                             <td>a</td>
@@ -199,79 +200,53 @@
                         @php
                             $angkaAwal           = 1;
 
-                            $totLuarBalai        = [];
-                            $totBalai            = [];
-                            $totKurangMampu      = [];
-                            $totBencanaAlam      = [];
-                            $totIsbat            = [];
-
                             $totJumlahNR         = [];
                             $totJumlahPNBP       = [];
-
-                            $totPriaDibawah19Tahun       = [];
-                            $totWanitaDibawah19Tahun     = [];
-                            $totPria19Sampai21Tahun      = [];
-                            $totWanita19Sampai21Tahun    = [];
-                            $totPriaDiatas21Tahun        = [];
-                            $totWanitaDiatas21Tahun      = [];
                         @endphp
-                        @forelse ($pernikahans->unique('desa_id') as $index => $pernikahan)
+                        @forelse ($desas as $index => $desa)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3 text-xs text-center">{{ $angkaAwal++ }}</td>
-                                <td class="px-4 py-3 text-xs">{{ $pernikahan->desa->name }}</td>
+                                <td class="px-4 py-3 text-xs">{{ $desa->name }}</td>
                                 {{-- Luar Kantor --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $luarBalai = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $luarBalaiNikah[$index] }}</td>
                                 {{-- Kantor/Balai Nikah --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $balai = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $dalamBalaiNikah[$index] }}</td>
                                 {{-- Miskin --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $kurangMampu = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $tidakMampu[$index] }}</td>
                                 {{-- Bencana Alam --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $bencanaAlam = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $musibahAlam[$index] }}</td>
                                 {{-- Isbat --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $isbat = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $sidangIsbat[$index] }}</td>
 
                                 {{-- Jumlah NR --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $jumlahNR = $luarBalai + $balai + $kurangMampu + $bencanaAlam + $isbat }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $jumlahNR = $luarBalaiNikah[$index] + $dalamBalaiNikah[$index] + $tidakMampu[$index] + $musibahAlam[$index] + $sidangIsbat[$index] }}</td>
 
                                 {{-- Total PNBP --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ number_format($jumlahPNBP = $luarBalai * 600000, 2) }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ number_format($jumlahPNBP = $luarBalaiNikah[$index] * 600000, 2) }}</td>
 
                                 {{-- Di bawah 19 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $priaDibawah19Tahun   = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $lakiDibawah19Tahun[$index] }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $wanitaDibawah19Tahun = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $perempuanDibawah19Tahun[$index] }}</td>
 
                                 {{-- 19-21 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $pria19Sampai21Tahun   = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $laki19Sampai21Tahun[$index] }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $wanita19Sampai21Tahun = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $perempuan19Sampai21Tahun[$index] }}</td>
 
                                 {{-- Di atas 21 tahun --}}
                                 {{-- Pria --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $priaDiatas21Tahun   = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $lakiDiatas21Tahun[$index] }}</td>
                                 {{-- Wanita --}}
-                                <td class="px-4 py-3 text-xs text-center">{{ $wanitaDiatas21Tahun = $pernikahan->whereHas('desa', fn($query) => $query->where('name', $pernikahan->desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count() }}</td>
+                                <td class="px-4 py-3 text-xs text-center">{{ $perempuanDiatas21Tahun[$index] }}</td>
+
                             </tr>
 
                             @php
-                                $totLuarBalai[]             .= $luarBalai;
-                                $totBalai[]                 .= $balai;
-                                $totKurangMampu[]           .= $kurangMampu;
-                                $totBencanaAlam[]           .= $bencanaAlam;
-                                $totIsbat[]                 .= $isbat;
-
-                                $totJumlahNR[]              .= $jumlahNR;
+                                $totJumlahNR[]                 .= $jumlahNR;
                                 $totJumlahPNBP[]            .= $jumlahPNBP;
-
-                                $totPriaDibawah19Tahun[]      .= $priaDibawah19Tahun;
-                                $totWanitaDibawah19Tahun[]    .= $wanitaDibawah19Tahun;
-                                $totPria19Sampai21Tahun[]     .= $pria19Sampai21Tahun;
-                                $totWanita19Sampai21Tahun[]   .= $wanita19Sampai21Tahun;
-                                $totPriaDiatas21Tahun[]       .= $priaDiatas21Tahun;
-                                $totWanitaDiatas21Tahun[]     .= $wanitaDiatas21Tahun;
-
                             @endphp
                         @empty
                         <tr>
@@ -280,21 +255,21 @@
                         @endforelse
                         <tr class="text-center text-xs font-bold">
                             <td colspan="2">Jumlah</td>
-                            <td>{{ array_sum($totLuarBalai) }}</td>
-                            <td>{{ array_sum($totBalai) }}</td>
-                            <td>{{ array_sum($totKurangMampu) }}</td>
-                            <td>{{ array_sum($totBencanaAlam) }}</td>
-                            <td>{{ array_sum($totIsbat) }}</td>
+                            <td>{{ array_sum($luarBalaiNikah) }}</td>
+                            <td>{{ array_sum($dalamBalaiNikah) }}</td>
+                            <td>{{ array_sum($tidakMampu) }}</td>
+                            <td>{{ array_sum($musibahAlam) }}</td>
+                            <td>{{ array_sum($sidangIsbat) }}</td>
 
                             <td>{{ array_sum($totJumlahNR) }}</td>
                             <td>{{ number_format( array_sum($totJumlahPNBP), 2 ) }}</td>
 
-                            <td>{{ array_sum($totPriaDibawah19Tahun) }}</td>
-                            <td>{{ array_sum($totWanitaDibawah19Tahun) }}</td>
-                            <td>{{ array_sum($totPria19Sampai21Tahun) }}</td>
-                            <td>{{ array_sum($totWanita19Sampai21Tahun) }}</td>
-                            <td>{{ array_sum($totPriaDiatas21Tahun) }}</td>
-                            <td>{{ array_sum($totWanitaDiatas21Tahun) }}</td>
+                            <td>{{ array_sum($lakiDibawah19Tahun) }}</td>
+                            <td>{{ array_sum($perempuanDibawah19Tahun) }}</td>
+                            <td>{{ array_sum($laki19Sampai21Tahun) }}</td>
+                            <td>{{ array_sum($perempuan19Sampai21Tahun) }}</td>
+                            <td>{{ array_sum($lakiDiatas21Tahun) }}</td>
+                            <td>{{ array_sum($perempuanDiatas21Tahun) }}</td>
                         </tr>
                     </tbody>
                 </table>
