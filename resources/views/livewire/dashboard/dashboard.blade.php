@@ -245,7 +245,7 @@
                             </tr>
 
                             @php
-                                $totJumlahNR[]                 .= $jumlahNR;
+                                $totJumlahNR[]              .= $jumlahNR;
                                 $totJumlahPNBP[]            .= $jumlahPNBP;
                             @endphp
                         @empty
