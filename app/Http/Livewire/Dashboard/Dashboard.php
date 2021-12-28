@@ -28,8 +28,6 @@ class Dashboard extends Component
             $lakiDiatas21Tahun         = [],
             $perempuanDiatas21Tahun    = [];
 
-
-
     public function mount()
     {
         // Get mount
@@ -42,17 +40,8 @@ class Dashboard extends Component
         $this->resetFields();
     }
 
-    public function render()
+    public function data()
     {
-        $pernikahans = Pernikahan::with('desa')
-                        ->whereMonth('date_time', $this->currnetMonth)
-                        ->whereYear('date_time', $this->currnetYear)
-                        ->where('kua_id', auth()->user()->kua_id)
-                        ->whereHas('desa', function($query){
-                            $query->groupBy('name');
-                        })
-                        ->get();
-
         $desas       = Desa::where('kua_id', auth()->user()->kua_id)->get();
 
         foreach ($desas as $desa) {
@@ -70,6 +59,18 @@ class Dashboard extends Component
             $this->perempuanDiatas21Tahun[]   .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
         }
 
+    }
+    public function render()
+    {
+        $pernikahans = Pernikahan::with('desa')
+                        ->whereMonth('date_time', $this->currnetMonth)
+                        ->whereYear('date_time', $this->currnetYear)
+                        ->where('kua_id', auth()->user()->kua_id)
+                        ->whereHas('desa', function($query){
+                            $query->groupBy('name');
+                        })
+                        ->get();
+        $this->data();
         return view('livewire.dashboard.dashboard', compact('pernikahans', 'desas'));
     }
 
@@ -87,8 +88,6 @@ class Dashboard extends Component
         $this->perempuan19Sampai21Tahun  = [];
         $this->lakiDiatas21Tahun         = [];
         $this->perempuanDiatas21Tahun    = [];
-
     }
-
 
 }
