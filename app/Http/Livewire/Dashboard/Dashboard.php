@@ -13,7 +13,8 @@ class Dashboard extends Component
             $currnetYear,
             $filterMonth,
 
-            $semuaDesa = false;
+            $semuaDesa = false,
+            $desas;
 
     public $luarBalaiNikah      = [],
             $dalamBalaiNikah    = [],
@@ -33,18 +34,10 @@ class Dashboard extends Component
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
         $this->currnetYear   = Carbon::now()->year;
-    }
 
-    public function updatedcurrnetMonth($value)
-    {
-        $this->resetFields();
-    }
+        $this->desas       = Desa::where('kua_id', auth()->user()->kua_id)->get();
 
-    public function data()
-    {
-        $desas       = Desa::where('kua_id', auth()->user()->kua_id)->get();
-
-        foreach ($desas as $desa) {
+        foreach ($this->desas as $desa) {
             $this->luarBalaiNikah[]    .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->dalamBalaiNikah[]   .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->tidakMampu[]        .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
@@ -58,8 +51,13 @@ class Dashboard extends Component
             $this->lakiDiatas21Tahun[]        .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
             $this->perempuanDiatas21Tahun[]   .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
         }
-
     }
+
+    public function updatedcurrnetMonth($value)
+    {
+        $this->resetFields();
+    }
+
     public function render()
     {
         $pernikahans = Pernikahan::with('desa')
@@ -70,8 +68,9 @@ class Dashboard extends Component
                             $query->groupBy('name');
                         })
                         ->get();
-        $this->data();
-        return view('livewire.dashboard.dashboard', compact('pernikahans', 'desas'));
+
+        // $this->data();
+        return view('livewire.dashboard.dashboard', compact('pernikahans'));
     }
 
     public function resetFields()

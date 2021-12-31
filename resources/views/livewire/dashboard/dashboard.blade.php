@@ -380,6 +380,8 @@
                             <td colspan="20" class="px-4 py-3 text-base font-bold justify-center text-center">Data pernikahan di bulan {{ $currnetMonth }} tidak ditemukan</td>
                         </tr>
                         @endforelse
+
+                        @if ($pernikahans->count() > 0)
                         <tr class="text-center text-xs font-bold">
                             <td colspan="2">Jumlah</td>
                             <td>{{ array_sum($totLuarBalai) }}</td>
@@ -398,6 +400,8 @@
                             <td>{{ array_sum($totPriaDiatas21Tahun) }}</td>
                             <td>{{ array_sum($totWanitaDiatas21Tahun) }}</td>
                         </tr>
+                        @endif
+
                     </tbody>
 
                     @endif
