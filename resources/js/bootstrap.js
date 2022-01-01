@@ -1,3 +1,5 @@
+import flatpickr from 'flatpickr';
+import { Indonesian } from 'flatpickr/dist/l10n/id';
 window._ = require('lodash');
 
 /**
@@ -9,6 +11,10 @@ window._ = require('lodash');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+flatpickr.localize(Indonesian);
+
+window.flatpickr = flatpickr;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

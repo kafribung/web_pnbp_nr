@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use App\Models\Pernikahan as ModelsPernikahan;
 use Livewire\WithPagination;
@@ -22,28 +22,27 @@ class Pernikahan extends Component
             $filterAge,
             $currnetMonth;
 
+    public $dateRange = [];
+
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
 
     public function mount()
     {
-        // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
-        if(ModelsPernikahan::count() == 0) {
-            $this->lastYear = 2021;
-            $this->oldYear  = 2020;
-        } else {
-            $this->lastYear  = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
-            $this->oldYear   = (int)ModelsPernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
-        }
-
-        // Get mount
-        $this->currnetMonth  = Carbon::now()->month;
-        $this->currnetYear   = Carbon::now()->year;
+        $this->dateRange = [Carbon::now()->firstOfMonth()->format('d/m/Y'), Carbon::now()->format('d/m/Y')];
     }
 
     public function render()
     {
+        $date = null;
+        $dateRange = null;
+        if (count($this->dateRange) == 2) {
+            $dateRange  = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d'), Carbon::createFromFormat('d/m/Y', $this->dateRange[1])->format('Y-m-d') ];
+        } else {
+            $date = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d')];
+        }
+
         $pernikahans    = ModelsPernikahan::with('penghulu', 'peristiwa_nikah', 'desa')
                             ->when($this->search, function($query){
                                 $query
@@ -65,8 +64,10 @@ class Pernikahan extends Component
                                     });
                                 });
                             })
-                            ->whereMonth('date_time', $this->currnetMonth)
-                            ->whereYear('date_time', $this->currnetYear)
+                            ->when($dateRange, function($query, $dateRange) {
+                                $query->whereBetween('date_time', $dateRange);
+                            })
+                            ->when($date, fn($q)=> $q->whereDate('date_time', $date))
                             ->when($this->filterAge, function($query){
                                 $query
                                 ->where(function($query){

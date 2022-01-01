@@ -12,15 +12,18 @@
             @if (session('error'))
             <x-message type="error" >{{ session('error') }}</x-message>
             @endif
-            <div class="mb-6">
+            <div class="mb-6 mt-2">
                 <div class="flex justify-start">
-                    <div class="mt-1">
+                    <div>
                         <x-search>
                             <x-input class="pl-8 pr-2 ml-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
-                    <div class="ml-2">
-                        <x-select class="text-sm" wire:model="currnetMonth">
+                    <div class="ml-4">
+                        <x-date-picker
+                        class="focus:ring-green-500 focus:border-green-500 block w-full pr-10 sm:text-sm text-gray-700 border-gray-300 rounded-md"
+                        wire:model="dateRange" />
+                        {{-- <x-select class="text-sm" wire:model="currnetMonth">
                             @slot('option_default', 'Filter Bulan')
                             @php
                                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -28,16 +31,16 @@
                             @for ($i = 0; $i < count($month); $i++)
                             <option value="{{ $i + 1 }}">{{ $month[$i] }}</option>
                             @endfor
-                        </x-select>
+                        </x-select> --}}
                     </div>
-                    <div class="ml-2">
+                    {{-- <div class="ml-2">
                         <x-select class="text-sm" wire:model="currnetYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
                             <option value="{{ $oldYear }}">{{ $oldYear }}</option>
                             @endfor
                         </x-select>
-                    </div>
+                    </div> --}}
                     <div class="ml-2">
                         <x-select class="text-sm" wire:model="filterAge">
                             @slot('option_default', 'Filter Umur')
