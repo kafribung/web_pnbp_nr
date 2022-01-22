@@ -35,7 +35,18 @@ class Dashboard extends Component
         $this->currnetMonth  = Carbon::now()->month;
         $this->currnetYear   = Carbon::now()->year;
 
-        $this->desas       = Desa::where('kua_id', auth()->user()->kua_id)->get();
+
+    }
+
+    public function updatedcurrnetMonth($value)
+    {
+        $this->resetFields();
+        $this->data();
+    }
+
+    public function data()
+    {
+        $this->desas         = Desa::where('kua_id', auth()->user()->kua_id)->get();
 
         foreach ($this->desas as $desa) {
             $this->luarBalaiNikah[]    .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
@@ -53,11 +64,6 @@ class Dashboard extends Component
         }
     }
 
-    public function updatedcurrnetMonth($value)
-    {
-        $this->resetFields();
-    }
-
     public function render()
     {
         $pernikahans = Pernikahan::with('desa')
@@ -69,7 +75,7 @@ class Dashboard extends Component
                         })
                         ->get();
 
-        // $this->data();
+
         return view('livewire.dashboard.dashboard', compact('pernikahans'));
     }
 
@@ -87,6 +93,8 @@ class Dashboard extends Component
         $this->perempuan19Sampai21Tahun  = [];
         $this->lakiDiatas21Tahun         = [];
         $this->perempuanDiatas21Tahun    = [];
+
+
     }
 
 }

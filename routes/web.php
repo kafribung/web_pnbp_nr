@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrintController;
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\JasaProfesiDanTransport\JasaProfesiDanTransport;
 use App\Http\Livewire\StafKua\StafKua;
@@ -35,6 +36,10 @@ Route::middleware('auth')->group(function() {
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
     Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
     Route::get('rekap-pnbp-nr', RekapPnbpNr::class)->name('rekap-pnbp-nr');
+
+
+    // Route::post('print', PrintController::class)->name('print');
+    Route::get('print', PrintController::class)->name('print');
 });
 
 require __DIR__.'/auth.php';

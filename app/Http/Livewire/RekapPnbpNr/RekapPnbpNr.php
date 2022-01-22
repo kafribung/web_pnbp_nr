@@ -5,6 +5,7 @@ namespace App\Http\Livewire\RekapPnbpNr;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Pernikahan;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class RekapPnbpNr extends Component
 {
@@ -77,10 +78,6 @@ class RekapPnbpNr extends Component
         };
     }
 
-    public function print($month)
-    {
-        dd($month);
-    }
 
     public function render()
     {

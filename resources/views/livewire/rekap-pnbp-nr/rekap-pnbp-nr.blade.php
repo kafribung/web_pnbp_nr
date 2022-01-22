@@ -1,5 +1,5 @@
 <div>
-    @livewire('pernikahan.form')
+    @livewire('rekap-pnbp-nr.cetak-laporan')
     <x-navbar>
         <a href="{{ route('rekap-pnbp-nr') }}" class="font-bold">Rekapan PNBP-NR</a>
     </x-navbar>
@@ -86,7 +86,11 @@
                         <td class="px-4 py-3 text-sm"> - </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <x-button-edit-delete metode='print' wire:click="print({{ $index+1 }})" class="hover:text-gray-700 text-gray-600 focus:shadow-outline-gray"></x-button-edit-delete>
+                                <form action="{{ route('print') }}" method="POST">
+                                    @csrf
+                                    <x-button-edit-delete metode='print' type="submit" class="hover:text-gray-700 text-gray-600 focus:shadow-outline-gray"></x-button-edit-delete>
+                                </form>
+
                             </div>
                         </td>
                     </tr>
