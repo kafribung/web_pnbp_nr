@@ -16,7 +16,7 @@
                 <div class="flex justify-start">
                     <div class="mt-1">
                         <x-search>
-                            <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                            <x-input class="pl-8 pr-2 ml-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
                     <div class="ml-2">
