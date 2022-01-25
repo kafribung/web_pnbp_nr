@@ -38,7 +38,7 @@ class Penghulu extends Model
 
     public function pph($jasaProfesi)
     {
-        if ($this->golongan->name == 'Penghulu Pertama -  III/a' || $this->golongan->name == 'Penghulu Pertama - III/b' || $this->golongan->name == 'Penghulu Muda - III/c'  || $this->golongan->name == 'Penghulu Muda - III/d')
+        if ($this->golongan->name == 'Penghulu Pertama - III/a' || $this->golongan->name == 'Penghulu Pertama - III/b' || $this->golongan->name == 'Penghulu Muda - III/c'  || $this->golongan->name == 'Penghulu Muda - III/d')
             return ($jasaProfesi * (5/100));
         else return ($jasaProfesi * (15/100));
     }

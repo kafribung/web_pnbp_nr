@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pernikahan;
 
 use App\Models\{Desa, Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
 use App\Rules\UppercaseRule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
@@ -56,7 +57,6 @@ class Form extends Pernikahan
 
     public function render()
     {
-
         $desas           = Desa::where('kua_id', auth()->user()->kua_id)->get();
         $peristiwaNikahs = PeristiwaNikah::get(['id', 'name']);
         $penghulus       = Penghulu::where('kua_id', auth()->user()->kua_id)->get(['id', 'name']);
@@ -101,6 +101,8 @@ class Form extends Pernikahan
         else  $data['transport'] = 100000;
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
+
+        ModelsPernikahan::create($data);
 
         session()->flash('message', $this->pernikahanId ? 'Data pernikahan ' .$this->male. ' berhasil diubah' : 'Data pernikahan '.$this->male.' berhasil ditambahkan');
         $this->closeModal();
