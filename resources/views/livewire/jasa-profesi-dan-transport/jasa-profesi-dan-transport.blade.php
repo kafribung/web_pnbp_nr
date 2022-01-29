@@ -100,7 +100,7 @@
                         </td>
                         <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{$jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->count() }} </td>
+                        <td class="px-4 py-3 text-xs text-center"> {{$jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->where('kua_id', auth()->user()->kua_id)->count() }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumlahPNBP   = $satuanPnbpNr * $jumlahNR, 2) }} </td>
 
