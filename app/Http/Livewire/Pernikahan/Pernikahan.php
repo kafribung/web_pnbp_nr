@@ -12,17 +12,10 @@ class Pernikahan extends Component
     use WithPagination;
 
     protected $paginationTheme = 'costume';
-    public $modal= false;
-
-    public $search;
-
-    public $lastYear,
-            $oldYear,
-            $currnetYear,
+    public $modal= false,
+            $search,
             $filterAge,
-            $currnetMonth;
-
-    public $dateRange = [];
+            $dateRange = [];
 
     protected $listeners = [
         'refreshParent' => '$refresh'
