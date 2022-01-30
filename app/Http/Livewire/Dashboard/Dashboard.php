@@ -11,90 +11,140 @@ class Dashboard extends Component
 {
     public $currnetMonth,
             $currnetYear,
-            $filterMonth,
-
-            $semuaDesa = false,
-            $desas;
-
-    public $luarBalaiNikah      = [],
-            $dalamBalaiNikah    = [],
-            $tidakMampu         = [],
-            $musibahAlam        = [],
-            $sidangIsbat        = [],
-
-            $lakiDibawah19Tahun        = [],
-            $perempuanDibawah19Tahun   = [],
-            $laki19Sampai21Tahun       = [],
-            $perempuan19Sampai21Tahun  = [],
-            $lakiDiatas21Tahun         = [],
-            $perempuanDiatas21Tahun    = [];
+            $semuaDesa = false;
 
     public function mount()
     {
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
         $this->currnetYear   = Carbon::now()->year;
-
-
-    }
-
-    public function updatedcurrnetMonth($value)
-    {
-        $this->resetFields();
-        $this->data();
-    }
-
-    public function data()
-    {
-        $this->desas         = Desa::where('kua_id', auth()->user()->kua_id)->get();
-
-        foreach ($this->desas as $desa) {
-            $this->luarBalaiNikah[]    .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->dalamBalaiNikah[]   .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->tidakMampu[]        .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->musibahAlam[]       .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->sidangIsbat[]       .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-
-            $this->lakiDibawah19Tahun[]       .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->perempuanDibawah19Tahun[]  .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '<', 19)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->laki19Sampai21Tahun[]      .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->perempuan19Sampai21Tahun[] .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->lakiDiatas21Tahun[]        .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $this->perempuanDiatas21Tahun[]   .= Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $this->currnetMonth)->whereYear('date_time', $this->currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-        }
     }
 
     public function render()
     {
-        $pernikahans = Pernikahan::with('desa')
-                        ->whereMonth('date_time', $this->currnetMonth)
-                        ->whereYear('date_time', $this->currnetYear)
-                        ->where('kua_id', auth()->user()->kua_id)
-                        ->whereHas('desa', function($query){
-                            $query->groupBy('name');
-                        })
-                        ->get();
+        $desas        = Desa::select('pernikahans.*', 'desas.name as name')
+                        ->withCount(['pernikahans as luar_balai_nikah_count' => function ($query){
+                            $query
+                            ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Luar Balai Nikah'))
+                            ->where(function($q){
+                                $q
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as balai_nikah_count' => function ($query){
+                            $query
+                            ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Balai Nikah'))
+                            ->where(function($q){
+                                $q
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as kurang_mampu_count' => function ($query){
+                            $query
+                            ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Kurang Mampu'))
+                            ->where(function($q){
+                                $q
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as bencana_alam_count' => function ($query){
+                            $query
+                            ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Bencana Alam'))->where(function($q){
+                                $q
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as isbat_count' => function ($query){
+                            $query
+                            ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Isbat'))
+                            ->where(function($q){
+                                $q
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
 
+                        ->withCount(['pernikahans as pria_dibawah_19_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('male_age', '<', 19)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as wanita_dibawah_19_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('female_age', '<', 19)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as pria_19_sampai_21_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('male_age', '>=', 19)
+                                ->where('male_age', '<=', 21)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as wanita_19_sampai_21_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('female_age', '>=', 19)
+                                ->where('female_age', '<=', 21)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as pria_diatas_21_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('male_age', '>', 21)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->withCount(['pernikahans as wanita_diatas_21_tahun_count' => function ($query){
+                            $query
+                            ->where(function($q){
+                                $q
+                                ->where('female_age', '>', 21)
+                                ->whereMonth('date_time', $this->currnetMonth)
+                                ->whereYear('date_time', $this->currnetYear)
+                                ->where('kua_id', auth()->user()->kua_id);
+                            });
+                        }])
+                        ->when($this->semuaDesa,
+                            function($q){
+                                return $q->leftJoin('pernikahans', 'pernikahans.desa_id', '=', 'desas.id');
+                            },
+                            function($q) {
+                                return $q->join('pernikahans', 'pernikahans.desa_id', '=', 'desas.id');
+                            }
+                        )
+                        ->where('desas.kua_id', auth()->user()->kua_id)->get();
 
-        return view('livewire.dashboard.dashboard', compact('pernikahans'));
+        return view('livewire.dashboard.dashboard', compact('desas'));
     }
-
-    public function resetFields()
-    {
-        $this->luarBalaiNikah    = [];
-        $this->dalamBalaiNikah   = [];
-        $this->tidakMampu        = [];
-        $this->musibahAlam       = [];
-        $this->sidangIsbat       = [];
-
-        $this->lakiDibawah19Tahun        = [];
-        $this->perempuanDibawah19Tahun   = [];
-        $this->laki19Sampai21Tahun       = [];
-        $this->perempuan19Sampai21Tahun  = [];
-        $this->lakiDiatas21Tahun         = [];
-        $this->perempuanDiatas21Tahun    = [];
-
-
-    }
-
 }

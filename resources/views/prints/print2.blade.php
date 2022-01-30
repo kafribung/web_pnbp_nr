@@ -1,230 +1,189 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Cetak Hasil</title>
+    <meta charset="utf-8">
+    <title>A4 landscape</title>
+
+    <!-- Normalize or reset CSS with your favorite library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+
+    <!-- Load paper.css for happy printing -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+    <!-- Set page size here: A5, A4 or A3 -->
+    <!-- Set also "landscape" if you need -->
     <style>
-        .kop {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .kop .address {
-            font-size: 10pt;
-            margin-top: -15px;
-        }
-        .content {
-            width: auto;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            padding-left: 30px;
-            padding-right: 30px;
-            padding-bottom: 80px;
-        }
-
-        p {
-            line-height: 20pt;
-        }
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            width: fit-content;
-            padding: 8px;
-            border-collapse: collapse;
-        }
-
-        .signature {
-            float: right;
+        @page {
+            size: A4 landscape
         }
     </style>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body>
-    <div class="kop">
-        <h3>Rumah Bibit Kelurahan Lakologou</h3>
-        <p class="kop address">Jl. Anoa Kel. Lakologou, Kec. Kokalukuna, Kota Baubau, Sulawesi Tenggara</p>
-    </div>
-    </div>
-    <div class="content">
-        <p>Berikut adalah hasil pengujian tanaman yang diperoleh dari Sistem Pendukung Keputusan yang dapat digunakan
-            sebagai pertimbangan untuk bibit tanaman yang akan tetap dikembangkan di Rumah Bibit Kelurahan Lakologou,
-            Kec. Kokalukuna, Kota Baubau yang dilakukan
-            pada:<br>
-            Hari: Senin
-            {{-- <br>Pukul: {{ $hasil->created_at->format('h:i') }} WITA
-            <br>Tanggal: {{ $hasil->created_at->format('d-m-Y') }}
-            <br>Penguji: {{ $hasil->user->name }} --}}
-        </p>
-        @php
-        $luarBalaiNikah = [];
-        $dalamBalaiNikah    = [];
-        $tidakMampu         = [];
-        $musibahAlam        = [];
-        $sidangIsbat        = [];
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
 
-        $lakiDibawah19Tahun        = [];
-        $perempuanDibawah19Tahun   = [];
-        $laki19Sampai21Tahun       = [];
-        $perempuan19Sampai21Tahun  = [];
-        $lakiDiatas21Tahun         = [];
-        $perempuanDiatas21Tahun    = [];
+<body class="A4 landscape container ">
 
-        foreach ($desas as $desa) {
-            $luarBalaiNikah[]    .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $dalamBalaiNikah[]   .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Balai Nikah'))->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $tidakMampu[]        .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Kurang Mampu'))->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $musibahAlam[]       .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Bencana Alam'))->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $sidangIsbat[]       .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Isbat'))->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
+    <!-- Each sheet element should have the class "sheet" -->
+    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+    <section class="sheet padding-10mm">
+        <!-- Write HTML just like a web page -->
+        <article class="text-xs font-bold text-center uppercase">Laporan Peristiwa Nikah Rujuk PerKelurahan/Desa</article>
+        <article class="text-xs font-bold text-center uppercase">Kantor Urusan Agama Kecamatan {{ auth()->user()->kua->name }}</article>
+        <article class="text-xs font-bold text-center uppercase">Tahun 2022</article>
 
-            $lakiDibawah19Tahun[]       .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '<', 19)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $perempuanDibawah19Tahun[]  .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '<', 19)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $laki19Sampai21Tahun[]      .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '>=', 19)->where('male_age', '<=', 21)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $perempuan19Sampai21Tahun[] .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>=', 19)->where('female_age', '<=', 21)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $lakiDiatas21Tahun[]        .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('male_age', '>', 21)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-            $perempuanDiatas21Tahun[]   .= \App\Models\Pernikahan::whereHas('desa', fn($query) => $query->where('name', $desa->name))->where('female_age', '>', 21)->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->where('kua_id', auth()->user()->kua_id)->count();
-        }
-        @endphp
+        <div class="flex">
+            <div class="flex flex-col">
+                <div class="text-sm mt-2">Bulan : Januari</div>
+                <table class="w-full whitespace-no-wrap">
+                    <thead>
+                        <tr class="text-xs font-semibold text-left text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
+                            <th class="px-3 py-1" rowspan="3">No</th>
+                            <th class="px-3 py-1" rowspan="3">Kelurahan/Desa</th>
+                            <th class="px-3 py-1" rowspan="3">Luar Kantor</th>
+                            <th class="px-3 py-1 text-center" colspan="4">Bebas Biaya</th>
+                            <th class="px-3 py-1" rowspan="3">Jml NR</th>
+                            <th class="px-3 py-1" rowspan="3">Total PNBP</th>
+                            <th class="px-3 py-1 text-center" colspan="6">Berdasarkan Usia</th>
+                        </tr>
+                        <tr class="text-xs font-semibold text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            <th class="px-3 py-1" rowspan="2">Kantor</th>
+                            <th class="px-3 py-1" rowspan="2">Miskin</th>
+                            <th class="px-3 py-1" rowspan="2">Bencana Alam</th>
+                            <th class="px-3 py-1" rowspan="2">Isbat</th>
 
-        <table>
-            <thead>
-                <tr>
-                    <th rowspan="3">No</th>
-                    <th rowspan="3">Kelurahan/Desa</th>
-                    <th rowspan="3">Luar Kantor</th>
-                    <th colspan="4">Bebas Biaya</th>
-                    <th rowspan="3">Jml NR</th>
-                    <th rowspan="3">Total PNBP</th>
-                    <th colspan="6">Berdasarkan Usia</th>
-                </tr>
-                <tr>
-                    <th rowspan="2">Kantor</th>
-                    <th rowspan="2">Miskin</th>
-                    <th rowspan="2">Bencana Alam</th>
-                    <th rowspan="2">Isbat</th>
+                            <th class="px-3 py-1" colspan="2">Di Bawah 19 Thn</th>
+                            <th class="px-3 py-1" colspan="2">19 s.d 21 Thn</th>
+                            <th class="px-3 py-1" colspan="2">Di Atas 21 Thn</th>
+                        </tr>
+                        <tr class="text-xs font-semibold text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            <th class="px-3 py-1">Pria</th>
+                            <th class="px-3 py-1">Wanita</th>
 
-                    <th colspan="2">Di Bawah 19 Thn</th>
-                    <th colspan="2">19 s.d 21 Thn</th>
-                    <th colspan="2">Di Atas 21 Thn</th>
-                </tr>
-                <tr>
-                    <th>Pria</th>
-                    <th>Wanita</th>
+                            <th class="px-3 py-1">Pria</th>
+                            <th class="px-3 py-1">Wanita</th>
 
-                    <th>Pria</th>
-                    <th>Wanita</th>
+                            <th class="px-3 py-1">Pria</th>
+                            <th class="px-3 py-1">Wanita</th>
 
-                    <th>Pria</th>
-                    <th>Wanita</th>
-                </tr>
-            </thead>
+                        </tr>
+                    </thead>
 
-            <tbody>
-                <tr>
-                    <td>a</td>
-                    <td>b</td>
-                    <td>c</td>
-                    <td>d</td>
-                    <td>e</td>
-                    <td>f</td>
-                    <td>g</td>
-                    <td>h=(c+d+e+f+g)</td>
-                    <td>i=(c*Rp.600.000.00)</td>
-                    <td>j</td>
-                    <td>k</td>
-                    <td>l</td>
-                    <td>m</td>
-                    <td>n</td>
-                    <td>o</td>
-                </tr>
-                @php
-                    $angkaAwal           = 1;
+                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <tr class="text-center text-xs font-semibold">
+                            <td>a</td>
+                            <td>b</td>
+                            <td>c</td>
+                            <td>d</td>
+                            <td>e</td>
+                            <td>f</td>
+                            <td>g</td>
+                            <td>h=(c+d+e+f+g)</td>
+                            <td>i=(c*Rp.600.000.00)</td>
+                            <td>j</td>
+                            <td>k</td>
+                            <td>l</td>
+                            <td>m</td>
+                            <td>n</td>
+                            <td>o</td>
+                        </tr>
+                        @php
+                            $angkaAwal           = 1;
 
-                    $totJumlahNR         = [];
-                    $totJumlahPNBP       = [];
-                @endphp
-                @forelse ($desas as $index => $desa)
-                    <tr>
-                        <td>{{ $angkaAwal++ }}</td>
-                        <td>{{ $desa->name }}</td>
-                        {{-- Luar Kantor --}}
-                        <td>{{ $luarBalaiNikah[$index] }}</td>
-                        {{-- Kantor/Balai Nikah --}}
-                        <td>{{ $dalamBalaiNikah[$index] }}</td>
-                        {{-- Miskin --}}
-                        <td>{{ $tidakMampu[$index] }}</td>
-                        {{-- Bencana Alam --}}
-                        <td>{{ $musibahAlam[$index] }}</td>
-                        {{-- Isbat --}}
-                        <td>{{ $sidangIsbat[$index] }}</td>
+                            $totJumlahNR         = [];
+                            $totJumlahPNBP       = [];
+                        @endphp
+                        @forelse ($desas->unique('desa') as $index => $desa)
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-3 py-1 text-xs text-center">{{ $angkaAwal++ }}</td>
+                                <td class="px-3 py-1 text-xs">{{ $desa->desa }}</td>
+                                {{-- Luar Kantor --}}
+                                <td class="px-3 py-1 text-xs text-center">{{ $desa->luar_balai_nikah_count }}</td>
+                                {{-- Kantor/Balai Nikah --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $dalamBalaiNikah[$index] }}</td> --}}
+                                {{-- Miskin --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $tidakMampu[$index] }}</td> --}}
+                                {{-- Bencana Alam --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $musibahAlam[$index] }}</td> --}}
+                                {{-- Isbat --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $sidangIsbat[$index] }}</td> --}}
 
-                        {{-- Jumlah NR --}}
-                        <td>{{ $jumlahNR = $luarBalaiNikah[$index] + $dalamBalaiNikah[$index] + $tidakMampu[$index] + $musibahAlam[$index] + $sidangIsbat[$index] }}</td>
+                                {{-- Jumlah NR --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $jumlahNR = $luarBalaiNikah[$index] + $dalamBalaiNikah[$index] + $tidakMampu[$index] + $musibahAlam[$index] + $sidangIsbat[$index] }}</td> --}}
 
-                        {{-- Total PNBP --}}
-                        <td>{{ number_format($jumlahPNBP = $luarBalaiNikah[$index] * 600000, 2) }}</td>
+                                {{-- Total PNBP --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ number_format($jumlahPNBP = $luarBalaiNikah[$index] * 600000, 2) }}</td> --}}
 
-                        {{-- Di bawah 19 tahun --}}
-                        {{-- Pria --}}
-                        <td>{{ $lakiDibawah19Tahun[$index] }}</td>
-                        {{-- Wanita --}}
-                        <td>{{ $perempuanDibawah19Tahun[$index] }}</td>
+                                {{-- Di bawah 19 tahun --}}
+                                {{-- Pria --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $lakiDibawah19Tahun[$index] }}</td> --}}
+                                {{-- Wanita --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $perempuanDibawah19Tahun[$index] }}</td> --}}
 
-                        {{-- 19-21 tahun --}}
-                        {{-- Pria --}}
-                        <td>{{ $laki19Sampai21Tahun[$index] }}</td>
-                        {{-- Wanita --}}
-                        <td>{{ $perempuan19Sampai21Tahun[$index] }}</td>
+                                {{-- 19-21 tahun --}}
+                                {{-- Pria --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $laki19Sampai21Tahun[$index] }}</td> --}}
+                                {{-- Wanita --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $perempuan19Sampai21Tahun[$index] }}</td> --}}
 
-                        {{-- Di atas 21 tahun --}}
-                        {{-- Pria --}}
-                        <td>{{ $lakiDiatas21Tahun[$index] }}</td>
-                        {{-- Wanita --}}
-                        <td>{{ $perempuanDiatas21Tahun[$index] }}</td>
+                                {{-- Di atas 21 tahun --}}
+                                {{-- Pria --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $lakiDiatas21Tahun[$index] }}</td> --}}
+                                {{-- Wanita --}}
+                                {{-- <td class="px-3 py-1 text-xs text-center">{{ $perempuanDiatas21Tahun[$index] }}</td> --}}
 
-                    </tr>
+                            </tr>
 
-                    @php
-                        $totJumlahNR[]              .= $jumlahNR;
-                        $totJumlahPNBP[]            .= $jumlahPNBP;
-                    @endphp
-                @empty
-                <tr>
-                    <td colspan="20">Data pernikahan di bulan {{ $currnetMonth }} tidak ditemukan</td>
-                </tr>
-                @endforelse
-                <tr>
-                    <td colspan="2">Jumlah</td>
-                    <td>{{ array_sum($luarBalaiNikah) }}</td>
-                    <td>{{ array_sum($dalamBalaiNikah) }}</td>
-                    <td>{{ array_sum($tidakMampu) }}</td>
-                    <td>{{ array_sum($musibahAlam) }}</td>
-                    <td>{{ array_sum($sidangIsbat) }}</td>
+                            {{-- @php
+                                $totJumlahNR[]              .= $jumlahNR;
+                                $totJumlahPNBP[]            .= $jumlahPNBP;
+                            @endphp --}}
+                        @empty
+                        <tr>
+                            <td colspan="20" class="px-3 py-1 text-base font-bold justify-center text-center">Data pernikahan di bulan {{ $currnetMonth }} tidak ditemukan</td>
+                        </tr>
+                        @endforelse
+                        {{-- <tr class="text-center text-xs font-bold">
+                            <td colspan="2">Jumlah</td>
+                            <td>{{ array_sum($luarBalaiNikah) }}</td>
+                            <td>{{ array_sum($dalamBalaiNikah) }}</td>
+                            <td>{{ array_sum($tidakMampu) }}</td>
+                            <td>{{ array_sum($musibahAlam) }}</td>
+                            <td>{{ array_sum($sidangIsbat) }}</td>
 
-                    <td>{{ array_sum($totJumlahNR) }}</td>
-                    <td>{{ number_format( array_sum($totJumlahPNBP), 2 ) }}</td>
+                            <td>{{ array_sum($totJumlahNR) }}</td>
+                            <td>{{ number_format( array_sum($totJumlahPNBP), 2 ) }}</td>
 
-                    <td>{{ array_sum($lakiDibawah19Tahun) }}</td>
-                    <td>{{ array_sum($perempuanDibawah19Tahun) }}</td>
-                    <td>{{ array_sum($laki19Sampai21Tahun) }}</td>
-                    <td>{{ array_sum($perempuan19Sampai21Tahun) }}</td>
-                    <td>{{ array_sum($lakiDiatas21Tahun) }}</td>
-                    <td>{{ array_sum($perempuanDiatas21Tahun) }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p>Demikian hasil ini dibuat untuk dapat dijadikan pertimbangan pengadaan bibit selanjutnya.</p>
-
-        <div class="signature">
-            <p>Baubau, 12 Desember 2021</p>
-            <p>Mengetahui,</p>
-            <p>Ketua Rumah Bibit Kelurahan Lakologou</p>
-            <br>
-            <br>
-            <br>
-            <p>(..................................)</p>
+                            <td>{{ array_sum($lakiDibawah19Tahun) }}</td>
+                            <td>{{ array_sum($perempuanDibawah19Tahun) }}</td>
+                            <td>{{ array_sum($laki19Sampai21Tahun) }}</td>
+                            <td>{{ array_sum($perempuan19Sampai21Tahun) }}</td>
+                            <td>{{ array_sum($lakiDiatas21Tahun) }}</td>
+                            <td>{{ array_sum($perempuanDiatas21Tahun) }}</td>
+                        </tr> --}}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+
+        <div class="flex justify-end text-xs mt-2">
+            <div class="flex-col">
+                <p>Baubau, 01 Januari 2022</p>
+                <p>Kepala KUA</p>
+                <p class="mt-14">{{ auth()->user()->kua->penghulus->where('kua_leader', 1)->first()->name }}</p>
+            </div>
+        </div>
+
+    </section>
+
+
 
 </body>
 
