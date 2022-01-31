@@ -79,6 +79,7 @@
                     </tr>
                     {{-- Set array variable --}}
                     @php
+                        $angkaAwal        = 1;
                         $totJumlahNR      = [];
                         $totSatuanPnbpNr  = [];
                         $totJumlahPNBP    = [];
@@ -92,18 +93,17 @@
                         $totJumPengPPH    = [];
                         $totJumPerPem     = [];
                     @endphp
-                    @forelse ($penghulus as $index => $penghulu)
+                    @forelse ($penghulus->unique('name') as $index => $penghulu)
 
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-xs text-center">
-                            {{ $index+1 }}
+                            {{ $angkaAwal++ }}
                         </td>
                         <td class="px-4 py-3 text-xs font-semibold "> {{ $penghulu->name }} </td>
                         <td class="px-4 py-3 text-xs"> {{ $penghulu->golongan->name }} </td>
-                        <td class="px-4 py-3 text-xs text-center"> {{$jumlahNR = $penghulu->pernikahans()->whereMonth('date_time', $currnetMonth)->whereYear('date_time', $currnetYear)->whereHas('peristiwa_nikah', fn($query) => $query->where('name', 'Luar Balai Nikah'))->where('kua_id', auth()->user()->kua_id)->count() }} </td>
+                        <td class="px-4 py-3 text-xs text-center"> {{$jumlahNR = $penghulu->luar_balai_nikah_count }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumlahPNBP   = $satuanPnbpNr * $jumlahNR, 2) }} </td>
-
                         {{-- Transport --}}
                         @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= $penghulu->pernikahans()->sum('transport'), 2) }} </td>
