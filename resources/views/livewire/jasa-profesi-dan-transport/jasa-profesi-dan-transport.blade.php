@@ -132,7 +132,7 @@
                             $totJumJasaProfesi[]  .= $jumJasaProfesi;
                             $totPPH[]             .= $pph;
                             $totJumPengPPH[]      .= $jumPengPPH;
-                            $totJumPerPem[]          .= $jumPerPem;
+                            $totJumPerPem[]       .= $jumPerPem;
                         @endphp
                     </tr>
                     @empty
