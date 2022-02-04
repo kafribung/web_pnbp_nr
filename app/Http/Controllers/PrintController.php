@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Desa, Pernikahan, Penghulu};
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Http\Resources\DesaResource;
+use Illuminate\Support\Facades\App;
+use App\Models\{Desa, Pernikahan, Penghulu};
 
 
 class PrintController extends Controller
@@ -161,9 +161,13 @@ class PrintController extends Controller
                         ->leftJoin('pernikahans', 'pernikahans.penghulu_id', '=', 'penghulus.id')
                         ->where('penghulus.kua_id', auth()->user()->kua_id)
                         ->get();
-        return view('prints.print', compact('desas', 'currnetMonth', 'currnetYear', 'pernikahans', 'penghulus'));
+        // return view('prints.print', compact('desas', 'currnetMonth', 'currnetYear', 'pernikahans', 'penghulus'));
 
-        // $pdf = PDF::loadView('prints.print', compact('desas'));
-        // return $pdf->download('invoice.pdf');
+        $pdf = PDF::loadView('prints.print',['desas' => $desas, 'currnetMonth' => $currnetMonth, 'currnetYear' => $currnetYear, 'pernikahans' => $pernikahans, 'penghulus' => $penghulus])->setPaper('a4', 'landscape');
+        return $pdf->download('invoice.pdf');
+
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('<h1>Test</h1>');
+        // return $pdf->stream();
     }
 }

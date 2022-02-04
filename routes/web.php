@@ -38,8 +38,8 @@ Route::middleware('auth')->group(function() {
     Route::get('rekap-pnbp-nr', RekapPnbpNr::class)->name('rekap-pnbp-nr');
 
 
-    // Route::post('print', PrintController::class)->name('print');
-    Route::get('print', PrintController::class)->name('print');
+    Route::post('print', PrintController::class)->name('print');
+    Route::get('prints', PrintController::class)->name('prints');
 });
 
 require __DIR__.'/auth.php';
