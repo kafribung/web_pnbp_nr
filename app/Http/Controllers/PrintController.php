@@ -11,12 +11,12 @@ class PrintController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public $currnetMonth = 1;
-    public $currnetYear  = 2022;
-    public function __invoke()
+    public $currentMonth = null;
+    public $currentYear  = null;
+    public function __invoke($currentMonth, $currentYear)
     {
-        $currnetMonth = $this->currnetMonth;
-        $currnetYear = $this->currnetYear;
+        $this->currentMonth = $currentMonth;
+        $this->currentYear  = $currentYear;
 
         $desas        = Desa::select('pernikahans.*', 'desas.name as name')
                         ->withCount(['pernikahans as luar_balai_nikah_count' => function ($query){
@@ -24,8 +24,8 @@ class PrintController extends Controller
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Luar Balai Nikah'))
                             ->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -34,8 +34,8 @@ class PrintController extends Controller
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Balai Nikah'))
                             ->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -44,8 +44,8 @@ class PrintController extends Controller
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Kurang Mampu'))
                             ->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -53,8 +53,8 @@ class PrintController extends Controller
                             $query
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Bencana Alam'))->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -63,8 +63,8 @@ class PrintController extends Controller
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Isbat'))
                             ->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -74,8 +74,8 @@ class PrintController extends Controller
                             ->where(function($q){
                                 $q
                                 ->where('male_age', '<', 19)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -84,8 +84,8 @@ class PrintController extends Controller
                             ->where(function($q){
                                 $q
                                 ->where('female_age', '<', 19)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -95,8 +95,8 @@ class PrintController extends Controller
                                 $q
                                 ->where('male_age', '>=', 19)
                                 ->where('male_age', '<=', 21)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -106,8 +106,8 @@ class PrintController extends Controller
                                 $q
                                 ->where('female_age', '>=', 19)
                                 ->where('female_age', '<=', 21)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -116,8 +116,8 @@ class PrintController extends Controller
                             ->where(function($q){
                                 $q
                                 ->where('male_age', '>', 21)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -126,8 +126,8 @@ class PrintController extends Controller
                             ->where(function($q){
                                 $q
                                 ->where('female_age', '>', 21)
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
@@ -135,8 +135,8 @@ class PrintController extends Controller
                         ->where('desas.kua_id', auth()->user()->kua_id)->get();
 
         $pernikahans  = Pernikahan::with('penghulu', 'peristiwa_nikah', 'desa')
-                        ->whereMonth('date_time', $this->currnetMonth)
-                        ->whereYear('date_time', $this->currnetYear)
+                        ->whereMonth('date_time', $this->currentMonth)
+                        ->whereYear('date_time', $this->currentYear)
                         ->where('kua_id', auth()->user()->kua_id)
                         ->latest()
                         ->get();
@@ -148,14 +148,14 @@ class PrintController extends Controller
                             ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Luar Balai Nikah'))
                             ->where(function($q){
                                 $q
-                                ->whereMonth('date_time', $this->currnetMonth)
-                                ->whereYear('date_time', $this->currnetYear)
+                                ->whereMonth('date_time', $this->currentMonth)
+                                ->whereYear('date_time', $this->currentYear)
                                 ->where('kua_id', auth()->user()->kua_id);
                             });
                         }])
                         ->leftJoin('pernikahans', 'pernikahans.penghulu_id', '=', 'penghulus.id')
                         ->where('penghulus.kua_id', auth()->user()->kua_id)
                         ->get();
-        return view('prints.print', compact('desas', 'currnetMonth', 'currnetYear', 'pernikahans', 'penghulus'));
+        return view('prints.print', compact('desas', 'currentMonth', 'currentYear', 'pernikahans', 'penghulus'));
     }
 }

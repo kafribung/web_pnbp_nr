@@ -15,7 +15,7 @@
             <div class="mb-6">
                 <div class="flex justify-start">
                     <div class="ml-2">
-                        <x-select class="text-sm" wire:model="currnetYear">
+                        <x-select class="text-sm" wire:model="currentYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
                             <option value="{{ $oldYear }}">{{ $oldYear }}</option>
@@ -57,7 +57,7 @@
                                 <li>Kurang Mampu: {{ $tidakMampu = $kurangMampu[$index] }}</li>
                                 <li>Bencana Alam: {{ $bencana = $bencanaAlam[$index] }}</li>
                                 <li>Isbat: {{$sidang = $isbat[$index] }}</li>
-                                <li class="font-bold">Total: {{ $luarBalai + $balai + $tidakMampu + $bencana + $sidang }}</li>
+                                <li class="font-bold">Total: {{ $total = $luarBalai + $balai + $tidakMampu + $bencana + $sidang }}</li>
                             </ul>
                         </td>
                         <td class="px-4 py-3 text-sm"> {{ number_format($luarBalai * 600000, 2)  }} </td>
@@ -86,7 +86,13 @@
                         <td class="px-4 py-3 text-sm"> - </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <a href="{{ route('print') }}"  target="_blank" class="hover:text-gray-700 text-gray-600 focus:shadow-outline-gray">Cetak</a>
+                                @if ($total)
+                                <a href="{{ route('print', [$index+1, $currentYear]) }}"  target="_blank" class="hover:text-gray-900 text-gray-600 focus:shadow-outline-gray">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                                    </svg>
+                                </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
