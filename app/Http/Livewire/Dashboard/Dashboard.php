@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use App\Models\Desa;
+use App\Models\{Desa, Penghulu};
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Pernikahan;
@@ -18,6 +18,11 @@ class Dashboard extends Component
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
         $this->currnetYear   = Carbon::now()->year;
+    }
+
+    public function permohonanPembayaran($count)
+    {
+        $this->jumPermohonanPembayaran =$count;
     }
 
     public function render()
@@ -145,6 +150,9 @@ class Dashboard extends Component
                         )
                         ->where('desas.kua_id', auth()->user()->kua_id)->get();
 
-        return view('livewire.dashboard.dashboard', compact('desas'));
+        $penghuluCount = Penghulu::where('kua_id', auth()->user()->kua_id)->count();
+        $desaCount     = Desa::where('kua_id', auth()->user()->kua_id)->count();
+
+        return view('livewire.dashboard.dashboard', compact('desas', 'penghuluCount', 'desaCount'));
     }
 }

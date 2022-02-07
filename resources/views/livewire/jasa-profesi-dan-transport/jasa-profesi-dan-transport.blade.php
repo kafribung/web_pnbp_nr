@@ -149,10 +149,21 @@
                         <td>{{ number_format( array_sum($totJumJasaProfesi), 2 ) }}</td>
                         <td>{{ number_format( array_sum($totPPH), 2 ) }}</td>
                         <td>{{ number_format( array_sum($totJumPengPPH), 2 ) }}</td>
-                        <td>{{ number_format( array_sum($totJumPerPem), 2 ) }}</td>
+                        <td>{{ $totalPermohonanPembayaran=  number_format( array_sum($totJumPerPem), 2 ) }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    window.addEventListener('permohonanPembayaran', event => {
+        alert('Name updated to: ' + event.detail.newName);
+    })
+    </script>
+{{-- <script>
+    Livewire.on('permohonanPembayaran', count => {$totJumPerPem})
+</script> --}}
+
+@endpush

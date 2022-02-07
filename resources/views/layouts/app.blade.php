@@ -53,9 +53,7 @@
         </div>
     </div>
     @livewireScripts
-    <script>
-        console.log(localStorage.getItem('thema'));
-    </script>
+    @stack('scripts')
 </body>
 
 </html>
