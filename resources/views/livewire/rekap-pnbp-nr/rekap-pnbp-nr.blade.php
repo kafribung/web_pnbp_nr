@@ -12,7 +12,7 @@
             @if (session('error'))
             <x-message type="error" >{{ session('error') }}</x-message>
             @endif
-            <div class="mb-6">
+            <div class="mb-6 mt-2">
                 <div class="flex justify-start">
                     <div class="ml-2">
                         <x-select class="text-sm" wire:model="currentYear">
