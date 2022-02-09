@@ -18,8 +18,6 @@ class JasaProfesiDanTransport extends Component
             $currnetMonth,
             $currnetYear;
 
-    public $totalPermohonanPembayaran = null;
-
     public function mount()
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
@@ -34,12 +32,6 @@ class JasaProfesiDanTransport extends Component
         // Get mount
         $this->currnetMonth  = Carbon::now()->month;
         $this->currnetYear   = Carbon::now()->year;
-    }
-
-    public function updatedtotalPermohonanPembayaran($value)
-    {
-        $this->totalPermohonanPembayaran = $value;
-        dd($value);
     }
 
     public function render()

@@ -13,6 +13,8 @@ class Dashboard extends Component
             $currnetYear,
             $semuaDesa = false;
 
+    public $totPermohonanPembayaran;
+
     public function mount()
     {
         // Get mount

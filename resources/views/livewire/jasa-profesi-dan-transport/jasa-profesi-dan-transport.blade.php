@@ -156,14 +156,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-<script>
-    window.addEventListener('permohonanPembayaran', event => {
-        alert('Name updated to: ' + event.detail.newName);
-    })
-    </script>
-{{-- <script>
-    Livewire.on('permohonanPembayaran', count => {$totJumPerPem})
-</script> --}}
-
-@endpush
