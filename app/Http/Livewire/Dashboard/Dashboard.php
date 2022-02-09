@@ -22,6 +22,7 @@ class Dashboard extends Component
         $this->currnetYear   = Carbon::now()->year;
     }
 
+    // id pendapatan bulan tahun kua
     public function permohonanPembayaran($count)
     {
         $this->jumPermohonanPembayaran =$count;

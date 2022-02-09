@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\HisotryPermohonanPembayaran;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Penghulu extends Model
 {
@@ -43,4 +44,17 @@ class Penghulu extends Model
         else return ($jasaProfesi * (15/100));
     }
 
+    public function historyPermohonanPembayaran(array $data)
+    {
+        if ($data['cost']) {
+            if ($permohonanPembayaran =  HisotryPermohonanPembayaran::where('kua_id', $data['kua_id'])->where('month', $data['month'])->where('year', $data['year'])->first()) {
+                $data['updated_by'] = auth()->id();
+                $permohonanPembayaran->update($data);
+            } else {
+                $data['created_by'] = auth()->id();
+                HisotryPermohonanPembayaran::create($data);
+            }
+        }
+
+    }
 }

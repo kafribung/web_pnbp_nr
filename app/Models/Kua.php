@@ -35,4 +35,8 @@ class Kua extends Model
         return $this->hasMany(Desa::class);
     }
 
+    public function hisotryPermohonanPembayaran()
+    {
+        return $this->hasMany(HisotryPermohonanPembayaran::class);
+    }
 }

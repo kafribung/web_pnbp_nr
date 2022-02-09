@@ -149,10 +149,23 @@
                         <td>{{ number_format( array_sum($totJumJasaProfesi), 2 ) }}</td>
                         <td>{{ number_format( array_sum($totPPH), 2 ) }}</td>
                         <td>{{ number_format( array_sum($totJumPengPPH), 2 ) }}</td>
-                        <td>{{ $totalPermohonanPembayaran=  number_format( array_sum($totJumPerPem), 2 ) }}</td>
+                        <td>{{ number_format( array_sum($totJumPerPem), 2 ) }}</td
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@php
+    $data = [
+        'cost'       => array_sum($totJumPerPem),
+        'month'      => $currnetMonth,
+        'year'       => $currnetYear,
+        'kua_id'     => auth()->user()->kua_id,
+    ];
+
+    $penghulu =  new App\Models\Penghulu();
+    $penghulu->historyPermohonanPembayaran($data);
+
+@endphp
