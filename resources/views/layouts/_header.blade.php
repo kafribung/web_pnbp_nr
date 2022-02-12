@@ -18,7 +18,7 @@
         </div>
         <ul class="flex items-center flex-shrink-0 space-x-6">
             <!-- Theme toggler -->
-            <li class="flex">
+            {{-- <li class="flex">
                 <button class="rounded-md focus:outline-none focus:shadow-outline-green"
                 x-data="{
                     dark: false,
@@ -51,7 +51,7 @@
                         </svg>
                     </template>
                 </button>
-            </li>
+            </li> --}}
             <!-- Notifications menu -->
             <li x-data="{ toggleNotificationsMenu : false }" class="relative">
                 <button
