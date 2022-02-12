@@ -7,6 +7,7 @@ use App\Http\Livewire\StafKua\StafKua;
 use App\Http\Livewire\Kua\Kua;
 use App\Http\Livewire\Penghulu\Penghulu;
 use App\Http\Livewire\Pernikahan\Pernikahan;
+use App\Http\Livewire\Profil\Profil;
 use App\Http\Livewire\RekapPnbpNr\RekapPnbpNr;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +37,8 @@ Route::middleware('auth')->group(function() {
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
     Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
     Route::get('rekap-pnbp-nr', RekapPnbpNr::class)->name('rekap-pnbp-nr');
-
-
     Route::get('print/{currnetMonth}/{currnetYear}', PrintController::class)->name('print');
+    Route::get('profil', Profil::class)->name('profil');
 });
 
 require __DIR__.'/auth.php';
