@@ -2,10 +2,9 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use App\Models\{Desa, Penghulu};
+use App\Models\{Desa, HisotryPermohonanPembayaran, Penghulu};
 use Carbon\Carbon;
 use Livewire\Component;
-use App\Models\Pernikahan;
 
 class Dashboard extends Component
 {
@@ -155,7 +154,8 @@ class Dashboard extends Component
 
         $penghuluCount = Penghulu::where('kua_id', auth()->user()->kua_id)->count();
         $desaCount     = Desa::where('kua_id', auth()->user()->kua_id)->count();
+        $permohonanPembayaran  = HisotryPermohonanPembayaran::where('kua_id', auth()->user()->kua_id)->where([['month', $this->currnetMonth, 'year' => $this->currnetYear]])->first();
 
-        return view('livewire.dashboard.dashboard', compact('desas', 'penghuluCount', 'desaCount'));
+        return view('livewire.dashboard.dashboard', compact('desas', 'penghuluCount', 'desaCount', 'permohonanPembayaran'));
     }
 }

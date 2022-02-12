@@ -30,9 +30,9 @@
                 </svg>
             </div>
             <div>
-                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"> Account balance
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"> Jumlah Permohonan Pembayaran
                 </p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"> $ 46,760.89 </p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">Rp  {{ $permohonanPembayaran == null ? 0 : number_format($permohonanPembayaran->cost, 2)  }} </p>
             </div>
         </div>
         <!-- Card -->
