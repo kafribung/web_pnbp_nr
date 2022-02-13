@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
+
 use Illuminate\Support\Carbon;
 use Livewire\Component;
-use App\Models\Pernikahan as ModelsPernikahan;
+use App\Models\{
+    Pernikahan as ModelsPernikahan,
+    Kua,
+};
 use Livewire\WithPagination;
 
 class Pernikahan extends Component
@@ -15,7 +19,9 @@ class Pernikahan extends Component
     public $modal= false,
             $search,
             $filterAge,
-            $dateRange = [];
+            $dateRange = [],
+            $kuas,
+            $filterKua = 1;
 
     protected $listeners = [
         'refreshParent' => '$refresh'
@@ -28,13 +34,17 @@ class Pernikahan extends Component
 
     public function render()
     {
-        $date = null;
-        $dateRange = null;
+        $this->kuas      = Kua::get(['name', 'id']);
+        $date            = null;
+        $dateRange       = null;
         if (count($this->dateRange) == 2) {
             $dateRange  = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d'), Carbon::createFromFormat('d/m/Y', $this->dateRange[1])->format('Y-m-d') ];
         } else {
             $date = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d')];
         }
+
+        if (!auth()->user()->kua_id) $filterKua = $this->filterKua;
+        else $filterKua = auth()->user()->kua_id;
 
         $pernikahans    = ModelsPernikahan::with('penghulu', 'peristiwa_nikah', 'desa')
                             ->when($this->search, function($query){
@@ -100,7 +110,9 @@ class Pernikahan extends Component
                                     }
                                 });
                             })
-                            ->where('kua_id', auth()->user()->kua_id)
+                            ->when($filterKua, function($q, $filterKua){
+                                $q->where('kua_id', $filterKua);
+                            })
                             ->latest()
                             ->paginate(10);
         return view('livewire.pernikahan.pernikahan', compact('pernikahans'));

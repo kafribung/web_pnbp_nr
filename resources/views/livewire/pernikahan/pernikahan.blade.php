@@ -14,12 +14,22 @@
             @endif
             <div class="mb-6 mt-2">
                 <div class="flex justify-start">
-                    <div>
+                    <div class="mr-2">
                         <x-search>
                             <x-input class="pl-8 pr-2 ml-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
-                    <div class="ml-4">
+                    @if (!auth()->user()->kua_id)
+                    <div class="ml-2">
+                        <x-select class="text-sm" wire:model="filterKua">
+                            @slot('option_default', 'Pilih KUA')
+                            @foreach ($kuas as $kua)
+                            <option value="{{ $kua->id }}">{{ $kua->name }}</option>
+                            @endforeach
+                        </x-select>
+                    </div>
+                    @endif
+                    <div class="ml-2">
                         <x-date-picker
                         class="focus:ring-green-500 focus:border-green-500 block w-full pr-10 sm:text-sm text-gray-700 border-gray-300 rounded-md"
                         wire:model="dateRange" />
@@ -41,7 +51,9 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
+                    @if (auth()->user()->kua_id)
                     <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
+                    @endif
                 </div>
             </div>
 
@@ -88,8 +100,10 @@
                             <div class="flex items-center text-sm">
                                 <div>
                                     <p class="font-semibold"> {{ $pernikahan->desa->name }} </p>
-                                    @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">{{ number_format($pernikahan->transport, 2) }}</p>
+                                    @if (auth()->user()->kua)
+                                        @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">{{ number_format($pernikahan->transport, 2) }}</p>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

@@ -50,6 +50,7 @@ class Form extends Pernikahan
         ];
     }
 
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
