@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>A4 landscape</title>
+    <title>Rekap PNBP {{ auth()->user()->kua ? 'KUA Kecamatan ' . auth()->user()->kua->name : 'BIMAS Islam Kabupaten Mamuju'  }} </title>
 
     <!-- Normalize or reset CSS with your favorite library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
