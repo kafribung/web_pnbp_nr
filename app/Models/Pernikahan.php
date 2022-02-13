@@ -34,4 +34,9 @@ class Pernikahan extends Model
     {
         return $this->belongsTo(Desa::class);
     }
+
+    public function kua()
+    {
+        return $this->belongsTo(Kua::class);
+    }
 }

@@ -13,6 +13,11 @@ class Profil extends Component
         'name' => 'required|min:3|string',
     ];
 
+    public function mount()
+    {
+        $this->name = auth()->user()->name;
+    }
+
     public function render()
     {
         return view('livewire.profil.form');

@@ -39,4 +39,9 @@ class Kua extends Model
     {
         return $this->hasMany(HisotryPermohonanPembayaran::class);
     }
+
+    public function pernikahans()
+    {
+        return $this->hasMany(Pernikahan::class);
+    }
 }
