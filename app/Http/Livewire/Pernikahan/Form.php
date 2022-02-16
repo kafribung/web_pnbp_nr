@@ -4,8 +4,6 @@ namespace App\Http\Livewire\Pernikahan;
 
 use App\Models\{Desa, Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
 use App\Rules\UppercaseRule;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 
 class Form extends Pernikahan
 {
@@ -179,12 +177,5 @@ class Form extends Pernikahan
         $this->modal = false;
         $this->fieldsReset();
         $this->emit('refreshParent');
-    }
-
-    public function isAdminBimas()
-    {
-        if (!auth()->user()->kua) {
-            return redirect('pernikahan');
-        }
     }
 }

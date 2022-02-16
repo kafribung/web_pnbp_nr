@@ -142,12 +142,12 @@
             <div class="pt-2">
                 <div class="flex justify-end">
                     <x-button wire:click="closeModal" type="button"
-                        class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+                        class="px-4 py-2 mt-4 bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
                         Batal
                     </x-button>
 
                     <x-button type="submit"
-                        class="{{ !empty($pernikahanId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
+                        class="px-4 py-2 mt-4 {{ !empty($pernikahanId) ? 'bg-yellow-600 active:bg-yellow-600 hover:bg-yellow-700 focus:shadow-outline-yellow' : 'bg-green-600 active:bg-green-600 hover:bg-green-700 focus:shadow-outline-green'}}">
                         {{ !empty($pernikahanId) ? "Ubah" : "Simpan"}}
                     </x-button>
                 </div>

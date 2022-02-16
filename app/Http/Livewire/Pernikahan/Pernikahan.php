@@ -27,6 +27,14 @@ class Pernikahan extends Component
         'refreshParent' => '$refresh'
     ];
 
+    public function updatedDateRange() {
+        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    }
+
+    public function updatedFilterKua() {
+        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    }
+
     public function mount()
     {
         $this->dateRange = [Carbon::now()->firstOfMonth()->format('d/m/Y'), Carbon::now()->format('d/m/Y')];
@@ -121,5 +129,12 @@ class Pernikahan extends Component
     public function openCloseModal()
     {
         $this->modal = !$this->modal;
+    }
+
+    public function isAdminBimas()
+    {
+        if (!auth()->user()->kua) {
+            return redirect('pernikahan');
+        }
     }
 }

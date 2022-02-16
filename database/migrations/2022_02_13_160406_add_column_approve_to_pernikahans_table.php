@@ -14,7 +14,8 @@ class AddColumnApproveToPernikahansTable extends Migration
     public function up()
     {
         Schema::table('pernikahans', function (Blueprint $table) {
-            $table->boolean('approve')->after('transport')->default(true);
+            $table->enum('approve', ['acc', 'pending', 'repair'])->after('transport')->default('pending');
+            $table->text('note')->nullable()->after('approve');
         });
     }
 

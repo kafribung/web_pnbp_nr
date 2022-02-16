@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use Illuminate\Support\Arr;
+
+
 use Livewire\Component;
+use App\Models\Pernikahan;
+use Illuminate\Support\Carbon;
 
 class FormAccept extends Component
 {
@@ -13,7 +16,8 @@ class FormAccept extends Component
 
     protected $listeners = [
         'create',
-        'updateKuaDate'
+        'updateKuaDate',
+        'acceptPerRow',
     ];
 
     public function updateKuaDate($filterKua, $dateRange)
@@ -34,7 +38,37 @@ class FormAccept extends Component
 
     public function storeOrUpdate()
     {
+        $date            = null;
+        $dateRange       = null;
+        if (count($this->dateRange) == 2) {
+            $dateRange  = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d'), Carbon::createFromFormat('d/m/Y', $this->dateRange[1])->format('Y-m-d') ];
+        } else {
+            $date = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d')];
+        }
+
+        Pernikahan::where('kua_id', $this->filterKua)
+                    ->when($dateRange, function($query, $dateRange) {
+                        $query->whereBetween('date_time', $dateRange);
+                    })
+                    ->when($date, fn($q)=> $q->whereDate('date_time', $date))
+                    ->update([
+                        'approve' => true,
+                    ]);
         
+        session()->flash('message', 'Data pernikahan berhasil di ACC');
+
+        return redirect('pernikahan');
+    }
+
+    public function acceptPerRow($id)
+    {
+        $pernikahan =Pernikahan::find($id);
+        $pernikahan->approve = true;
+        $pernikahan->save();
+
+        session()->flash('message', 'Data pernikahan ' .$pernikahan->male. ' berhasil di ACC');
+
+        return redirect('pernikahan');
     }
 
     public function closeModal()
