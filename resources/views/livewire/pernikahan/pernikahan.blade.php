@@ -118,8 +118,10 @@
 
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
+                                @if (auth()->user()->kua)
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('pernikahan.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
                                 <x-button-edit-delete metode='delete' wire:click="$emitTo('pernikahan.form', 'delete', {{ $pernikahan->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>
+                                @endif
                             </div>
                         </td>
                     </tr>

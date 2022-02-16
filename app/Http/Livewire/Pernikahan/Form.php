@@ -71,6 +71,7 @@ class Form extends Pernikahan
 
     public function create()
     {
+        $this->isAdminBimas();
         $this->openCloseModal();
     }
 
@@ -112,6 +113,8 @@ class Form extends Pernikahan
 
     public function edit($id)
     {
+        $this->isAdminBimas();
+
         $this->pernikahanId                  = $id;
         $pernikahan                          = ModelsPernikahan::findOrFail($id);
 
@@ -134,6 +137,7 @@ class Form extends Pernikahan
 
     public function delete($id)
     {
+        $this->isAdminBimas();
         $this->pernikahanIdDelete = $id;
 
         $pernikahan      = ModelsPernikahan::findOrFail($id);
@@ -175,5 +179,12 @@ class Form extends Pernikahan
         $this->modal = false;
         $this->fieldsReset();
         $this->emit('refreshParent');
+    }
+
+    public function isAdminBimas()
+    {
+        if (!auth()->user()->kua) {
+            return redirect('pernikahan');
+        }
     }
 }
