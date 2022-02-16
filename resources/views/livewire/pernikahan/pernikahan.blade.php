@@ -12,11 +12,11 @@
             @if (session('error'))
             <x-message type="error" >{{ session('error') }}</x-message>
             @endif
-            <div class="mb-6 mt-2">
-                <div class="flex justify-start">
-                    <div class="mr-2">
+            <div class="mb-2 mt-2">
+                <div class="flex justify-start my-2 ml-1">
+                    <div>
                         <x-search>
-                            <x-input class="pl-8 pr-2 ml-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                            <x-input class="pl-8 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
                     @if (!auth()->user()->kua_id)

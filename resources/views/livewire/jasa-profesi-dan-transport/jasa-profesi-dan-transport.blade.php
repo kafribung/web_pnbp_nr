@@ -9,14 +9,14 @@
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
             @endif
-            <div class="mb-6 mt-2">
-                <div class="flex justify-start">
+            <div class="mb-2 mt-2">
+                <div class="flex justify-start my-2 ml-1">
                     <div>
                         <x-search>
-                            <x-input class="pl-8 pr-2 ml-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                            <x-input class="pl-8 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
-                    <div class="ml-4">
+                    <div class="ml-2">
                         <x-select class="text-sm" wire:model="currnetMonth">
                             @slot('option_default', 'Filter Bulan')
                             @php
