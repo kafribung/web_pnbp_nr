@@ -10,9 +10,9 @@
             @if (session('message'))
             <x-message type="message">{{ session('message') }}</x-message>
             @endif
-            <div class="flex justify-between my-2">
+            <div class="flex justify-between my-2 ml-1">
                 <x-search>
-                    <x-input class="pl-8 pr-2 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
+                    <x-input class="pl-8 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                 </x-search>
                 <x-button-add wire:click="$emitTo('penghulu.form', 'create')"></x-button-add>
             </div>
