@@ -16,6 +16,16 @@
                             <x-input class="pl-8 text-sm text-black" wire:model="search" type="text" placeholder="Search"></x-input>
                         </x-search>
                     </div>
+                    @if (!auth()->user()->kua_id)
+                    <div class="ml-2">
+                        <x-select class="text-sm" wire:model="filterKua">
+                            @slot('option_default', 'Pilih KUA')
+                            @foreach ($kuas as $kua)
+                            <option value="{{ $kua->id }}">{{ $kua->name }}</option>
+                            @endforeach
+                        </x-select>
+                    </div>
+                    @endif
                     <div class="ml-2">
                         <x-select class="text-sm" wire:model="currnetMonth">
                             @slot('option_default', 'Filter Bulan')
@@ -94,7 +104,6 @@
                         $totJumPerPem     = [];
                     @endphp
                     @forelse ($penghulus->unique('name') as $index => $penghulu)
-
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-xs text-center">
                             {{ $angkaAwal++ }}
@@ -105,14 +114,22 @@
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($satuanPnbpNr = 600000, 2)  }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumlahPNBP   = $satuanPnbpNr * $jumlahNR, 2) }} </td>
                         {{-- Transport --}}
-                        @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
-                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= $penghulu->pernikahans()->sum('transport'), 2) }} </td>
+                        @if (auth()->user()->kua)
+                            @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                            <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= $penghulu->pernikahans()->sum('transport'), 2) }} </td>
+                            @else
+                            {{-- Jika KUa tipologi C --}}
+                            <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= 100000, 2) }} </td>
+                            @endif
                         @else
-                        {{-- Jika KUa tipologi C --}}
-                        <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= 100000, 2) }} </td>
+                            @if ($filterKua == 10 || $filterKua == 7 || $filterKua == 8 || $filterKua == 9 || $filterKua == 11)
+                            <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= $penghulu->pernikahans()->sum('transport'), 2) }} </td>
+                            @else
+                            {{-- Jika KUa tipologi C --}}
+                            <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasaTransport= 100000, 2) }} </td>
+                            @endif
                         @endif
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumTransport = $jumlahNR * $jasaTransport, 2) }} </td>
-
                         {{-- Jasa Profesi --}}
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jasPro         = $penghulu->jasa_profesi, 2) }} </td>
                         <td class="px-4 py-3 text-xs text-center"> {{ number_format($jumJasaProfesi = $jasPro * $jumlahNR, 2) }} </td>
@@ -158,14 +175,14 @@
 </div>
 
 @php
-    $data = [
-        'cost'       => array_sum($totJumPerPem),
-        'month'      => $currnetMonth,
-        'year'       => $currnetYear,
-        'kua_id'     => auth()->user()->kua_id,
-    ];
-
-    $penghulu =  new App\Models\Penghulu();
-    $penghulu->historyPermohonanPembayaran($data);
-
+    if (auth()->user()->kua) {
+        $data = [
+            'cost'       => array_sum($totJumPerPem),
+            'month'      => $currnetMonth,
+            'year'       => $currnetYear,
+            'kua_id'     => auth()->user()->kua_id,
+        ];
+        $penghulu =  new App\Models\Penghulu();
+        $penghulu->historyPermohonanPembayaran($data);
+    }
 @endphp
