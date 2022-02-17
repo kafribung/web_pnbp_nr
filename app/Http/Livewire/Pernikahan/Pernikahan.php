@@ -24,7 +24,7 @@ class Pernikahan extends Component
             $filterKua = 1;
 
     protected $listeners = [
-        'refreshParent' => '$refresh'
+        'refreshParentPernikahan' => '$refresh'
     ];
 
     public function updatedDateRange() {
@@ -137,4 +137,5 @@ class Pernikahan extends Component
             return redirect('pernikahan');
         }
     }
+
 }

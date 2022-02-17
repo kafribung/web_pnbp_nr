@@ -1,4 +1,5 @@
 <div>
+    @livewire('pernikahan.form-repair')
     <x-navbar>
         <a href="{{ route('pernikahan') }}" class="font-bold">Pernikahan</a>
     </x-navbar>
@@ -120,9 +121,19 @@
                         {{-- <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td> --}}
                         <td class="px-4 py-3 text-sm font-semibold"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
                         <td class="px-4 py-3 text-xs">
-                            <span class="px-2 py-1 font-semibold leading-tight {{ $pernikahan->approve == 'acc' ? 'text-green-700 bg-green-100' : ($pernikahan->approve == 'pending' ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100') }}  dark:bg-green-700 dark:text-green-100 rounded-full">
-                                {{ $pernikahan->approve == 'acc' ? 'Acc' : ($pernikahan->approve == 'pending' ? 'Pending' : 'Repair') }} 
-                            </span>
+                            @if ($pernikahan->approve == 'acc')
+                            <button class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100 rounded-full">
+                                Acc
+                            </button>
+                            @elseif ($pernikahan->approve == 'pending')
+                            <button class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 dark:bg-green-700 dark:text-green-100 rounded-full">
+                                Pending
+                            </button>
+                            @else
+                            <button wire:click="$emitTo('pernikahan.form-repair', 'showNoteRepair', {{ $pernikahan->id }})" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-green-700 dark:text-green-100 rounded-full">
+                                Repair
+                            </button>
+                            @endif
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-1 text-sm">
@@ -130,9 +141,12 @@
                                 <x-button-edit-delete metode='edit' wire:click="$emitTo('pernikahan.form', 'edit', {{ $pernikahan->id }})" class="hover:text-yellow-700 text-yellow-600 focus:shadow-outline-yellow"></x-button-edit-delete>
                                 <x-button-edit-delete metode='delete' wire:click="$emitTo('pernikahan.form', 'delete', {{ $pernikahan->id }})" class="hover:text-red-700 text-red-600 focus:shadow-outline-red"></x-button-edit-delete>
                                 @else
-                                <x-button class="px-2 py-1 block bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green mr-2" wire:click="$emitTo('pernikahan.form-accept', 'acceptPerRow', {{ $pernikahan->id }})">Acc</x-button>
-                                <x-button class="px-2 py-1  bg-red-400 active:bg-red-500 hover:bg-red-600 focus:shadow-outline-red mr-2" wire:click="$emitTo('pernikahan.form-repair', 'edit', {{ $pernikahan->id }})">Tolak</x-button>
-                                @livewire('pernikahan.form-repair')
+                                    @if($pernikahan->approve == 'repair' || $pernikahan->approve == 'pending')
+                                    <x-button class="px-2 py-1 block bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green mr-2" wire:click="$emitTo('pernikahan.form-accept', 'acceptPerRow', {{ $pernikahan->id }})">Acc</x-button>
+                                    @endif
+                                    @if($pernikahan->approve == 'acc' || $pernikahan->approve == 'pending')
+                                    <x-button class="px-2 py-1  bg-red-400 active:bg-red-500 hover:bg-red-600 focus:shadow-outline-red mr-2" wire:click="$emitTo('pernikahan.form-repair', 'edit', {{ $pernikahan->id }})">Tolak</x-button>
+                                    @endif
                                 @endif
                             </div>
                         </td>

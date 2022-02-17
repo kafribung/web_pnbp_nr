@@ -12,10 +12,12 @@ class FormRepair extends Component
 
     public $modal = false,
             $note,
-            $pernikahan;
+            $pernikahan,
+            $show = true;
 
     protected $listeners = [
-        'edit'
+        'edit',
+        'showNoteRepair'
     ];
 
     protected $rules = [
@@ -43,19 +45,28 @@ class FormRepair extends Component
 
         $pernikahan  = $this->pernikahan;
 
-        $pernikahan->note    = $data['note'];   
-        $pernikahan->approve = 'repair';   
+        $pernikahan->note    = $data['note'];
+        $pernikahan->approve = 'repair';
         $pernikahan->save();
-        
+
         session()->flash('message', 'Data pernikahan '. $pernikahan->male . ' telah diajukan perbaikan');
 
         return redirect('pernikahan');
+    }
+
+    public function showNoteRepair($id)
+    {
+        $this->show       = false;
+        $this->modal      = true;
+        $this->pernikahan = Pernikahan::find($id);
+        $this->note       = $this->pernikahan->note;
     }
 
     public function closeModal()
     {
         $this->modal = false;
         $this->note  = null;
+        $this->show  = true;
     }
 
 }

@@ -52,9 +52,10 @@ class FormAccept extends Component
                     })
                     ->when($date, fn($q)=> $q->whereDate('date_time', $date))
                     ->update([
-                        'approve' => true,
+                        'approve' => 'acc',
+                        'note'    => null,
                     ]);
-        
+
         session()->flash('message', 'Data pernikahan berhasil di ACC');
 
         return redirect('pernikahan');
@@ -62,8 +63,9 @@ class FormAccept extends Component
 
     public function acceptPerRow($id)
     {
-        $pernikahan =Pernikahan::find($id);
-        $pernikahan->approve = true;
+        $pernikahan          = Pernikahan::find($id);
+        $pernikahan->approve = 'acc';
+        $pernikahan->note    = null;
         $pernikahan->save();
 
         session()->flash('message', 'Data pernikahan ' .$pernikahan->male. ' berhasil di ACC');
@@ -75,6 +77,5 @@ class FormAccept extends Component
     {
         $this->modal = false;
     }
-
 
 }
