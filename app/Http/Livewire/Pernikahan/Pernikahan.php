@@ -16,16 +16,13 @@ class Pernikahan extends Component
     use WithPagination;
 
     protected $paginationTheme = 'costume';
+
     public $modal= false,
             $search,
             $filterAge,
             $dateRange = [],
             $kuas,
             $filterKua = 1;
-
-    protected $listeners = [
-        'refreshParentPernikahan' => '$refresh'
-    ];
 
     public function updatedDateRange() {
         $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
