@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Kua;
 use App\Models\{Desa, Pernikahan, Penghulu};
+
 class PrintController extends Controller
 {
     /**
@@ -13,10 +16,17 @@ class PrintController extends Controller
      */
     public $currentMonth = null;
     public $currentYear  = null;
+
+
     public function __invoke($currentMonth, $currentYear, $filterKua)
     {
         $this->currentMonth = $currentMonth;
         $this->currentYear  = $currentYear;
+        $kua                = Kua::find($filterKua);;
+        $kuaLeader          = Kua::find($filterKua)->penghulus->where('kua_leader', 1)->first();
+
+        $bulan              = Carbon::createFromDate($currentYear, $currentMonth)->month($currentMonth)->isoFormat('MMMM');
+        $tanggalLengkap     = Carbon::createFromDate($currentYear, $currentMonth)->month($currentMonth)->isoFormat('D MMMM Y');
 
         // Redirect jika tidak ada data.
         if (Pernikahan::where('kua_id', $filterKua)->whereMonth('date_time', $this->currentMonth)->whereYear('date_time', $this->currentYear)->count() == 0) {
@@ -170,6 +180,6 @@ class PrintController extends Controller
                         ->leftJoin('pernikahans', 'pernikahans.penghulu_id', '=', 'penghulus.id')
                         ->where('penghulus.kua_id', $filterKua)
                         ->get();
-        return view('prints.print', compact('desas', 'currentMonth', 'currentYear', 'pernikahans', 'penghulus'));
+        return view('prints.print', compact('kua', 'kuaLeader', 'bulan', 'tanggalLengkap', 'desas', 'currentMonth', 'currentYear', 'pernikahans', 'penghulus'));
     }
 }

@@ -1,12 +1,12 @@
 <section class="sheet padding-10mm">
     <!-- Write HTML just like a web page -->
     <article class="text-xs font-bold text-center uppercase">Data Peristiwa Nikah</article>
-    <article class="text-xs font-bold text-center uppercase">Kantor Urusan Agama Kecamatan {{ auth()->user()->kua->name }}</article>
-    <article class="text-xs font-bold text-center uppercase">Tahun 2022</article>
+    <article class="text-xs font-bold text-center uppercase">Kantor Urusan Agama Kecamatan {{ $kua->name }}</article>
+    <article class="text-xs font-bold text-center uppercase">Tahun {{ $currentYear }}</article>
 
     <div class="flex">
         <div class="flex flex-col">
-            <div class="text-xs mt-2">Bulan : Januari</div>
+            <div class="text-xs mt-2">Bulan : {{ $bulan }}</div>
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr
@@ -49,7 +49,7 @@
                             <div class="flex items-center text-xs">
                                 <div>
                                     <p class="font-semibold"> {{ $pernikahan->desa->name }} </p>
-                                    @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                                    @if ($kua->name == 'Tommo' || $kua->name == 'Tapalang Barat' || $kua->name == 'Bonehau' || $kua->name == 'Kalumpang' || $kua->name == 'Kepulauan Balabalakang')
                                     <p class="text-xs text-gray-600 dark:text-gray-400">{{ number_format($pernikahan->transport, 2) }}</p>
                                     @endif
                                 </div>
@@ -74,9 +74,9 @@
 
     <div class="flex justify-end text-xs mt-2">
         <div class="flex-col">
-            <p>Baubau, 12 Desember 2022</p>
-            <img width="100" src="{{ asset(auth()->user()->kua->penghulus->where('kua_leader', 1)->first()->takeImg) }}" alt="TTD">
-            <p class="mt-2">{{ auth()->user()->kua->penghulus->where('kua_leader', 1)->first()->name }}</p>
+            <p>{{ $kua->name }}, {{ $tanggalLengkap }}</p>
+            <img width="100" src="{{ asset($kuaLeader->takeImg) }}" alt="TTD">
+            <p class="mt-2">{{ $kuaLeader->name }}</p>
         </div>
     </div>
 

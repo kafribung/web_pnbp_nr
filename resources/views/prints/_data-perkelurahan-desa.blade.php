@@ -1,12 +1,12 @@
 <section class="sheet padding-10mm">
     <!-- Write HTML just like a web page -->
     <article class="text-xs font-bold text-center uppercase">Laporan Peristiwa Nikah Rujuk Per Kelurahan/Desa</article>
-    <article class="text-xs font-bold text-center uppercase">Kantor Urusan Agama Kecamatan {{ auth()->user()->kua->name }}</article>
-    <article class="text-xs font-bold text-center uppercase">Tahun 2022</article>
+    <article class="text-xs font-bold text-center uppercase">Kantor Urusan Agama Kecamatan {{ $kua->name }}</article>
+    <article class="text-xs font-bold text-center uppercase">Tahun {{ $currentYear }}</article>
 
     <div class="flex">
         <div class="flex flex-col">
-            <div class="text-xs mt-2">Bulan : Januari</div>
+            <div class="text-xs mt-2">Bulan : {{ $bulan }}</div>
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr class="text-xs font-semibold text-left text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
@@ -163,10 +163,10 @@
 
     <div class="flex justify-end text-xs mt-2">
         <div class="flex-col">
-            <p>Baubau, 01 Januari 2022</p>
+            <p>{{ $kua->name }}, {{ $tanggalLengkap }}</p>
             <p>Kepala KUA</p>
-            <img width="100" src="{{ asset(auth()->user()->kua->penghulus->where('kua_leader', 1)->first()->takeImg) }}" alt="TTD">
-            <p class="mt-2">{{ auth()->user()->kua->penghulus->where('kua_leader', 1)->first()->name }}</p>
+            <img width="100" src="{{ asset($kuaLeader->takeImg) }}" alt="TTD">
+            <p class="mt-2">{{ $kuaLeader->name }}</p>
         </div>
     </div>
 
