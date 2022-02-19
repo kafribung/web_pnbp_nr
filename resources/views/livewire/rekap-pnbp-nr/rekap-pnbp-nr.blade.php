@@ -14,6 +14,16 @@
             @endif
             <div class="mb-6 mt-2">
                 <div class="flex justify-start">
+                    @if (!auth()->user()->kua_id)
+                    <div class="ml-2">
+                        <x-select class="text-sm" wire:model="filterKua">
+                            @slot('option_default', 'Pilih KUA')
+                            @foreach ($kuas as $kua)
+                            <option value="{{ $kua->id }}">{{ $kua->name }}</option>
+                            @endforeach
+                        </x-select>
+                    </div>
+                    @endif
                     <div class="ml-2">
                         <x-select class="text-sm" wire:model="currentYear">
                             @slot('option_default', 'Filter Tahun')
@@ -79,14 +89,30 @@
                             </ul>
                         </td>
                         <td class="px-4 py-3 text-xs">
-                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                Approved
-                            </span>
+                            @if ($pernikahanLuarBalaiAcc_count[$index] != 0)
+                                @if ($pernikahanLuarBalaiAcc_count[$index] == $pernikahanLuarBalai_count[$index])
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                    Disetujui
+                                </span>
+                                @else
+                                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                                    Ditolak
+                                </span>
+                                @endif
+                            @endif
                         </td>
-                        <td class="px-4 py-3 text-sm"> - </td>
+                        <td class="px-4 py-3 text-sm">
+                            @if ($pernikahanLuarBalaiAcc_count[$index] != 0)
+                                @if ($pernikahanLuarBalaiAcc_count[$index] < $pernikahanLuarBalai_count[$index])
+                                    <p class="block">Silahkan cek keterangan data pernikahan, yg masih di pending / tolak.</p>
+                                @else
+                                    -
+                                @endif
+                            @endif
+                        </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                @if ($total)
+                                @if ($total && ($pernikahanLuarBalaiAcc_count[$index] == $pernikahanLuarBalai_count[$index]))
                                 <a href="{{ route('print', [$index+1, $currentYear]) }}"  target="_blank" class="hover:text-gray-900 text-gray-600 focus:shadow-outline-gray">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />

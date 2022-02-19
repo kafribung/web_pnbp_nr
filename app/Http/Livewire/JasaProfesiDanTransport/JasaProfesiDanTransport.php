@@ -16,8 +16,8 @@ class JasaProfesiDanTransport extends Component
 
     public $lastYear,
             $oldYear,
-            $currnetMonth,
-            $currnetYear,
+            $currentMonth,
+            $currentYear,
             $kuas,
             $filterKua = 1;
 
@@ -25,16 +25,16 @@ class JasaProfesiDanTransport extends Component
     {
         // Get year untuk mengatahui tahun pernikahan paling lama dan terbaru
         if(Pernikahan::count() == 0 || !auth()->user()->kua) {
-            $this->lastYear = 2022;
-            $this->oldYear  = 2021;
+            $this->lastYear = Carbon::now()->year;
+            $this->oldYear  = Carbon::now()->subYear()->year;
         } else {
             $this->lastYear  = (int)Pernikahan::where('kua_id', auth()->user()->kua_id)->latest()->first()->created_at->format('Y');
             $this->oldYear   = (int)Pernikahan::where('kua_id', auth()->user()->kua_id)->oldest()->first()->created_at->format('Y');
         }
 
         // Get mount
-        $this->currnetMonth  = Carbon::now()->month;
-        $this->currnetYear   = Carbon::now()->year;
+        $this->currentMonth  = Carbon::now()->month;
+        $this->currentYear   = Carbon::now()->year;
 
         $this->kuas          = Kua::get(['name', 'id']);
 
@@ -54,8 +54,8 @@ class JasaProfesiDanTransport extends Component
                         ->whereHas('peristiwa_nikah', fn($q) => $q->where('name', 'Luar Balai Nikah'))
                         ->where(function($q) use($filterKua){
                             $q
-                            ->whereMonth('date_time', $this->currnetMonth)
-                            ->whereYear('date_time', $this->currnetYear)
+                            ->whereMonth('date_time', $this->currentMonth)
+                            ->whereYear('date_time', $this->currentYear)
                             ->where('kua_id', $filterKua);
                         });
                     }])
@@ -70,16 +70,16 @@ class JasaProfesiDanTransport extends Component
                                         $q->where('name', 'Luar Balai Nikah');
                                     })
                                     ->where('approve', 'acc')
-                                    ->whereMonth('date_time', $this->currnetMonth)
-                                    ->whereYear('date_time', $this->currnetYear)
+                                    ->whereMonth('date_time', $this->currentMonth)
+                                    ->whereYear('date_time', $this->currentYear)
                                     ->where('kua_id', $filterKua)
                                     ->count();
 
         $pernikahanLuarBalai_count = Pernikahan::whereHas('peristiwa_nikah', function($q){
                                         $q->where('name', 'Luar Balai Nikah');
                                     })
-                                    ->whereMonth('date_time', $this->currnetMonth)
-                                    ->whereYear('date_time', $this->currnetYear)
+                                    ->whereMonth('date_time', $this->currentMonth)
+                                    ->whereYear('date_time', $this->currentYear)
                                     ->where('kua_id', $filterKua)
                                     ->count();
 

@@ -27,7 +27,7 @@
                     </div>
                     @endif
                     <div class="ml-2">
-                        <x-select class="text-sm" wire:model="currnetMonth">
+                        <x-select class="text-sm" wire:model="currentMonth">
                             @slot('option_default', 'Filter Bulan')
                             @php
                                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -38,7 +38,7 @@
                         </x-select>
                     </div>
                     <div class="ml-2">
-                        <x-select class="text-sm" wire:model="currnetYear">
+                        <x-select class="text-sm" wire:model="currentYear">
                             @slot('option_default', 'Filter Tahun')
                             @for ($oldYear; $oldYear <= $lastYear; $oldYear++)
                             <option value="{{ $oldYear }}">{{ $oldYear }}</option>
@@ -187,8 +187,8 @@
     if (auth()->user()->kua) {
         $data = [
             'cost'       => array_sum($totJumPerPem),
-            'month'      => $currnetMonth,
-            'year'       => $currnetYear,
+            'month'      => $currentMonth,
+            'year'       => $currentYear,
             'kua_id'     => auth()->user()->kua_id,
         ];
         $penghulu =  new App\Models\Penghulu();
