@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function() {
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
     Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
     Route::get('rekap-pnbp-nr', RekapPnbpNr::class)->name('rekap-pnbp-nr');
-    Route::get('print/{currnetMonth}/{currnetYear}', PrintController::class)->name('print');
+    Route::get('print/{currnetMonth}/{currnetYear}/{filterKua}', PrintController::class)->name('print');
     Route::get('profil', Profil::class)->name('profil');
 });
 
