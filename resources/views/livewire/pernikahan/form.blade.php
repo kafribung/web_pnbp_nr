@@ -162,11 +162,11 @@
             {{ $name ?? $male }}
         </x-slot>
         <x-button wire:click="closeModal" type="button"
-            class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+            class="px-4 py-2 mt-4 bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
             Batal
         </x-button>
         <x-button wire:click="destroy"
-            class="bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
+            class="px-4 py-2 mt-4 bg-red-600 active:bg-red-600 hover:bg-red-700 focus:shadow-outline-red">
             Hapus
         </x-button>
     </x-delete-card>

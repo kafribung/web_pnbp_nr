@@ -47,6 +47,9 @@
                     </div>
                 </div>
             </div>
+            <div class="">
+                <p class="text-sm text-red-500">Catatan: </p>
+            </div>
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr

@@ -11,7 +11,7 @@
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Ubah Profil
                     </h3>
-    
+
                     <div class="mt-3">
                         <div class="block text-sm">
                             <x-label for="name" :value="__('Nama Lengkap')" />
@@ -20,16 +20,16 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="pt-5">
                     <div class="flex justify-end">
                         <x-button wire:click="closeModal" type="button"
-                            class="bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
+                            class="px-4 py-2 mt-4 bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
                             Batal
                         </x-button>
-    
+
                         <x-button type="submit"
-                            class="bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green">
+                            class="px-4 py-2 mt-4 bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green">
                             Simpan
                         </x-button>
                     </div>
