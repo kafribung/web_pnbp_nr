@@ -47,9 +47,15 @@
                     </div>
                 </div>
             </div>
-            <div class="">
-                <p class="text-sm text-red-500">Catatan: </p>
+
+            <div class="my-3">
+                @if ($pernikahanLuarBalaiAcc_count < $pernikahanLuarBalai_count)
+                <p class="text-sm text-red-500"><span class="font-semibold">**Catatan!</span> Jumlah pernikahan yang di acc {{ $pernikahanLuarBalaiAcc_count }} dari {{ $pernikahanLuarBalai_count }}.</p>
+                @else
+                <p class="text-sm text-black"><span class="font-semibold">**Catatan!</span> Data pernikahan telah divalidasi / acc.</p>
+                @endif
             </div>
+
             <table class="w-full whitespace-no-wrap">
                 <thead>
                     <tr

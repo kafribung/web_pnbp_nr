@@ -66,16 +66,23 @@ class JasaProfesiDanTransport extends Component
                     ->where('penghulus.kua_id', $filterKua)
                     ->get();
 
-        $pernikahanLuarBalai_count = Pernikahan::whereHas('peristiwa_nikah', function($q){
+        $pernikahanLuarBalaiAcc_count = Pernikahan::whereHas('peristiwa_nikah', function($q){
                                         $q->where('name', 'Luar Balai Nikah');
                                     })
                                     ->where('approve', 'acc')
                                     ->whereMonth('date_time', $this->currnetMonth)
                                     ->whereYear('date_time', $this->currnetYear)
-                                    ->where('kua_id', 4)
+                                    ->where('kua_id', $filterKua)
                                     ->count();
-                                dd($pernikahanLuarBalai_count);
 
-        return view('livewire.jasa-profesi-dan-transport.jasa-profesi-dan-transport', compact('penghulus', 'pernikahanLuarBalai_count'));
+        $pernikahanLuarBalai_count = Pernikahan::whereHas('peristiwa_nikah', function($q){
+                                        $q->where('name', 'Luar Balai Nikah');
+                                    })
+                                    ->whereMonth('date_time', $this->currnetMonth)
+                                    ->whereYear('date_time', $this->currnetYear)
+                                    ->where('kua_id', $filterKua)
+                                    ->count();
+
+        return view('livewire.jasa-profesi-dan-transport.jasa-profesi-dan-transport', compact('penghulus', 'pernikahanLuarBalaiAcc_count', 'pernikahanLuarBalai_count'));
     }
 }
