@@ -19,6 +19,31 @@
                             <x-input-error for="name" class="mt-2"/>
                         </div>
                     </div>
+
+                    <div class="mt-3">
+                        <div class="block text-sm">
+                            <x-label for="password_old" :value="__('Password Lama')" />
+                            <x-input id="password_old" class="block mt-1 w-full" type="password" wire:model="password_old" />
+                            <x-input-error for="password_old" class="mt-2"/>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="block text-sm">
+                            <x-label for="password" :value="__('Password Baru')" />
+                            <x-input id="password" class="block mt-1 w-full" type="password" wire:model="password" />
+                            <x-input-error for="password" class="mt-2"/>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-3">
+                        <div class="block text-sm">
+                            <x-label for="password_confirmation" :value="__('Konfirmasi Password Baru')" />
+                            <x-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" />
+                            <x-input-error for="password_confirmation" class="mt-2"/>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="pt-5">

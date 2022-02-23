@@ -2,16 +2,32 @@
 
 namespace App\Http\Livewire\Profil;
 
+use App\Rules\MatchOldPasswordRule;
 use Livewire\Component;
+use Illuminate\Validation\Rules;
+
 
 class Profil extends Component
 {
     public $modal = true,
-            $name;
+            $name,
+            $password_old,
+            $password,
+            $password_confirmation;
 
-    protected $rules = [
-        'name' => 'required|min:3|string',
-    ];
+    public function rules()
+    {
+        return [
+            'name'         => 'required|min:3|string',
+            'password_old' => ['required', new MatchOldPasswordRule],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function mount()
     {
@@ -27,10 +43,13 @@ class Profil extends Component
     {
         $data = $this->validate();
 
+        $data['password'] = bcrypt($this->password);
+
         auth()->user()->update($data);
 
-        session()->flash('message', 'Profil berhasil diperbaruhi');
-        return redirect('dashboard');
+        session()->flash('status', 'Profil berhasil diperbaruhi, silahkan login ulang');
+        auth()->logout();
+        return redirect('login');
     }
 
     public function closeModal()
