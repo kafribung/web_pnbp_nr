@@ -52,11 +52,11 @@
                 </div>
                 <div class="flex justify-end">
                     @if (auth()->user()->kua_id)
-                    <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
-                    @livewire('pernikahan.form')
-                    @else
-                    <x-button class="px-4 py-2 mt-4 bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green mr-2" wire:click="$emitTo('pernikahan.form-accept', 'create')">ACC Semua</x-button>
-                    @livewire('pernikahan.form-accept')
+                        <x-button-add wire:click="$emitTo('pernikahan.form', 'create')"></x-button-add>
+                        @livewire('pernikahan.form')
+                    @elseif ($pernikahans->count())
+                        <x-button class="px-4 py-2 mt-4 bg-green-400 active:bg-green-500 hover:bg-green-600 focus:shadow-outline-green mr-2" wire:click="$emitTo('pernikahan.form-accept', 'create')">ACC Semua</x-button>
+                        @livewire('pernikahan.form-accept')
                     @endif
                 </div>
             </div>
