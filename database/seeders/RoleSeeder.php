@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
@@ -24,5 +26,10 @@ class RoleSeeder extends Seeder
                 'name' => $roles,
             ]);
         }
+
+        DB::table('role_user')->insert([
+            'user_id' => User::first()->id,
+            'role_id' => 1,
+        ]);
     }
 }
