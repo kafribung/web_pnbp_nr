@@ -247,6 +247,10 @@
                 background-color: #a779e9;
             }
 
+            .bg-green-400{
+                background-color: #4ADE80;
+            }
+
             .bg-no-repeat {
                 background-repeat: no-repeat;
             }
@@ -464,7 +468,7 @@
                         @yield('code', __('Oh no'))
                     </div>
 
-                    <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
+                    <div class="w-16 h-1 bg-green-400 my-3 md:my-6"></div>
 
                     <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
                         @yield('message')
