@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-use App\Models\{Desa, Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
+use Illuminate\Support\Str;
 use App\Rules\UppercaseRule;
+use App\Models\{Desa, Penghulu, Pernikahan as ModelsPernikahan, PeristiwaNikah};
+use App\Rules\UcwordsNotUpperCaseRule;
 
 class Form extends Pernikahan
 {
@@ -32,12 +34,12 @@ class Form extends Pernikahan
     protected function  rules()
     {
         return [
-            'male'                       => 'required|string|min:3',
+            'male'                       => ['required', 'string', 'min:3', new UcwordsNotUpperCaseRule],
             'male_age'                   => 'required|numeric|min:2',
-            'male_father'                => 'required|string|min:3',
-            'female'                     => 'required|string|min:3',
+            'male_father'                => ['required', 'string', 'min:3', new UcwordsNotUpperCaseRule],
+            'female'                     => ['required', 'string', 'min:3', new UcwordsNotUpperCaseRule],
             'female_age'                 => 'required|numeric|min:2',
-            'female_father'              => 'required|string|min:3',
+            'female_father'              => ['required', 'string', 'min:3', new UcwordsNotUpperCaseRule],
             'desa_id'                    => 'required|numeric',
             'marriage_certificate_number'=> ['required', 'string', new UppercaseRule, 'min:13', 'unique:pernikahans,marriage_certificate_number,'. $this->pernikahanId],
             'perforation_number'         => ['required', 'string', new UppercaseRule, 'min:12', 'unique:pernikahans,perforation_number,'. $this->pernikahanId],
@@ -75,6 +77,10 @@ class Form extends Pernikahan
 
     public function storeOrUpdate()
     {
+        // $name = 'Kapi asuda';
+        // $name = ucwords($name);
+
+        // dd('sa');
         if(auth()->user()->kua->name == 'Tommo'|| auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau'|| auth()->user()->kua->name == 'Kalumpang'){
             if ($this->transport > 750000) {
                 session()->flash('error','Estimasi transport tidak boleh lebih dari 750.000');
@@ -93,6 +99,7 @@ class Form extends Pernikahan
         $data['created_by'] = auth()->id();
         $data['kua_id']     = auth()->user()->kua_id;
 
+
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
         // Costume biaya transport jika login sebagai KUA tipologi DI dan D2
@@ -101,8 +108,6 @@ class Form extends Pernikahan
         else  $data['transport'] = 100000;
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
-
-        ModelsPernikahan::create($data);
 
         session()->flash('message', $this->pernikahanId ? 'Data pernikahan ' .$this->male. ' berhasil diubah' : 'Data pernikahan '.$this->male.' berhasil ditambahkan');
         $this->closeModal();

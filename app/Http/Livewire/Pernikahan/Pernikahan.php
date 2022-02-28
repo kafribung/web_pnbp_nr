@@ -24,17 +24,17 @@ class Pernikahan extends Component
             $kuas,
             $filterKua = 1;
 
-    public function updatedDateRange() {
-        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
-    }
+    // public function updatedDateRange() {
+    //     $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    // }
 
-    public function updatedFilterKua() {
-        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
-    }
+    // public function updatedFilterKua() {
+    //     $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    // }
 
     public function mount()
     {
-        $this->dateRange = [Carbon::now()->firstOfMonth()->format('d/m/Y'), Carbon::now()->format('d/m/Y')];
+        $this->dateRange = [Carbon::now()->firstOfMonth()->format('d/m/Y'), Carbon::now()->addDay()->format('d/m/Y')];
     }
 
     public function render()
