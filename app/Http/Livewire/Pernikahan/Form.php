@@ -77,10 +77,6 @@ class Form extends Pernikahan
 
     public function storeOrUpdate()
     {
-        // $name = 'Kapi asuda';
-        // $name = ucwords($name);
-
-        // dd('sa');
         if(auth()->user()->kua->name == 'Tommo'|| auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau'|| auth()->user()->kua->name == 'Kalumpang'){
             if ($this->transport > 750000) {
                 session()->flash('error','Estimasi transport tidak boleh lebih dari 750.000');
@@ -98,7 +94,6 @@ class Form extends Pernikahan
         $data               = $this->validate();
         $data['created_by'] = auth()->id();
         $data['kua_id']     = auth()->user()->kua_id;
-
 
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
