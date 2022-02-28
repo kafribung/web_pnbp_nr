@@ -3,9 +3,8 @@
 namespace App\Http\Livewire\Penghulu;
 
 use Livewire\WithFileUploads;
-
+use App\Rules\UcwordsNotUpperCaseRule;
 use Illuminate\Support\Facades\Storage;
-
 use App\Models\{Golongan, Kua, Penghulu as PenghuluModel};
 
 class Form extends Penghulu
@@ -30,7 +29,7 @@ class Form extends Penghulu
 
     public function rules() {
         return [
-            'name'         => 'required|string|min:3',
+            'name'         => ['required','string','min:3', new UcwordsNotUpperCaseRule],
             'golongan_id'  => 'required',
             'kua_id'       => 'required',
             'kua_leader'   => '',

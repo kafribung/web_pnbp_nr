@@ -2,6 +2,8 @@
 namespace App\Http\Livewire\Kua;
 
 use App\Models\{Kua as ModelsKua, Typology};
+use App\Rules\UcwordsNotUpperCaseRule;
+
 class Form extends Kua
 {
     public $name, $typology_id, $kuaId, $kuaIdDelete;
@@ -12,10 +14,13 @@ class Form extends Kua
         'delete'
     ];
 
-    protected $rules =[
-        'name'        => ['required', 'string', 'min:3'],
-        'typology_id'  => 'required',
-    ];
+    protected function rules()
+    {
+        return [
+            'name'        => ['required', 'string', 'min:3', new UcwordsNotUpperCaseRule],
+            'typology_id'  => 'required',
+        ];
+    }
 
     public function updated($propertyName)
     {
