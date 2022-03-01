@@ -31,7 +31,7 @@ class FormAccept extends Component
 
     public function create()
     {
-        $this->modal = true;
+        $this->openCloseModal();
     }
 
     public function storeOrUpdate()
@@ -56,6 +56,8 @@ class FormAccept extends Component
 
         session()->flash('message', 'Data pernikahan berhasil di ACC');
 
+        $this->openCloseModal();
+
         return $this->emit('refreshParent');
     }
 
@@ -68,12 +70,14 @@ class FormAccept extends Component
 
         session()->flash('message', 'Data pernikahan ' .$pernikahan->male. ' berhasil di ACC');
 
+        $this->openCloseModal();
+
         return $this->emit('refreshParent');
     }
 
-    public function closeModal()
+    public function openCloseModal()
     {
-        $this->modal = false;
+        $this->modal = !$this->modal;
     }
 
 }

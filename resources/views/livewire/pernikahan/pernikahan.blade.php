@@ -119,7 +119,7 @@
                         <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('dddd')  }} </td>
                         <td class="px-4 py-3 text-sm"> {{  date('d M Y', strtotime($pernikahan->date_time)) }} </td>
                         {{-- <td class="px-4 py-3 text-sm"> {{ Carbon\Carbon::parse($pernikahan->date_time)->isoFormat('d MMM Y')  }} </td> --}}
-                        <td class="px-4 py-3 text-sm font-semibold"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
+                        <td class="px-4 py-3 text-sm  {{ $pernikahan->peristiwa_nikah->name  == 'Luar Balai Nikah' ? 'font-bold' : 'font-semibold'}}"> {{ $pernikahan->peristiwa_nikah->name ?? null }} </td>
                         <td class="px-4 py-3 text-xs">
                             @if ($pernikahan->approve == 'acc')
                             <button class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100 rounded-full">
