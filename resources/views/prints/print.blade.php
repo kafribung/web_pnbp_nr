@@ -33,10 +33,15 @@
 
     <!-- Each sheet element should have the class "sheet" -->
     <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    @include('prints._data-perkelurahan-desa')
-    {{-- Data pernikahan --}}
-    @include('prints._data-pernikahan')
-    {{-- Jasa Profesi --}}
-    @include('prints._data-jasa-profesi')
+    @if ($filterKua)
+        @include('prints._data-perkelurahan-desa')
+        {{-- Data pernikahan --}}
+        @include('prints._data-pernikahan')
+        {{-- Jasa Profesi --}}
+        @include('prints._data-jasa-profesi')
+    @else
+        @include('prints._data-pernikahan-per-kua')
+    @endif
+
 </body>
 </html>

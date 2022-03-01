@@ -18,10 +18,11 @@ class PrintController extends Controller
     public $currentYear  = null;
 
 
-    public function __invoke($currentMonth, $currentYear, $filterKua)
+    public function __invoke($currentMonth, $currentYear, $filterKua, $semuaKUA = false)
     {
         $this->currentMonth = $currentMonth;
         $this->currentYear  = $currentYear;
+
         $kua                = Kua::find($filterKua);;
         $kuaLeader          = Kua::find($filterKua)->penghulus->where('kua_leader', 1)->first();
 
@@ -180,6 +181,6 @@ class PrintController extends Controller
                         ->leftJoin('pernikahans', 'pernikahans.penghulu_id', '=', 'penghulus.id')
                         ->where('penghulus.kua_id', $filterKua)
                         ->get();
-        return view('prints.print', compact('kua', 'kuaLeader', 'bulan', 'tanggalLengkap', 'desas', 'currentMonth', 'currentYear', 'pernikahans', 'penghulus'));
+        return view('prints.print', compact('kua', 'kuaLeader', 'bulan', 'tanggalLengkap', 'desas', 'currentMonth', 'currentYear', 'pernikahans', 'penghulus', 'filterKua'));
     }
 }

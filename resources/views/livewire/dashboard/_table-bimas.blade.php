@@ -1,7 +1,7 @@
 <div class="mt-6">
     <div class="flex justify-start">
         <div class="ml-1">
-            <x-select class="text-sm" wire:model="currnetMonth">
+            <x-select class="text-sm" wire:model="currentMonth">
                 @slot('option_default', 'Filter Bulan')
                 @php
                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -12,9 +12,20 @@
         </div>
 
     </div>
-    <div class="ml-1 my-2 block">
-        <input id="semua-desa" type="checkbox" wire:model="semuaDesa">
-        <label for="semua-desa">Tampilkan semua KUA</label>
+    <div class="flex justify-between ml-1 my-2">
+        <div>
+            <input id="semua-desa" type="checkbox" wire:model="semuaDesa">
+            <label for="semua-desa">Tampilkan semua KUA</label>
+        </div>
+        <div>
+            @if ($semuaDesa)
+            <a href="{{ route('print-kua', [$currentMonth, $currentYear]) }}"  target="_blank" class="hover:text-gray-900 text-gray-600 focus:shadow-outline-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+            </a>
+            @endif
+        </div>
     </div>
 </div>
 <div class="w-full my-6 overflow-hidden rounded-lg shadow-xs">
@@ -24,7 +35,7 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3" rowspan="3">No</th>
-                    <th class="px-4 py-3" rowspan="3">Kelurahan/Desa</th>
+                    <th class="px-4 py-3" rowspan="3">Kecamatan</th>
                     <th class="px-4 py-3" rowspan="3">Luar Kantor</th>
                     <th class="px-4 py-3 text-center" colspan="4">Bebas Biaya</th>
                     <th class="px-4 py-3" rowspan="3">Jml NR</th>

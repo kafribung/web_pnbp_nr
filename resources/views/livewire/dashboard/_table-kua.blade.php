@@ -1,7 +1,7 @@
 <div class="mt-6">
     <div class="flex justify-start">
         <div class="ml-1">
-            <x-select class="text-sm" wire:model="currnetMonth">
+            <x-select class="text-sm" wire:model="currentMonth">
                 @slot('option_default', 'Filter Bulan')
                 @php
                 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PrintController;
+use App\Http\Controllers\{PrintController, PrintKuaController};
 use App\Http\Livewire\Dashboard\Dashboard;
 use App\Http\Livewire\JasaProfesiDanTransport\JasaProfesiDanTransport;
 use App\Http\Livewire\StafKua\StafKua;
@@ -32,12 +32,13 @@ Route::middleware('auth')->group(function() {
         Route::get('kua', Kua::class)->name('kua');
         Route::get('staf-kua', StafKua::class)->name('staf-kua');
         Route::get('penghulu', Penghulu::class)->name('penghulu');
+        Route::get('print/kua/{currentMonth}/{currentYear}', PrintKuaController::class)->name('print-kua');
     });
 
     Route::get('pernikahan', Pernikahan::class)->name('pernikahan');
     Route::get('jasa-profesi-dan-transport', JasaProfesiDanTransport::class)->name('jasa-profesi-dan-transport');
     Route::get('rekap-pnbp-nr', RekapPnbpNr::class)->name('rekap-pnbp-nr');
-    Route::get('print/{currnetMonth}/{currnetYear}/{filterKua}', PrintController::class)->name('print');
+    Route::get('print/{currentMonth}/{currentYear}/{filterKua}', PrintController::class)->name('print');
     Route::get('profil', Profil::class)->name('profil');
 });
 
