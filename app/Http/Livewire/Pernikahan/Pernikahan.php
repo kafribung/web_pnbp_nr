@@ -17,6 +17,17 @@ class Pernikahan extends Component
 
     protected $paginationTheme = 'costume';
 
+    protected $listeners = [
+        'reRenderParent',
+        'refreshParent' => '$refresh'
+    ];
+
+    public function reRenderParent()
+    {
+        $this->mount();
+        $this->render();
+    }
+
     public $modal= false,
             $search,
             $filterAge,
@@ -24,13 +35,13 @@ class Pernikahan extends Component
             $kuas,
             $filterKua = 1;
 
-    // public function updatedDateRange() {
-    //     $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
-    // }
+    public function updatedDateRange() {
+        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    }
 
-    // public function updatedFilterKua() {
-    //     $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
-    // }
+    public function updatedFilterKua() {
+        $this->emit('updateKuaDate', $this->filterKua, $this->dateRange);
+    }
 
     public function mount()
     {

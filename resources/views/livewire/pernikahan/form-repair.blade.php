@@ -19,7 +19,7 @@
 
                 <div class="pt-5">
                     <div class="flex justify-end">
-                        <x-button wire:click="closeModal" type="button"
+                        <x-button wire:click="openCloseModal" type="button"
                             class="px-4 py-2 mt-4 bg-gray-400 active:bg-gray-500 hover:bg-gray-600 focus:shadow-outline-gray mr-2">
                             Batal
                         </x-button>

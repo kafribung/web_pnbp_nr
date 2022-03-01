@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Pernikahan;
 
 
 use Livewire\Component;
-use App\Models\Pernikahan;
+use App\Models\Pernikahan as ModelsPernikahan;
 
 class FormRepair extends Component
 {
@@ -31,8 +31,8 @@ class FormRepair extends Component
 
     public function edit($id)
     {
-        $this->modal      = true;
-        $this->pernikahan = Pernikahan::find($id);
+        $this->openCloseModal();
+        $this->pernikahan = ModelsPernikahan::find($id);
 
         if ($this->pernikahan->note) {
             $this->note = $this->pernikahan->note;
@@ -50,21 +50,22 @@ class FormRepair extends Component
         $pernikahan->save();
 
         session()->flash('message', 'Data pernikahan '. $pernikahan->male . ' telah diajukan perbaikan');
+        $this->openCloseModal();
 
-        return redirect('pernikahan');
+        return $this->emit('refreshParent');
     }
 
     public function showNoteRepair($id)
     {
         $this->show       = false;
         $this->modal      = true;
-        $this->pernikahan = Pernikahan::find($id);
+        $this->pernikahan = ModelsPernikahan::find($id);
         $this->note       = $this->pernikahan->note;
     }
 
-    public function closeModal()
+    public function openCloseModal()
     {
-        $this->modal = false;
+        $this->modal = !$this->modal;
         $this->note  = null;
         $this->show  = true;
     }

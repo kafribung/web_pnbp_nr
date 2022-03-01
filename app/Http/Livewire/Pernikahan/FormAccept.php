@@ -2,11 +2,9 @@
 
 namespace App\Http\Livewire\Pernikahan;
 
-
-
-use Livewire\Component;
-use App\Models\Pernikahan;
+use App\Models\Pernikahan as ModelsPernikahan;
 use Illuminate\Support\Carbon;
+use Livewire\Component;
 
 class FormAccept extends Component
 {
@@ -46,7 +44,7 @@ class FormAccept extends Component
             $date = [Carbon::createFromFormat('d/m/Y', $this->dateRange[0])->format('Y-m-d')];
         }
 
-        Pernikahan::where('kua_id', $this->filterKua)
+        ModelsPernikahan::where('kua_id', $this->filterKua)
                     ->when($dateRange, function($query, $dateRange) {
                         $query->whereBetween('date_time', $dateRange);
                     })
@@ -58,19 +56,19 @@ class FormAccept extends Component
 
         session()->flash('message', 'Data pernikahan berhasil di ACC');
 
-        return redirect('pernikahan');
+        return $this->emit('refreshParent');
     }
 
     public function acceptPerRow($id)
     {
-        $pernikahan          = Pernikahan::find($id);
+        $pernikahan          = ModelsPernikahan::find($id);
         $pernikahan->approve = 'acc';
         $pernikahan->note    = null;
         $pernikahan->save();
 
         session()->flash('message', 'Data pernikahan ' .$pernikahan->male. ' berhasil di ACC');
 
-        return redirect('pernikahan');
+        return $this->emit('refreshParent');
     }
 
     public function closeModal()

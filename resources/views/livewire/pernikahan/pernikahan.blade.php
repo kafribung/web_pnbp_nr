@@ -130,7 +130,7 @@
                                 Pending
                             </button>
                             @else
-                            <button wire:click="$emitTo('pernikahan.form-repair', 'showNoteRepair', {{ $pernikahan->id }})" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 dark:bg-green-700 dark:text-green-100 rounded-full">
+                            <button wire:click="$emitTo('pernikahan.form-repair', 'showNoteRepair', {{ $pernikahan->id }})" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 hover:underline hover:text-red-900  dark:bg-green-700 dark:text-green-100 rounded-full">
                                 Repair
                             </button>
                             @endif
