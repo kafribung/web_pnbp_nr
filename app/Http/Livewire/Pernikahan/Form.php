@@ -46,7 +46,7 @@ class Form extends Pernikahan
             'penghulu_id'                => ['required', 'numeric'],
             'peristiwa_nikah_id'         => ['required', 'numeric'],
             'date_time'                  => ['required', 'date'],
-            'transport'                  => (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang') ? 'required|numeric|' : '',
+            'transport'                  => (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang') ? 'required_if:peristiwa_nikah_id,2' : '',
         ];
     }
 
@@ -98,9 +98,10 @@ class Form extends Pernikahan
         if ($this->pernikahanId) $data['updated_by'] = auth()->id();
 
         // Costume biaya transport jika login sebagai KUA tipologi DI dan D2
-        if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
-            $data['transport'] = $this->transport;
-        else  $data['transport'] = 100000;
+        if ($this->peristiwa_nikah_id == 2) {
+            if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                $data['transport'] = $this->transport;
+        }
 
         ModelsPernikahan::updateOrcreate(['id' => $this->pernikahanId], $data);
 

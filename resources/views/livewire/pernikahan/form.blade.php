@@ -97,15 +97,19 @@
                         </x-select>
                         <x-input-error for="penghulu_id" class="mt-2"/>
                     </div>
+
                     @if (auth()->user()->kua)
-                        @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
-                        <div class="sm:col-span-6">
-                            <x-label for="transport" value="{{ __(auth()->user()->kua->name == 'Kepulauan Balabalakang' ? 'Estimasi biaya transport max:1.000.000' : 'Estimasi biaya transport max:750.000' ) }}" />
-                            <x-input id="transport" class="block mt-1 w-full" type="number" wire:model="transport"/>
-                            <x-input-error for="transport" class="mt-2"/>
-                        </div>
+                        @if ($peristiwa_nikah_id == 2)
+                            @if (auth()->user()->kua->name == 'Tommo' || auth()->user()->kua->name == 'Tapalang Barat' || auth()->user()->kua->name == 'Bonehau' || auth()->user()->kua->name == 'Kalumpang' || auth()->user()->kua->name == 'Kepulauan Balabalakang')
+                            <div class="sm:col-span-6">
+                                <x-label for="transport" value="{{ __(auth()->user()->kua->name == 'Kepulauan Balabalakang' ? 'Estimasi biaya transport max:1.000.000' : 'Estimasi biaya transport max:750.000' ) }}" />
+                                <x-input id="transport" class="block mt-1 w-full" type="number" wire:model="transport"/>
+                                <x-input-error for="transport" class="mt-2"/>
+                            </div>
+                            @endif
                         @endif
                     @endif
+
                     <div class="sm:col-span-6">
                         <x-label for="date_time" value="{{ __('Tanggal dan Waktu Pernikahan') }}" />
                         <x-input id="date_time" class="block mt-1 w-full" type="datetime-local" wire:model="date_time"/>
