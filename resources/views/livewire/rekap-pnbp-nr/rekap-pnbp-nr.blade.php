@@ -104,7 +104,7 @@
                         <td class="px-4 py-3 text-sm">
                             @if ($pernikahanLuarBalaiAcc_count[$index] != 0)
                                 @if ($pernikahanLuarBalaiAcc_count[$index] < $pernikahanLuarBalai_count[$index])
-                                    <p class="block">Silahkan cek keterangan data pernikahan, yg masih di pending / tolak.</p>
+                                    <p class="block">Silahkan cek keterangan data pernikahan, yg tertolak.</p>
                                 @else
                                     -
                                 @endif

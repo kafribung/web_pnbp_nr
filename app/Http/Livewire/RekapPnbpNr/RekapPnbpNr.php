@@ -91,18 +91,12 @@ class RekapPnbpNr extends Component
             $this->lakiLakidiAtas21Tahun[] .= Pernikahan::with('peristiwa_nikah', 'desa')->where('male_age', '>', 21)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currentYear)->where('kua_id', $filterKua)->count();
             $this->perempuandiAtas21Tahun[].= Pernikahan::with('peristiwa_nikah', 'desa')->where('female_age', '>', 21)->whereMonth('date_time', $index+1)->whereYear('date_time', $this->currentYear)->where('kua_id', $filterKua)->count();
 
-            $this->pernikahanLuarBalaiAcc_count[] .= Pernikahan::whereHas('peristiwa_nikah', function($q){
-                                                        $q->where('name', 'Luar Balai Nikah');
-                                                    })
-                                                    ->where('approve', 'acc')
+            $this->pernikahanLuarBalaiAcc_count[] .= Pernikahan::where('approve', 'acc')
                                                     ->whereMonth('date_time', $index+1)
                                                     ->whereYear('date_time', $this->currentYear)
                                                     ->where('kua_id', $filterKua)
                                                     ->count();
-            $this->pernikahanLuarBalai_count[]   .= Pernikahan::whereHas('peristiwa_nikah', function($q){
-                                                        $q->where('name', 'Luar Balai Nikah');
-                                                    })
-                                                    ->whereMonth('date_time', $index+1)
+            $this->pernikahanLuarBalai_count[]   .= Pernikahan::whereMonth('date_time', $index+1)
                                                     ->whereYear('date_time', $this->currentYear)
                                                     ->where('kua_id', $filterKua)
                                                     ->count();
