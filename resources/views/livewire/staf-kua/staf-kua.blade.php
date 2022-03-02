@@ -1,7 +1,7 @@
 <div>
     @livewire('staf-kua.form')
     <x-navbar>
-        <a href="{{ route('staf-kua') }}" class="font-bold">staf kua</a>
+        <a href="{{ route('staf-kua') }}" class="font-bold">Staf KUA</a>
     </x-navbar>
     <x-cta> Berisi data akun staf KUA di Kabupaten Mamuju </x-cta>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
