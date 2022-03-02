@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             GolonganSeeder::class,
             PeristiwaNikahSeeder::class,
             DesaSeeder::class,
+            StafKuaSeeder::class,
         ]);
     }
 }
