@@ -4,8 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta property="og:title" content="PNBPNR Kemenag Kabupaten Mamuju" />
+        <meta property="og:description" content="Sistem Informasi Pelaporan dan Perekapan PNBPNR untuk semua KUA di kabupaten Mamuju" />
+        <meta property="og:image" content="{{ asset('assets/img/logo.png') }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{'PNBPNR Kemenag Kabupaten Mamuju'}} </title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('assets/img/logo.png') }}">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
